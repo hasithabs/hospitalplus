@@ -1,8 +1,4 @@
-14:21:00,825  WARN main Employee:main:27 - errrr
- 14:27:20,170  WARN main Employee:main:27 - fff
- 14:27:49,861  WARN main Employee:main:27 - fff
- 14:28:36,963  WARN main Employee:main:27 - fff
- 14:45:46,824  WARN main Employee:main:27 - fff
- 14:46:16,957  WARN main Employee:main:27 - fff
- 14:47:28,265  WARN main Employee:main:27 - dddd
- 
+ERROR   2017-10-17 00:01:31,628 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
+ERROR   2017-10-17 00:03:06,307 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
+ERROR   2017-10-17 00:06:30,383 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\Util\App.properties' not found in the classpath
+ERROR   2017-10-17 00:07:35,974 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\util\App.properties' not found in the classpath

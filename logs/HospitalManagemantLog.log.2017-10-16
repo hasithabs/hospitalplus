@@ -1,0 +1,5 @@
+08:03:42,948  WARN main Employee:main:27 - dddd
+ 08:05:59,866  WARN main Employee:main:27 - dddd
+ WARN    2017-10-16 08:08:57,664 [main] Controller.EmployeeManagement.Employee  - fsefsf
+ERROR   2017-10-16 23:58:12,853 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
+ERROR   2017-10-16 23:59:49,253 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
