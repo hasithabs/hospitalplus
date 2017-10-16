@@ -4,27 +4,31 @@
  */
 package Controller.EmployeeManagement;
 
+
 import java.io.IOException;
+import java.util.Properties;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import util.PropertyValues;
+import util.Util;
+ 
 
-
-/**
- *
- * @author kasun
- */
-public class Employee extends UtilityConfig{
-    
+public class Employee {
+    public Logger LOG;
+   
     public Employee() throws IOException{
-        super();
-        LOG  = Logger.getLogger(Employee.class);
+        //in order to use the log file
+        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
+        LOG = Logger.getLogger(Employee.class);
         
     }
     
     public static void main(String[] args) throws IOException {
-         
-        Employee e = new Employee();
-        System.out.println(e.property.getProperty("name"));
-        e.LOG.warn("fsefsf");
+        //create instance to access the property file
+        PropertyValues propertyVal = new PropertyValues();
+        Properties propertyValues = propertyVal.getPropValues();
+        
+        System.out.println(propertyValues.getProperty("name"));
     }
     
     
