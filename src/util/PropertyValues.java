@@ -5,7 +5,7 @@
  */
 package util;
 
-import Controller.EmployeeManagement.Employee;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ public class PropertyValues {
 
     public PropertyValues() {
         PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(Employee.class);
+        LOG = Logger.getLogger(PropertyValues.class);
     }
 
     public Properties getPropValues() throws IOException {
