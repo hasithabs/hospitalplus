@@ -4,34 +4,67 @@
  */
 package Controller.EmployeeManagement;
 
+import java.sql.SQLException;
 
-import java.io.IOException;
-import java.util.Properties;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import util.PropertyValues;
-import util.Util;
- 
+import daoFactory.DaoFactory;
+import dao.interfaces.EmployeeDao;
 
-public class Employee {
-    public Logger LOG;
-   
-    public Employee() throws IOException{
-        //in order to use the log file
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(Employee.class);
-        
+public class EmployeeController {
+
+    private String FirstName;
+    private String LastName;
+    private String Email;
+    private String Password;
+    private String ConfigPassword;
+
+
+    private static EmployeeDao employeeDao() {
+        DaoFactory dao = DaoFactory.getDatabase();
+        return dao.getEmployeeDao();
     }
-    
-    public static void main(String[] args) throws IOException {
-        //create instance to access the property file
-        PropertyValues propertyVal = new PropertyValues();
-        Properties propertyValues = propertyVal.getPropValues();
-        
-        System.out.println(propertyValues.getProperty("name"));
+
+    public void save() throws SQLException {
+        employeeDao().insert(this);
     }
-    
-    
-    
-    
+
+    // getters and setters for the employee object
+     public String getFirstName() {
+        return FirstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public String getConfigPassword() {
+        return ConfigPassword;
+    }
+
+    public void setFirstName(String FirstName) {
+        this.FirstName = FirstName;
+    }
+
+    public void setLastName(String LastName) {
+        this.LastName = LastName;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public void setConfigPassword(String ConfigPassword) {
+        this.ConfigPassword = ConfigPassword;
+    }
 }
