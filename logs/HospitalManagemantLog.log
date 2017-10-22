@@ -1,4 +1,1 @@
-ERROR   2017-10-17 00:01:31,628 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:03:06,307 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:06:30,383 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:07:35,974 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\util\App.properties' not found in the classpath
+INFO    2017-10-22 18:41:44,969 [main] Controller.EmployeeManagement.Employee  - Hello World
