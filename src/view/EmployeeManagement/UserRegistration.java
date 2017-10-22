@@ -2,7 +2,7 @@
 All the user Registration action done in this class. 
 (add user to the system)
  */
-package view.layout.EmployeeManagement;
+package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
 import java.sql.SQLException;
