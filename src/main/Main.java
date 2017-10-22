@@ -11,6 +11,6 @@ import view.layout.MainJFrame;
 public class Main {
 	
 	public static void main(String[] args) throws SQLException {
-		MainJFrame.createAndShowGUI();
+		new MainJFrame().createAndShowGUI();
 	}		
 }
