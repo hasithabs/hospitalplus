@@ -1,1 +1,16 @@
-INFO    2017-10-22 17:17:52,398 [main] Controller.EmployeeManagement.test  - Hello World
+ERROR   2017-10-23 00:20:33,439 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:20:35,719 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:20:35,725 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - 
+ERROR   2017-10-23 00:32:09,732 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:32:11,814 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:32:11,818 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - 
+ERROR   2017-10-23 00:34:13,130 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:34:14,629 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:34:14,634 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - 
+ERROR   2017-10-23 00:40:51,926 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:40:53,395 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-10-23 00:40:53,400 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - 
+ERROR   2017-10-23 00:44:42,737 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - 
+ERROR   2017-10-23 00:46:05,452 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - Password Not Match
+ERROR   2017-10-23 00:59:05,264 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - Password Not Match
+INFO    2017-10-23 00:59:27,010 [AWT-EventQueue-0] Controller.EmployeeManagement.EmployeeController  - Successfully saved

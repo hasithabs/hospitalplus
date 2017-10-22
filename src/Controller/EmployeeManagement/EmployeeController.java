@@ -1,70 +1,58 @@
 /*
- * This class handles all the operations regarding to the employees 
- * in addition to that this holds all the attributes regarding to the Employees
- */
+* manage all the operations regarding to the employee.
+*/
 package Controller.EmployeeManagement;
 
-import java.sql.SQLException;
-
-import daoFactory.DaoFactory;
+import Model.EmployeeManagement.Employee;
 import dao.interfaces.EmployeeDao;
+import daoFactory.DaoFactory;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
+import util.Config;
+import util.Util;
+import util.DBUtil;
 
 public class EmployeeController {
 
-    private String FirstName;
-    private String LastName;
-    private String Email;
-    private String Password;
-    private String ConfigPassword;
+    //set property values to this file
+    Config cnf = new Config();
+    Logger LOG = cnf.getLogger(EmployeeController.class);
 
-
+    /*
+    *return the Employee data access object after getting it form data access object factory.
+    */
     private static EmployeeDao employeeDao() {
         DaoFactory dao = DaoFactory.getDatabase();
         return dao.getEmployeeDao();
     }
 
-    public void save() throws SQLException {
-        employeeDao().insert(this);
+    /*
+    *compare Password and COnfigPassword is match with each others. and return boolean value.
+    *emp-> employee object that need to check the passwords
+     */
+    public boolean compairePasswords(Employee Emp) {
+        return Emp.getPassword().equals(Emp.getConfigPassword());
     }
 
-    // getters and setters for the employee object
-     public String getFirstName() {
-        return FirstName;
-    }
+    /*
+    *save function will call after all the validations are done by this method
+    *Emp->Employee object that need to save in the database.
+     */
+    public void save(Employee Emp) throws SQLException {
 
-    public String getLastName() {
-        return LastName;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public String getConfigPassword() {
-        return ConfigPassword;
-    }
-
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
-    }
-
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
-
-    public void setConfigPassword(String ConfigPassword) {
-        this.ConfigPassword = ConfigPassword;
+        if (Emp != null) {
+            if (compairePasswords(Emp) && !Emp.getPassword().equals(Util.PASSWORD_DEFAULT_VALUE) && !Emp.getConfigPassword().equals(Util.PASSWORD_DEFAULT_VALUE)) {
+                employeeDao().insert(Emp);
+                JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
+                LOG.info(DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
+            } else {
+                JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_Password_NotCompair"));
+                LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_Password_NotCompair"));
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
+            LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
+        }
     }
 }

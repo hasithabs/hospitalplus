@@ -6,10 +6,7 @@ and open the template in the editor.
 -->
 
 <root>
-    <query key="test1">
-        <entry>SELECT emp_id, first_name, last_name, salary FROM trn_employee</entry>
-    </query>
-    <query key="test2">
-        <entry>SELECT yash, jaya last_name, salary FROM trn_employee</entry>
+    <query key="Employee_Regiter_Insert">
+        <entry>INSERT INTO Employee (FirstName,LastName,Email,Password) VALUES (?, ?, ?, ?)</entry>
     </query>
 </root>

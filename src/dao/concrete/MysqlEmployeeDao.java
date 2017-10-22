@@ -5,27 +5,33 @@
  */
 package dao.concrete;
 
-import Controller.EmployeeManagement.EmployeeController;
+import Model.EmployeeManagement.Employee;
 import dao.interfaces.EmployeeDao;
 import daoFactory.DaoFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import util.DBUtil;
 
 /**
  *
  * @author kasun
  */
 public class MysqlEmployeeDao implements EmployeeDao {
-
-    private static final String INSERT = "INSERT INTO Employee (FirstName,LastName,Email,Password) VALUES (?, ?, ?, ?)";
-
+ 
+    /*
+    *insert data into database
+    *employee-> the employee object that need to save in the databse should be pass to here
+    */
     @Override
-    public EmployeeController insert(EmployeeController employee) throws SQLException {
+    public void insert(Employee employee) throws SQLException {
+        //reading query from xml file
+        String query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Regiter_Insert");
+        
         try (
                 Connection c = DaoFactory.getDatabase().openConnection();
-                PreparedStatement pstmt = c.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement pstmt = c.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, employee.getFirstName());
             pstmt.setString(2, employee.getLastName());
@@ -40,8 +46,7 @@ public class MysqlEmployeeDao implements EmployeeDao {
             rset.next();
 
         }
-
-        return employee;
+ 
     }
 
 }

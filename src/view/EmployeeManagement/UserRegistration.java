@@ -5,22 +5,21 @@ All the user Registration action done in this class.
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
+import Model.EmployeeManagement.Employee;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import util.Config;
 import util.Util;
 
 public class UserRegistration extends javax.swing.JFrame {
 
+    Config cnf = new Config();
     public Logger LOG;
 
     public UserRegistration() {
         initComponents();
-
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(UserRegistration.class);
-
+        //initialize log file
+        LOG = cnf.getLogger(UserRegistration.class);
     }
 
     @SuppressWarnings("unchecked")
@@ -108,6 +107,11 @@ public class UserRegistration extends javax.swing.JFrame {
 
         btnCancelBotton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnCancelBotton.setText("Cancel");
+        btnCancelBotton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelBottonActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCancelBotton);
         btnCancelBotton.setBounds(800, 370, 120, 30);
 
@@ -129,26 +133,33 @@ public class UserRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-       
-        EmployeeController empObj = new EmployeeController();
 
+        Employee empObj = new Employee();
+        EmployeeController empContro = new EmployeeController();
+        
+        
         empObj.setFirstName(txtFirstName.getText());
         empObj.setLastName(txtLastName.getText());
         empObj.setEmail(txtEmail.getText());
-        empObj.setPassword(txtPassword.getText());
+        empObj.setPassword(new String(txtPassword.getPassword()));
+        empObj.setConfigPassword(new String(txtConfPassword.getPassword()));
 
         try {
-            empObj.save();
-            System.out.println("Sucessfully Saved...");
+            empContro.save(empObj);
+            Util.Clear(jPanel1);
         } catch (SQLException ex) {
             LOG.error(ex);
         }
-        
-        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void btnCancelBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelBottonActionPerformed
+
+        Util.Clear(jPanel1);
+
+    }//GEN-LAST:event_btnCancelBottonActionPerformed
+
     public static void main(String args[]) throws SQLException {
-       
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

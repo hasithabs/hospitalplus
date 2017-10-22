@@ -5,7 +5,7 @@
  */
 package dao.interfaces;
 
-import Controller.EmployeeManagement.EmployeeController;
+import Model.EmployeeManagement.Employee;
 import java.sql.SQLException;
 
 /**
@@ -14,6 +14,6 @@ import java.sql.SQLException;
  */
 public interface EmployeeDao {
     
-    EmployeeController insert(EmployeeController object) throws SQLException;
+    void insert(Employee object) throws SQLException;
     
 }

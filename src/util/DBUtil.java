@@ -28,8 +28,8 @@ public class DBUtil {
         Config cnf = new Config();
         /*
         <-----Parameters Examples------>
-        XMLFileType   : "EmployeeError" / "EmployeeQuery"
-        dataType      : "error" / "query"
+        XMLFileType   : "EmployeeMsg" / "EmployeeQuery"
+        dataType      : "message" / "query"
         key           : "id"
         
         For more information refer : 
@@ -41,8 +41,8 @@ public class DBUtil {
         try {
             if (XMLFileType != null || dataType != null || key != null) {
                 String XMLFilePath ="";
-                if(dataType.equals("error")){
-                    XMLFilePath = (Util.ERROR_FILE_PATH.concat(XMLFileType)).concat(".xml");
+                if(dataType.equals("message")){
+                    XMLFilePath = (Util.MSG_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else if(dataType.equals("query")){
                     XMLFilePath = (Util.QUERY_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else{

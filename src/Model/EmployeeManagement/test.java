@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.EmployeeManagement;
+package Model.EmployeeManagement;
 
 import java.io.IOException;
 import org.apache.log4j.Logger;

@@ -14,11 +14,11 @@ import java.util.logging.Logger;
  */
 public class Mysql extends DaoFactory {
 
-    private static  String url = "jdbc:mysql://127.0.0.1:3306/";
-    private static  String database = "hospitalplus";
-    private static  String driver = "com.mysql.jdbc.Driver";
-    private static  String user = "root";
-    private static  String password = "mysql";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/";
+    private static String database = "hospitalplus";
+    private static String driver = "com.mysql.jdbc.Driver";
+    private static String user = "hospitalplus";
+    private static String password = "pluscrew";
 
     @Override
     public Connection openConnection() {
