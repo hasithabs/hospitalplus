@@ -9,8 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.DrugCategoryModel;
-import dao.interfaces.DrugCategoryDao;
+import model.DrugTypeModel;
+import dao.interfaces.DrugTypeDao;
 import daoFactory.DaoFactory;
 import org.apache.log4j.Logger;
 import util.Config;
@@ -21,30 +21,30 @@ import static util.messageAlert.getMessageAlert;
  *
  * @author EnTeRs
  */
-public class mysqlDrugCategoryDao implements DrugCategoryDao {
+public class mysqlDrugTypeDao implements DrugTypeDao {
 
     Config cnf = new Config();
 
-    public mysqlDrugCategoryDao() {
+    public mysqlDrugTypeDao() {
         //create log variablle
-        Logger LOG = cnf.getLogger(mysqlDrugCategoryDao.class);
+        Logger LOG = cnf.getLogger(mysqlDrugTypeDao.class);
     }
     /**
      * Insert Drug Category to DB
      * 
-     * @param drugCategory drug category model 
-     * @return DrugCategoryModel
+     * @param drugType drug category model 
+     * @return DrugTypeModel
      * @throws SQLException 
      */
     @Override
-    public DrugCategoryModel insert(DrugCategoryModel drugCategory) throws SQLException {
+    public DrugTypeModel insert(DrugTypeModel drugType) throws SQLException {
         try {
             Connection c = DaoFactory.getDatabase().openConnection();
             try {
-                PreparedStatement pstmt = c.prepareStatement(getXMLData("StockQuery", "query", "addDrugCategory"), 
+                PreparedStatement pstmt = c.prepareStatement(getXMLData("StockQuery", "query", "addDrugType"), 
                         PreparedStatement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, drugCategory.getName());
-                pstmt.setString(2, drugCategory.getDescription());
+                pstmt.setString(1, drugType.getName());
+                pstmt.setString(2, drugType.getDescription());
 
                 pstmt.executeUpdate();
 
@@ -57,7 +57,7 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
             getMessageAlert(e.getMessage(), "error");
         }
 
-        return drugCategory;
+        return drugType;
     }
     
 }

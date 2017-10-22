@@ -82,10 +82,13 @@ public class AddDrugCategory extends javax.swing.JFrame {
         adcAddNewBtn.setBounds(300, 310, 200, 40);
 
         adcCloseBtn.setText("X");
+        adcCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adcCloseBtnActionPerformed(evt);
+            }
+        });
         AddDrugCategoryPanel.add(adcCloseBtn);
         adcCloseBtn.setBounds(740, 10, 40, 40);
-
-        adcDrugCatNameInput.setText("jTextField1");
         AddDrugCategoryPanel.add(adcDrugCatNameInput);
         adcDrugCatNameInput.setBounds(310, 140, 300, 30);
 
@@ -110,13 +113,16 @@ public class AddDrugCategory extends javax.swing.JFrame {
 
     private void adcAddNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcAddNewBtnActionPerformed
         try {
-            // TODO add your handling code here:
             DrugCategoryModel drugCategory = new DrugCategoryModel(adcDrugCatNameInput.getText(), adcDrugCatDescInput.getText());
             DrugCategoryController.getInstance().save(drugCategory);
         } catch (SQLException ex) {
             Logger.getLogger(AddDrugCategory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_adcAddNewBtnActionPerformed
+
+    private void adcCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcCloseBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_adcCloseBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,10 @@
  */
 package view.layout.stockManagement;
 
+import Controller.StockManagement.DrugTypeController;
+import java.sql.SQLException;
+import model.DrugTypeModel;
+
 /**
  *
  * @author EnTeRs
@@ -32,10 +36,10 @@ public class AddDrugType extends javax.swing.JFrame {
         adtDrugCatNameLabel = new javax.swing.JLabel();
         adtAddNewBtn = new javax.swing.JButton();
         adtCloseBtn = new javax.swing.JButton();
-        adtDrugCatNameInput = new javax.swing.JTextField();
+        adtDrugTypeNameInput = new javax.swing.JTextField();
         adcDrugTypeDescLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        adcDrugTypeDescInput = new javax.swing.JTextArea();
+        adtDrugTypeDescInput = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -64,16 +68,24 @@ public class AddDrugType extends javax.swing.JFrame {
         adtDrugCatNameLabel.setBounds(120, 140, 180, 30);
 
         adtAddNewBtn.setText("Add New");
+        adtAddNewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adtAddNewBtnActionPerformed(evt);
+            }
+        });
         AddDrugTypePanel.add(adtAddNewBtn);
         adtAddNewBtn.setBounds(300, 310, 200, 40);
 
         adtCloseBtn.setText("X");
+        adtCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adtCloseBtnActionPerformed(evt);
+            }
+        });
         AddDrugTypePanel.add(adtCloseBtn);
         adtCloseBtn.setBounds(740, 10, 40, 40);
-
-        adtDrugCatNameInput.setText("jTextField1");
-        AddDrugTypePanel.add(adtDrugCatNameInput);
-        adtDrugCatNameInput.setBounds(310, 140, 300, 30);
+        AddDrugTypePanel.add(adtDrugTypeNameInput);
+        adtDrugTypeNameInput.setBounds(310, 140, 300, 30);
 
         adcDrugTypeDescLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         adcDrugTypeDescLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,9 +93,9 @@ public class AddDrugType extends javax.swing.JFrame {
         AddDrugTypePanel.add(adcDrugTypeDescLabel);
         adcDrugTypeDescLabel.setBounds(120, 200, 180, 30);
 
-        adcDrugTypeDescInput.setColumns(20);
-        adcDrugTypeDescInput.setRows(3);
-        jScrollPane1.setViewportView(adcDrugTypeDescInput);
+        adtDrugTypeDescInput.setColumns(20);
+        adtDrugTypeDescInput.setRows(3);
+        jScrollPane1.setViewportView(adtDrugTypeDescInput);
 
         AddDrugTypePanel.add(jScrollPane1);
         jScrollPane1.setBounds(310, 200, 300, 70);
@@ -93,6 +105,18 @@ public class AddDrugType extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void adtCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adtCloseBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_adtCloseBtnActionPerformed
+
+    private void adtAddNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adtAddNewBtnActionPerformed
+        try {
+            DrugTypeModel drugType = new DrugTypeModel(adtDrugTypeNameInput.getText(), adtDrugTypeDescInput.getText());
+            DrugTypeController.getInstance().save(drugType);
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_adtAddNewBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,12 +158,12 @@ public class AddDrugType extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddDrugTypePanel;
-    private javax.swing.JTextArea adcDrugTypeDescInput;
     private javax.swing.JLabel adcDrugTypeDescLabel;
     private javax.swing.JButton adtAddNewBtn;
     private javax.swing.JButton adtCloseBtn;
-    private javax.swing.JTextField adtDrugCatNameInput;
     private javax.swing.JLabel adtDrugCatNameLabel;
+    private javax.swing.JTextArea adtDrugTypeDescInput;
+    private javax.swing.JTextField adtDrugTypeNameInput;
     private javax.swing.JLabel adtTitleLabel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

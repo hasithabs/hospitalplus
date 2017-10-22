@@ -5,9 +5,8 @@
  */
 package model;
 
-import dao.interfaces.DrugCategoryDao;
+import dao.interfaces.DrugTypeDao;
 import java.sql.SQLException;
-import java.util.List;
 
 import daoFactory.DaoFactory;
 
@@ -15,13 +14,13 @@ import daoFactory.DaoFactory;
  *
  * @author EnTeRs
  */
-public class DrugCategoryModel {
+public class DrugTypeModel {
 
     private int id;
     private String name;
     private String description;
 
-    public DrugCategoryModel(String name, String description) {
+    public DrugTypeModel(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -52,18 +51,18 @@ public class DrugCategoryModel {
 
     /*  Methods to work with the database **/
     /**
-     * Save Current Drug Category to DB
+     * Save Current Drug Type to DB
      */
     public void save() throws SQLException {
-        DrugCategoryDAO().insert(this);
+        DrugTypeDAO().insert(this);
     }
 
     /* 
-     * Return the drug category DAO
-     * @return dao the drug category dao 
+     * Return the drug type DAO
+     * @return dao the drug type dao 
      */
-    private static DrugCategoryDao DrugCategoryDAO() {
+    private static DrugTypeDao DrugTypeDAO() {
         DaoFactory dao = DaoFactory.getDatabase();
-        return dao.getDrugCategoryDao();
+        return dao.getDrugTypeDao();
     }
 }

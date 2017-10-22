@@ -63,10 +63,13 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
         urdcUpdateBtn.setBounds(230, 220, 140, 40);
 
         urdcCloseBtn.setText("X");
+        urdcCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urdcCloseBtnActionPerformed(evt);
+            }
+        });
         UpdateRemoveDrugCategoryPanel.add(urdcCloseBtn);
         urdcCloseBtn.setBounds(740, 10, 40, 40);
-
-        urdcDrugCatNameInput.setText("jTextField1");
         UpdateRemoveDrugCategoryPanel.add(urdcDrugCatNameInput);
         urdcDrugCatNameInput.setBounds(310, 140, 300, 30);
 
@@ -79,6 +82,10 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void urdcCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdcCloseBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_urdcCloseBtnActionPerformed
 
     /**
      * @param args the command line arguments
