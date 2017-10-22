@@ -6,29 +6,21 @@ package Controller.EmployeeManagement;
 
 
 import java.io.IOException;
-import java.util.Properties;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import util.PropertyValues;
-import util.Util;
- 
+import util.Config;
+
 
 public class Employee {
-    public Logger LOG;
-   
-    public Employee() throws IOException{
-        //in order to use the log file
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(Employee.class);
-        
-    }
-    
+  
     public static void main(String[] args) throws IOException {
-        //create instance to access the property file
-        PropertyValues propertyVal = new PropertyValues();
-        Properties propertyValues = propertyVal.getPropValues();
+        Config cnf = new Config();
         
-        System.out.println(propertyValues.getProperty("name"));
+        //create log variablle
+        Logger LOG = cnf.getLogger(Employee.class);
+        
+        //calling property value
+        System.out.println(cnf.getPropertyValue("name"));
+        LOG.info("Hello World");
     }
     
     
