@@ -26,8 +26,8 @@ public class DBUtil {
     public static String getXMLData(String XMLFileType, String dataType, String key) {
         /*
         <-----Parameters Examples------>
-        XMLFileType   : "EmployeeError" / "EmployeeQuery"
-        dataType      : "error" / "query"
+        XMLFileType   : "EmployeeError" / "EmployeeMsg"
+        dataType      : "message" / "query"
         key           : "id"
         
         For more information refer : 
@@ -39,12 +39,12 @@ public class DBUtil {
         try {
             if (XMLFileType != null || dataType != null || key != null) {
                 String XMLFilePath ="";
-                if(dataType.equals("error")){
-                    XMLFilePath = (Util.ERROR_FILE_PATH.concat(XMLFileType)).concat(".xml");
+                if(dataType.equals("message")){
+                    XMLFilePath = (Util.MSG_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else if(dataType.equals("query")){
                     XMLFilePath = (Util.QUERY_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else{
-                    LOG.error("Invalide XML dataType parameter for getXMLData method");
+                    LOG.error("Invalide XML dataType parameter");
                 }
                 
                 File fXmlFile = new File(XMLFilePath);
@@ -65,11 +65,11 @@ public class DBUtil {
                     }
                 }
             }else{
-                LOG.error("Null Parameters for getXMLData method");
+                LOG.error("Null Parameters");
                 return null;
             }
         } catch (Exception ex) {
-            LOG.error("Invalide Parameters for getXMLData method");
+            LOG.error("Invalide Parameters");
             ex.printStackTrace();
         }
         return null;
