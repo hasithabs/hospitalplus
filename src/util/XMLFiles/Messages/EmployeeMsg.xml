@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <message key="test1">
+        <entry>MSG1...</entry>
+    </message>
+    <message key="test2">
+        <entry>MSG2</entry>
+    </message>
+</root>
