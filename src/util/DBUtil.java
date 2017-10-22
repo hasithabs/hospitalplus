@@ -13,17 +13,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 
 /**
  *
  * @author Y4SHVINE
  */
 public class DBUtil {
+    
     public static Logger LOG;
 
     // get xml data 
     public static String getXMLData(String XMLFileType, String dataType, String key) {
+        Config cnf = new Config();
         /*
         <-----Parameters Examples------>
         XMLFileType   : "EmployeeError" / "EmployeeQuery"
@@ -34,8 +36,8 @@ public class DBUtil {
         https://stackoverflow.com/questions/428073/what-is-the-best-simplest-way-to-read-in-an-xml-file-in-java-application
         */
         
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(DBUtil.class);
+       
+        LOG =cnf.getLogger(DBUtil.class);
         try {
             if (XMLFileType != null || dataType != null || key != null) {
                 String XMLFilePath ="";
