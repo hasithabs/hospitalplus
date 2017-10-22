@@ -8,7 +8,6 @@ package util;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static util.Util.getIcon;
 
 /**
  *
@@ -26,20 +26,20 @@ import javax.swing.JPanel;
  */
 public class messageAlert {
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int ScreenW = (int) screenSize.getWidth();
-    int ScreenH = (int) screenSize.getHeight();
-    double screenW_ratio = ScreenW / 1920.0;
-    double screenH_ratio = ScreenH / 1080.0;
+    static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    static int ScreenW = (int) screenSize.getWidth();
+    static int ScreenH = (int) screenSize.getHeight();
+    static double screenW_ratio = ScreenW / 1920.0;
+    static double screenH_ratio = ScreenH / 1080.0;
 
-    public messageAlert(String message, String type) {
+    public static void getMessageAlert(String message, String type) {
         JFrame msgFrame = new JFrame();
         msgFrame.setPreferredSize(new Dimension((int) screenW_ratio * 800, (int) screenH_ratio * 215));
         msgFrame.setSize((int) screenW_ratio * 800, (int) screenH_ratio * 215);
 
         JPanel backgroundPanel = new JPanel(new BorderLayout());
 
-        String backgroundFile = "success";
+        String backgroundFile = "common/messagebox_error";
         Color typeColor = new Color(0, 39, 106);
         if ("error".equals(type)) {
             backgroundFile = "common/messagebox_error";
@@ -48,7 +48,7 @@ public class messageAlert {
             backgroundFile = "common/messagebox_success";
             typeColor = new Color(0, 39, 106);
         }
-        Image resizedBackgroundImg = util.Util.getIcon(getClass(), backgroundFile).getImage()
+        Image resizedBackgroundImg = getIcon(messageAlert.class, "common/messagebox_error").getImage()
                 .getScaledInstance((int) (screenW_ratio * 800),
                         (int) (screenH_ratio * 215), java.awt.Image.SCALE_SMOOTH);
         ImageIcon resizedBackgroundImgIcon = new ImageIcon(resizedBackgroundImg);
@@ -97,9 +97,5 @@ public class messageAlert {
         msgFrame.setLocation((int)(screenSize.getWidth() - msgFrame.getWidth()) / 2, 
                 (int)(screenSize.getHeight() - msgFrame.getHeight()) / 2);
         msgFrame.show();
-    }
-
-    public static void main(String args[]) {
-        new messageAlert("meka thamai success msg eka, haaa da ?... ubala kamathi reddak daaganin.", "success");
     }
 }
