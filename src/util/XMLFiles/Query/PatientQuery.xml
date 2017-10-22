@@ -5,7 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-
 <root>
-    
+    <query key="Patient_SignUp_Insert">
+        <entry>INSERT INTO patient(PatientID, FirstName, LastName, Sex, DateofBirth, Email, PhoneNumber, NIC, Address, City, ZipPostalCode, AdditionalInfo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)</entry>
+    </query>
+    <query key="test2">
+        <entry>SELECT yash, jaya last_name, salary FROM trn_employee</entry>
+    </query>
 </root>
