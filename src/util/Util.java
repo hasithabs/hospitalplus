@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
  *
  * @author EnTeRs
  */
-public class imageIconUtil {
+public class Util {
 
     private static final String IMAGE_PATH = "/view/images/";
 

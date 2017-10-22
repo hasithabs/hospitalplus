@@ -20,6 +20,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import util.messageAlert;
+import static util.messageAlert.getMessageAlert;
 
 /**
  *
@@ -42,23 +44,17 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
             Connection c = DaoFactory.getDatabase().openConnection();
             try (PreparedStatement pstmt = c.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, drugCategory.getName());
-                pstmt.setString(2, drugCategory.getName());
+                pstmt.setString(2, drugCategory.getDescription());
 
                 pstmt.executeUpdate();
-                
-                JOptionPane jop = new JOptionPane();
-JDialog dialog = jop.createDialog("File not found");
-dialog.setLayout(new BorderLayout());
-JLabel im = new JLabel("Java Technology Dive Log", util.Util.getIcon(getClass(), "common/home_background"), JLabel.CENTER);
-dialog.add(im, BorderLayout.NORTH);
-dialog.setVisible(true);
 
-                ResultSet rset = pstmt.getGeneratedKeys();
-            } catch (Exception e) {
-                System.out.println(e);
+                //ResultSet rset = pstmt.getGeneratedKeys();
+                c.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            getMessageAlert(e.getMessage(), "error");
         }
 
         return drugCategory;
