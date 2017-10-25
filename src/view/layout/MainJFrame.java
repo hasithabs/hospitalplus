@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -16,92 +18,339 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import util.imageIconUtil;
 
 /**
  *
  * @author EnTeRs
  */
 public class MainJFrame extends JFrame {
+
     public MainJFrame() {
     }
 
-    public static void createAndShowGUI() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int ScreenW = (int) screenSize.getWidth();
-        int ScreenH = (int) screenSize.getHeight();
-        double screenW_ratio = ScreenW / 1920.0;
-        double screenH_ratio = ScreenH / 1080.0;
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int ScreenW = (int) screenSize.getWidth();
+    int ScreenH = (int) screenSize.getHeight();
+    double screenW_ratio = ScreenW / 1920.0;
+    double screenH_ratio = ScreenH / 1080.0;
 
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    int menuBtnWidth = 140;
+    int menuBtnHeight = 140;
 
-        JLayeredPane pane = new JLayeredPane();
+    /**
+     * Create Main Menu Item JPanel
+     *
+     * @param btnWidth menu item button width
+     * @param btnHeight menu item button height
+     * @return JPanel
+     */
+    private JPanel createMenuItemPanel(int btnWidth, int btnHeight) {
+        JPanel Panelmenu = new JPanel();
+        Panelmenu.setPreferredSize(new Dimension((int) (screenW_ratio * btnWidth), (int) (screenH_ratio * btnHeight)));
+        Panelmenu.setOpaque(false);
+        return Panelmenu;
+    }
+
+    /**
+     * Create Main Menu Item JButton
+     *
+     * @param imgName menu item image path
+     * @param btnWidth menu item button width
+     * @param btnHeight menu item button height
+     * @return JButton
+     */
+    private JButton createMenuItemButton(String imgName, int btnWidth, int btnHeight) {
+        JButton menu_btn = new JButton();
+        Image M_reseized_img1 = util.imageIconUtil.getIcon(getClass(), imgName).getImage()
+                .getScaledInstance((int) (screenW_ratio * btnWidth), (int) (screenH_ratio * btnHeight), java.awt.Image.SCALE_SMOOTH);
+        ImageIcon Menu_reseize_ImgIcon1 = new ImageIcon(M_reseized_img1);
+        menu_btn.setIcon(Menu_reseize_ImgIcon1);
+        menu_btn.setPreferredSize(new Dimension((int) (screenW_ratio * btnWidth), (int) (screenH_ratio * btnHeight)));
+        return menu_btn;
+    }
+
+    /**
+     * Create Sub Menu Backdrop JPanel
+     *
+     * @param xPos X position
+     * @param yPos Y position
+     * @param backWidth panel backdrop width
+     * @param backHeight panel backdrop height
+     * @return JPanel
+     */
+    private JPanel createSubMenuBackdrop(int xPos, int yPos, int backWidth, int backHeight) {
+        JPanel menu_btn_back = new JPanel();
+        menu_btn_back.setBounds((int) (screenW_ratio * xPos), (int) (screenH_ratio * yPos), (int) (screenW_ratio * backWidth), (int) (screenH_ratio * backHeight));
+        menu_btn_back.setOpaque(false);
+        menu_btn_back.setVisible(false);
+        return menu_btn_back;
+    }
+
+    /**
+     * Create Sub Menu Button
+     *
+     * @param xPos X position
+     * @param yPos Y position
+     * @param backWidth button width
+     * @param backHeight button height
+     * @return JButton
+     */
+    private JButton createSubMenuItem(String BtnName, int xPos, int yPos, int btnWidht, int btnHeight) {
+        JButton subMenuBtn = new JButton(BtnName);
+        subMenuBtn.setBounds((int) (screenW_ratio * xPos), (int) (screenH_ratio * yPos), (int) (screenW_ratio * btnWidht), (int) (screenH_ratio * btnHeight));
+        subMenuBtn.setVisible(false);
+        return subMenuBtn;
+    }
+
+    /**
+     * Main Menu Icon Button Custom Actions
+     */
+    public class menuMainBtnAction implements MouseListener, ActionListener {
+
+        private final JButton[] menuSubBtnArr;
+        private final JPanel menuBackdrop;
+        private final JPanel centerPanel;
+        private final JLabel centerImg;
+
+        /**
+         * 
+         * @param menuSubBtnArr sub menu button array
+         * @param menuBackdrop panel backdrop
+         * @param centerPanel frame center JPanel
+         * @param centerImg frame center JLabel image
+         */
+        public menuMainBtnAction(JButton[] menuSubBtnArr, JPanel menuBackdrop,
+                JPanel centerPanel, JLabel centerImg) {
+            super();
+            this.menuSubBtnArr = menuSubBtnArr;
+            this.menuBackdrop = menuBackdrop;
+            this.centerPanel = centerPanel;
+            this.centerImg = centerImg;
+        }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            for (JButton jbutton : menuSubBtnArr) {
+                jbutton.setVisible(true);
+            }
+            menuBackdrop.setVisible(true);
+        }
+
+        @Override
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            for (JButton jbutton : menuSubBtnArr) {
+                jbutton.setVisible(false);
+            }
+            menuBackdrop.setVisible(false);
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent evt) {
+            centerPanel.removeAll();
+            centerPanel.add(centerImg, BorderLayout.NORTH);
+            centerPanel.updateUI();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent evt) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent evt) {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+//            centerPanel.removeAll();
+//            for (int i = 0; i < 2; i++) {
+//                for (int rm = 0; rm < centerPanel.getComponentCount(); rm++) {
+//                    centerPanel.remove(rm);
+//                }
+//            }
+//
+//            centerPanel.add(centerImg, BorderLayout.NORTH);
+//            centerPanel.updateUI();
+        }
+    }
+
+    /**
+     * Sub Menu Button Custom Actions
+     */
+    public class menuSubBtnAction implements MouseListener, ActionListener {
+
+        private final JButton[] menuSubBtnArr;
+        private final JPanel menuBackdrop;
+        private final JPanel centerPanel;
+
+        /**
+         * 
+         * @param menuSubBtnArr sub menu button array
+         * @param menuBackdrop panel backdrop
+         * @param centerPanel frame center JPanel
+         */
+        public menuSubBtnAction(JButton[] menuSubBtnArr, JPanel menuBackdrop,
+                JPanel centerPanel) {
+            super();
+            this.menuSubBtnArr = menuSubBtnArr;
+            this.menuBackdrop = menuBackdrop;
+            this.centerPanel = centerPanel;
+        }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            for (JButton jbutton : menuSubBtnArr) {
+                jbutton.setVisible(true);
+            }
+            menuBackdrop.setVisible(true);
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            centerPanel.removeAll();
+            centerPanel.updateUI();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+//            System.out.println("ee");
+//            for (int i = 0; i < 2; i++) {
+//                System.out.println(i);
+//                System.out.println(centerPanel.getComponentCount());
+//
+//                for (int rm = 0; rm < centerPanel.getComponentCount(); rm++) {
+//                    centerPanel.remove(rm);
+//                }
+//            }
+
+//            Selection_Sort_obj = null;
+//            Selection_Sort_obj = new contentIns();
+//            centerPanel.add(Selection_Sort_obj.SS_jf, BorderLayout.CENTER);
+        }
+    }
+
+    /**
+     * Menu Item Backdrop Mouse Actions
+     */
+    public class menuBackDropAction implements MouseListener {
+
+        private final JButton[] menuSubBtnArr;
+        private final JPanel menuBackdrop;
+
+        /**
+         * 
+         * @param menuSubBtnArr sub menu button array
+         * @param menuBackdrop panel backdrop
+         */
+        public menuBackDropAction(JButton[] menuSubBtnArr, JPanel menuBackdrop) {
+            super();
+            this.menuSubBtnArr = menuSubBtnArr;
+            this.menuBackdrop = menuBackdrop;
+        }
+
+        @Override
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            for (JButton jbutton : menuSubBtnArr) {
+                jbutton.setVisible(false);
+            }
+            menuBackdrop.setVisible(false);
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+    }
+
+    /**
+     * Create main GUI with menu
+     */
+    public void createAndShowGUI() {
+        JFrame GuiMainFrame = new JFrame();
+        GuiMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLayeredPane layeredPane = new JLayeredPane();
 
         //Interface
-        JPanel gui = new JPanel(new BorderLayout((int) (screenH_ratio * 5), (int) (screenW_ratio * 5)));
-        gui.setBorder(new EmptyBorder((int) (screenH_ratio * 10), (int) (screenW_ratio * 10), (int) (screenH_ratio * 10), (int) (screenW_ratio * 10)));
-        gui.setBackground(Color.BLACK);
-        gui.setBounds(0, 0, (int) (screenW_ratio * 1920), (int) (screenH_ratio * 1080));
+        JPanel guiJPanel = new JPanel(new BorderLayout((int) (screenH_ratio * 5), (int) (screenW_ratio * 5)));
+        guiJPanel.setBorder(new EmptyBorder((int) (screenH_ratio * 10), (int) (screenW_ratio * 10), (int) (screenH_ratio * 10), (int) (screenW_ratio * 10)));
+        guiJPanel.setBackground(Color.BLACK);
+        guiJPanel.setBounds(0, 0, (int) (screenW_ratio * 1920), (int) (screenH_ratio * 1080));
 
-        JPanel gui_top_layer = new JPanel(null);
-        gui_top_layer.setOpaque(false);
-        //gui_top_layer.setBackground(Color.blue);
-        gui_top_layer.setBounds(0, 0, (int) (screenW_ratio * 1920), (int) (screenH_ratio * 1080));
+        JPanel guiTopLayer = new JPanel(null);
+        guiTopLayer.setOpaque(false);
+        guiTopLayer.setBounds(0, 0, (int) (screenW_ratio * 1920), (int) (screenH_ratio * 1080));
 
-        //logo + menu = TOP
+        // Logo + Menu = TOP
         JPanel TOP = new JPanel(new BorderLayout((int) (screenW_ratio * 5), (int) (screenH_ratio * 5)));
         TOP.setOpaque(false);
-        gui.add(TOP, BorderLayout.NORTH);
+        guiJPanel.add(TOP, BorderLayout.NORTH);
 
-        //logo
+        // Logo
         JPanel logo = new JPanel();
         logo.setBorder(new EmptyBorder((int) (screenH_ratio * 0), (int) (screenW_ratio * 50), (int) (screenH_ratio * 0), (int) (screenW_ratio * 50)));
         logo.setOpaque(false);
         TOP.add(logo, BorderLayout.WEST);
-        ImageIcon L_imgicon1 = new ImageIcon("../hospitalplus/src/view/images/common/logo.png");
-        Image L_img1 = L_imgicon1.getImage();
+        Image L_img1 = imageIconUtil.getIcon(getClass(), "common/logo").getImage();
         Image L_reseized_img1 = L_img1.getScaledInstance((int) (screenW_ratio * 140), (int) (screenH_ratio * 140), java.awt.Image.SCALE_SMOOTH);
         ImageIcon Logo_reseize_ImgIcon1 = new ImageIcon(L_reseized_img1);
         JLabel stylish_logo = new JLabel();
         stylish_logo.setIcon(Logo_reseize_ImgIcon1);
         logo.add(stylish_logo);
 
-        //menu
+        // Menu Items Panel
         JPanel menu = new JPanel(new GridLayout(1, 9, (int) (screenH_ratio * 50), (int) (screenW_ratio * 0)));
         menu.setOpaque(false);
         menu.setBorder(new EmptyBorder((int) (screenH_ratio * 0), (int) (screenW_ratio * 50), (int) (screenH_ratio * 0), (int) (screenW_ratio * 50)));
         TOP.add(menu, BorderLayout.EAST);
 
-        JPanel Panelmenu_1 = new JPanel();
-        Panelmenu_1.setPreferredSize(new Dimension((int) (screenW_ratio * 140), (int) (screenH_ratio * 140)));
-        Panelmenu_1.setOpaque(false);
-        ImageIcon M_imgicon1 = new ImageIcon("../hospitalplus/src/view/images/common/menu_1.png");
-        Image M_img1 = M_imgicon1.getImage();
-        Image M_reseized_img1 = M_img1.getScaledInstance((int) (screenW_ratio * 140), (int) (screenH_ratio * 140), java.awt.Image.SCALE_SMOOTH);
-        ImageIcon Menu_reseize_ImgIcon1 = new ImageIcon(M_reseized_img1);
-        JButton menu_btn1 = new JButton();
-        menu_btn1.setIcon(Menu_reseize_ImgIcon1);
-        menu_btn1.setPreferredSize(new Dimension((int) (screenW_ratio * 140), (int) (screenH_ratio * 140)));
-        Panelmenu_1.add(menu_btn1);
-        menu.add(Panelmenu_1);
+        JPanel menuItemPanel1 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn1 = createMenuItemButton("common/menu_1", menuBtnWidth, menuBtnHeight);
+        menuItemPanel1.add(menuMainIconBtn1);
+        menu.add(menuItemPanel1);
 
-        JPanel Panelmenu_3 = new JPanel();
-        Panelmenu_3.setPreferredSize(new Dimension((int) (screenW_ratio * 140), (int) (screenH_ratio * 140)));
-        Panelmenu_3.setOpaque(false);
-        ImageIcon M_imgicon3 = new ImageIcon("../hospitalplus/src/view/images/common/menu_2.png");
-        Image M_img3 = M_imgicon3.getImage();
-        Image M_reseized_img3 = M_img3.getScaledInstance((int) (screenW_ratio * 140), (int) (screenH_ratio * 140), java.awt.Image.SCALE_SMOOTH);
-        ImageIcon Menu_reseize_ImgIcon3 = new ImageIcon(M_reseized_img3);
-        JButton menu_btn2 = new JButton();
-        menu_btn2.setIcon(Menu_reseize_ImgIcon3);
-        menu_btn2.setPreferredSize(new Dimension((int) (screenW_ratio * 140), (int) (screenH_ratio * 140)));
-        Panelmenu_3.add(menu_btn2);
-        menu.add(Panelmenu_3);
+        JPanel menuItemPanel2 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn2 = createMenuItemButton("common/menu_2", menuBtnWidth, menuBtnHeight);
+        menuItemPanel2.add(menuMainIconBtn2);
+        menu.add(menuItemPanel2);
 
-        //CENTER
+        JPanel menuItemPanel3 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn3 = createMenuItemButton("common/menu_1", menuBtnWidth, menuBtnHeight);
+        menuItemPanel3.add(menuMainIconBtn3);
+        menu.add(menuItemPanel3);
+
+        JPanel menuItemPanel4 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn4 = createMenuItemButton("common/menu_2", menuBtnWidth, menuBtnHeight);
+        menuItemPanel4.add(menuMainIconBtn4);
+        menu.add(menuItemPanel4);
+
+        // CENTER
         JPanel CENTER = new JPanel(new BorderLayout((int) (screenH_ratio * 5), (int) (screenW_ratio * 5)));
         CENTER.setOpaque(false);
-        gui.add(CENTER, BorderLayout.CENTER);
+        guiJPanel.add(CENTER, BorderLayout.CENTER);
 
         JPanel CENTER_NORTH = new JPanel();
         CENTER_NORTH.setBorder(new EmptyBorder((int) (screenH_ratio * 0), (int) (screenW_ratio * 0), (int) (screenH_ratio * 25), (int) (screenW_ratio * 0)));
@@ -127,221 +376,72 @@ public class MainJFrame extends JFrame {
         CENTER_Page.setOpaque(false);
         CENTER.add(CENTER_Page, BorderLayout.CENTER);
 
-        ImageIcon I_imgicon3 = new ImageIcon("../hospitalplus/src/view/images/common/home_background.png");
-        Image I_img3 = I_imgicon3.getImage();
-        Image I_reseized_img3 = I_img3.getScaledInstance((int) (screenW_ratio * 1765), (int) (screenH_ratio * 770), java.awt.Image.SCALE_SMOOTH);
+        // Center content panel background
+        Image I_reseized_img3 = util.imageIconUtil.getIcon(getClass(), "common/home_background").getImage()
+                .getScaledInstance((int) (screenW_ratio * 1765), (int) (screenH_ratio * 770), java.awt.Image.SCALE_SMOOTH);
         ImageIcon Ienu_reseize_ImgIcon3 = new ImageIcon(I_reseized_img3);
-
         JLabel CENTER_PAGE_IMG = new JLabel();
-        //ImageIcon home_img = new ImageIcon("..\\DAA_Assigment\\src\\daa_assigment\\img\\Home_Back.jpg");
         CENTER_PAGE_IMG.setIcon(Ienu_reseize_ImgIcon3);
         CENTER_Page.add(CENTER_PAGE_IMG, BorderLayout.NORTH);
 
         /* ~~~~~~~~~~ SUB MENU 1 ~~~~~~~~~~ */
-        JPanel menu_btn1_back = new JPanel();
-        menu_btn1_back.setBounds((int) (screenW_ratio * 1520), (int) (screenH_ratio * 155), (int) (screenW_ratio * 160), (int) (screenH_ratio * 110));
-        menu_btn1_back.setOpaque(false);
-        menu_btn1_back.setVisible(false);
+        JPanel menu1Backdrop = createSubMenuBackdrop(1140, 155, 160, 110);
+        JButton menu1SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1150, 155, 140, 50);
+        JButton menu1SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1150, 205, 140, 50);
+        JButton[] SubMenu1BtnArray = new JButton[]{menu1SubMenuBtn1, menu1SubMenuBtn2};
 
-        JButton menu_btn1_1 = new JButton("Sub Menu 1");
-        menu_btn1_1.setBounds((int) (screenW_ratio * 1530), (int) (screenH_ratio * 155), (int) (screenW_ratio * 140), (int) (screenH_ratio * 50));
-        menu_btn1_1.setVisible(false);
+        guiTopLayer.add(menu1SubMenuBtn1);
+        guiTopLayer.add(menu1SubMenuBtn2);
+        guiTopLayer.add(menu1Backdrop);
 
-        JButton menu_btn1_2 = new JButton("Sub Menu 2");
-        menu_btn1_2.setBounds((int) (screenW_ratio * 1530), (int) (screenH_ratio * 205), (int) (screenW_ratio * 140), (int) (screenH_ratio * 50));
-        menu_btn1_2.setVisible(false);
-
-        gui_top_layer.add(menu_btn1_1);
-        gui_top_layer.add(menu_btn1_2);
-        gui_top_layer.add(menu_btn1_back);
-
-        menu_btn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menu_btn1_1.setVisible(true);
-                menu_btn1_2.setVisible(true);
-                menu_btn1_back.setVisible(true);
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menu_btn1_1.setVisible(false);
-                menu_btn1_2.setVisible(false);
-                menu_btn1_back.setVisible(false);
-            }
-        });
-
-        menu_btn1_1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menu_btn1_1.setVisible(true);
-                menu_btn1_2.setVisible(true);
-                menu_btn1_back.setVisible(true);
-            }
-        });
-
-        menu_btn1_back.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menu_btn1_1.setVisible(false);
-                menu_btn1_2.setVisible(false);
-                menu_btn1_back.setVisible(false);
-            }
-        });
+        menuMainIconBtn1.addMouseListener(new menuMainBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, CENTER_PAGE_IMG));
+        menu1SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page));
+        menu1Backdrop.addMouseListener(new menuBackDropAction(SubMenu1BtnArray, menu1Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 2 ~~~~~~~~~~ */
-        JPanel menu_btn2_back = new JPanel();
-        menu_btn2_back.setBounds((int) (screenH_ratio * 1720), (int) (screenH_ratio * 155), (int) (screenH_ratio * 160), (int) (screenH_ratio * 110));
-        menu_btn2_back.setOpaque(false);
-        menu_btn2_back.setVisible(false);
+        JPanel menu2Backdrop = createSubMenuBackdrop(1330, 155, 160, 110);
+        JButton menu2SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1340, 155, 140, 50);
+        JButton menu2SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1340, 205, 140, 50);
+        JButton[] SubMenu2BtnArray = new JButton[]{menu2SubMenuBtn1, menu2SubMenuBtn2};
 
-        JButton menu_btn2_1 = new JButton("Sub Menu 1");
-        menu_btn2_1.setBounds((int) (screenH_ratio * 1720), (int) (screenH_ratio * 155), (int) (screenH_ratio * 140), (int) (screenH_ratio * 50));
-        menu_btn2_1.setVisible(false);
+        guiTopLayer.add(menu2SubMenuBtn1);
+        guiTopLayer.add(menu2SubMenuBtn2);
+        guiTopLayer.add(menu2Backdrop);
 
-        JButton menu_btn2_2 = new JButton("Sub Menu 2");
-        menu_btn2_2.setBounds((int) (screenH_ratio * 1720), (int) (screenH_ratio * 205), (int) (screenH_ratio * 140), (int) (screenH_ratio * 50));
-        menu_btn2_2.setVisible(false);
+        menuMainIconBtn2.addMouseListener(new menuMainBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, CENTER_PAGE_IMG));
+        menu2SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page));
+        menu2Backdrop.addMouseListener(new menuBackDropAction(SubMenu2BtnArray, menu2Backdrop));
 
-        gui_top_layer.add(menu_btn2_1);
-        gui_top_layer.add(menu_btn2_2);
-        gui_top_layer.add(menu_btn1_back);
+        /* ~~~~~~~~~~ SUB MENU 3 ~~~~~~~~~~ */
+        JPanel menu3Backdrop = createSubMenuBackdrop(1520, 155, 160, 110);
+        JButton menu3SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1530, 155, 140, 50);
+        JButton menu3SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1530, 205, 140, 50);
+        JButton[] SubMenu3BtnArray = new JButton[]{menu3SubMenuBtn1, menu3SubMenuBtn2};
 
-        menu_btn2.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menu_btn2_1.setVisible(true);
-                menu_btn2_2.setVisible(true);
-                menu_btn2_back.setVisible(true);
-            }
+        guiTopLayer.add(menu3SubMenuBtn1);
+        guiTopLayer.add(menu3SubMenuBtn2);
+        guiTopLayer.add(menu3Backdrop);
 
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menu_btn2_1.setVisible(false);
-                menu_btn2_2.setVisible(false);
-                menu_btn2_back.setVisible(false);
-            }
-        });
+        menuMainIconBtn3.addMouseListener(new menuMainBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page, CENTER_PAGE_IMG));
+        menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
+        menu3Backdrop.addMouseListener(new menuBackDropAction(SubMenu3BtnArray, menu3Backdrop));
 
-        menu_btn2_1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menu_btn2_1.setVisible(true);
-                menu_btn2_2.setVisible(true);
-                menu_btn2_back.setVisible(true);
-            }
-        });
+        /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
+        JPanel menu4Backdrop = createSubMenuBackdrop(1710, 155, 160, 110);
+        JButton menu4SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1720, 155, 140, 50);
+        JButton menu4SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1720, 205, 140, 50);
+        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2};
 
-        menu_btn2_back.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menu_btn2_1.setVisible(false);
-                menu_btn2_2.setVisible(false);
-                menu_btn2_back.setVisible(false);
-            }
-        });
+        guiTopLayer.add(menu4SubMenuBtn1);
+        guiTopLayer.add(menu4SubMenuBtn2);
+        guiTopLayer.add(menu4Backdrop);
 
-        /* ~~~~~~~~~~ SUB MENU Clicking ~~~~~~~~~~ */
-        JButton menu_btn_all = new JButton();
-
-        menu_btn_all.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CENTER_Page.add(CENTER_PAGE_IMG, BorderLayout.NORTH);
-                CENTER_Page.updateUI();
-            }
-        });
-
-        /* ~~~~~~~~~~ SUB MENU Clicking 1 ~~~~~~~~~~ */
-        menu_btn1_1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu_btn1.doClick();
-
-                CENTER_Page.remove(CENTER_PAGE_IMG);
-
-//                Selection_Sort_obj = null;
-//                Selection_Sort_obj = new Selection_Sort();
-
-//                CENTER_Page.add(Selection_Sort_obj.SS_jf, BorderLayout.CENTER);
-
-            }
-        });
-
-        menu_btn1_2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu_btn1.doClick();
-
-                CENTER_Page.remove(CENTER_PAGE_IMG);
-
-//                Selection_Sort_obj = null;
-//                Selection_Sort_obj = new Selection_Sort();
-
-//                CENTER_Page.add(Selection_Sort_obj.SS_algo_jf, BorderLayout.CENTER);
-
-            }
-        });
-
-        menu_btn1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < 2; i++) {
-                    for (int rm = 0; rm < CENTER_Page.getComponentCount(); rm++) {
-                        CENTER_Page.remove(rm);
-                    }
-                }
-
-                menu_btn_all.doClick();
-            }
-        });
-
-        /* ~~~~~~~~~~ SUB MENU Clicking 2 ~~~~~~~~~~ */
-        menu_btn2_1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu_btn1.doClick();
-
-                CENTER_Page.remove(CENTER_PAGE_IMG);
-
-//                Insertion_Sort_obj = null;
-//                Insertion_Sort_obj = new Insertion_Sort();
-
-//                CENTER_Page.add(Insertion_Sort_obj.IS_jf, BorderLayout.CENTER);
-
-            }
-        });
-
-        menu_btn2_2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu_btn1.doClick();
-
-                CENTER_Page.remove(CENTER_PAGE_IMG);
-
-//                Insertion_Sort_obj = null;
-//                Insertion_Sort_obj = new Insertion_Sort();
-
-//                CENTER_Page.add(Insertion_Sort_obj.IS_algo_jf, BorderLayout.CENTER);
-
-            }
-        });
-
-        menu_btn2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < 2; i++) {
-                    for (int rm = 0; rm < CENTER_Page.getComponentCount(); rm++) {
-                        CENTER_Page.remove(rm);
-                    }
-                }
-
-                menu_btn_all.doClick();
-            }
-        });
+        menuMainIconBtn4.addMouseListener(new menuMainBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, CENTER_PAGE_IMG));
+        menu4SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page));
+        menu4Backdrop.addMouseListener(new menuBackDropAction(SubMenu4BtnArray, menu4Backdrop));
 
 //        logout_btn.setBounds((int) (screenH_ratio * 1750), (int) (screenH_ratio * 980), (int) (screenH_ratio * 100), (int) (screenH_ratio * 30));
-//        gui_top_layer.add(logout_btn);
+//        guiTopLayer.add(logout_btn);
 //
 //        logout_btn.addActionListener(new ActionListener() {
 //            @Override
@@ -350,17 +450,17 @@ public class MainJFrame extends JFrame {
 //            }
 //        });
 
-        f.setTitle("Hospital Plus");
-        f.setVisible(true);
-        f.add(pane);
+        GuiMainFrame.setTitle("Hospital Plus");
+        GuiMainFrame.setVisible(true);
+        GuiMainFrame.add(layeredPane);
 
-        pane.add(gui, new Integer(1));
-        pane.add(gui_top_layer, new Integer(2));
+        layeredPane.add(guiJPanel, new Integer(1));
+        layeredPane.add(guiTopLayer, new Integer(2));
 
-        f.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-        f.pack();
-        f.setResizable(false);
-        f.show();
+        GuiMainFrame.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        GuiMainFrame.pack();
+        GuiMainFrame.setResizable(false);
+        GuiMainFrame.show();
 
     }
 }
