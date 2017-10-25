@@ -7,6 +7,7 @@ package dao.interfaces;
 
 import Model.EmployeeManagement.Employee;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.sql.SQLException;
  */
 public interface EmployeeDao {
     
-    void insert(Employee object) throws SQLException;
+    public void insert(Employee object) throws SQLException;
+    public ArrayList<Employee> getAllEmployees();
     
 }

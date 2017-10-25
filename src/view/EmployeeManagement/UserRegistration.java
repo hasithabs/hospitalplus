@@ -26,7 +26,6 @@ public class UserRegistration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -40,6 +39,7 @@ public class UserRegistration extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnCancelBotton = new javax.swing.JToggleButton();
         btnRegister = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hospital Pluse");
@@ -49,63 +49,66 @@ public class UserRegistration extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1255, 548));
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
-        jLabel1.setText("User Registration Form");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(470, 0, 370, 70);
-
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Last Name");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(600, 40, 150, 50);
+        jLabel2.setBounds(640, 150, 150, 50);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Confirm password");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(600, 240, 210, 50);
+        jLabel3.setBounds(640, 350, 210, 50);
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("First Name");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(40, 40, 150, 50);
+        jLabel4.setBounds(80, 150, 150, 50);
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("E-mail Address");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(40, 140, 180, 50);
+        jLabel5.setBounds(80, 250, 180, 50);
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Password");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(40, 240, 180, 50);
+        jLabel6.setBounds(80, 350, 180, 50);
 
         txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtFirstName.setOpaque(false);
         jPanel1.add(txtFirstName);
-        txtFirstName.setBounds(250, 50, 270, 30);
+        txtFirstName.setBounds(290, 160, 270, 30);
 
         txtEmail.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtEmail.setOpaque(false);
         jPanel1.add(txtEmail);
-        txtEmail.setBounds(250, 150, 270, 30);
+        txtEmail.setBounds(290, 260, 270, 30);
         txtEmail.getAccessibleContext().setAccessibleName("");
 
         txtLastName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtLastName.setOpaque(false);
         jPanel1.add(txtLastName);
-        txtLastName.setBounds(850, 50, 270, 30);
+        txtLastName.setBounds(890, 160, 270, 30);
 
         txtConfPassword.setOpaque(false);
         jPanel1.add(txtConfPassword);
-        txtConfPassword.setBounds(850, 250, 270, 30);
+        txtConfPassword.setBounds(890, 360, 270, 30);
 
         txtPassword.setOpaque(false);
         jPanel1.add(txtPassword);
-        txtPassword.setBounds(250, 250, 270, 30);
+        txtPassword.setBounds(290, 360, 270, 30);
 
+        btnCancelBotton.setBackground(new java.awt.Color(102, 102, 102));
         btnCancelBotton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnCancelBotton.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelBotton.setText("Cancel");
         btnCancelBotton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,9 +116,11 @@ public class UserRegistration extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnCancelBotton);
-        btnCancelBotton.setBounds(800, 370, 120, 30);
+        btnCancelBotton.setBounds(840, 450, 120, 30);
 
+        btnRegister.setBackground(new java.awt.Color(102, 102, 102));
         btnRegister.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,10 +128,16 @@ public class UserRegistration extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegister);
-        btnRegister.setBounds(1000, 370, 120, 30);
+        btnRegister.setBounds(1040, 450, 120, 30);
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("User Registration Form");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(460, 10, 370, 70);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(60, 80, 1160, 440);
+        jPanel1.setBounds(0, 0, 1260, 550);
 
         pack();
         setLocationRelativeTo(null);

@@ -9,4 +9,7 @@ and open the template in the editor.
     <query key="Employee_Regiter_Insert">
         <entry>INSERT INTO Employee (FirstName,LastName,Email,Password) VALUES (?, ?, ?, ?)</entry>
     </query>
+    <query key="Employee_Edit_SelectAll">
+        <entry>SELECT * FROM Employee</entry>
+    </query>
 </root>

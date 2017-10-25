@@ -7,6 +7,7 @@ import Model.EmployeeManagement.Employee;
 import dao.interfaces.EmployeeDao;
 import daoFactory.DaoFactory;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import util.Config;
@@ -55,4 +56,16 @@ public class EmployeeController {
             LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
         }
     }
+    
+    /*
+    *return all the employee registerd employee data as ArrayList
+    */
+    public ArrayList<Employee> getAllRegistedEmployeeData(){
+        
+        return employeeDao().getAllEmployees();
+        
+    }
+    
+    
+    
 }
