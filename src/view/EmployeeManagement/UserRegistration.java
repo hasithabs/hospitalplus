@@ -6,7 +6,9 @@ package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
 import Model.EmployeeManagement.Employee;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.Util;
@@ -160,6 +162,8 @@ public class UserRegistration extends javax.swing.JFrame {
             Util.Clear(jPanel1);
         } catch (SQLException ex) {
             LOG.error(ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 

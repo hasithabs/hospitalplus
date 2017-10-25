@@ -6,6 +6,7 @@ package Controller.EmployeeManagement;
 import Model.EmployeeManagement.Employee;
 import dao.interfaces.EmployeeDao;
 import daoFactory.DaoFactory;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class EmployeeController {
     /*
     *return the Employee data access object after getting it form data access object factory.
     */
-    private static EmployeeDao employeeDao() {
+    private static EmployeeDao employeeDao() throws IOException {
         DaoFactory dao = DaoFactory.getDatabase();
         return dao.getEmployeeDao();
     }
@@ -40,7 +41,7 @@ public class EmployeeController {
     *save function will call after all the validations are done by this method
     *Emp->Employee object that need to save in the database.
      */
-    public void save(Employee Emp) throws SQLException {
+    public void save(Employee Emp) throws SQLException, IOException {
 
         if (Emp != null) {
             if (compairePasswords(Emp) && !Emp.getPassword().equals(Util.PASSWORD_DEFAULT_VALUE) && !Emp.getConfigPassword().equals(Util.PASSWORD_DEFAULT_VALUE)) {
@@ -60,7 +61,7 @@ public class EmployeeController {
     /*
     *return all the employee registerd employee data as ArrayList
     */
-    public ArrayList<Employee> getAllRegistedEmployeeData(){
+    public ArrayList<Employee> getAllRegistedEmployeeData() throws IOException{
         
         return employeeDao().getAllEmployees();
         

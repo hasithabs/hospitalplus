@@ -3,14 +3,17 @@ package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
 import Model.EmployeeManagement.Employee;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
 public class EditEmployee extends javax.swing.JFrame {
 
     EmployeeController empCnt = new EmployeeController();
-    public EditEmployee() {
+    public EditEmployee() throws IOException {
         initComponents();
         showUser(empCnt.getAllRegistedEmployeeData());
     }
@@ -94,7 +97,11 @@ public class EditEmployee extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditEmployee().setVisible(true);
+                try {
+                    new EditEmployee().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(EditEmployee.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

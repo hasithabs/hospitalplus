@@ -8,6 +8,7 @@ package dao.concrete;
 import Model.EmployeeManagement.Employee;
 import dao.interfaces.EmployeeDao;
 import daoFactory.DaoFactory;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,12 +27,17 @@ public class MysqlEmployeeDao implements EmployeeDao {
 
     Config cnf = new Config();
     Logger LOG = cnf.getLogger(MysqlEmployeeDao.class);
-    
-    PreparedStatement pstmt ;
+
+    PreparedStatement pstmt;
     ResultSet rset;
     String query;
-    //create connection to database
-    Connection con = DaoFactory.getDatabase().openConnection();
+    Connection con ;
+    //create connection to databaseF
+
+    public MysqlEmployeeDao() throws IOException {
+
+       con = DaoFactory.getDatabase().openConnection();
+    }
 
     /*
     *insert data into database
@@ -46,8 +52,6 @@ public class MysqlEmployeeDao implements EmployeeDao {
 
             pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            
-            
             pstmt.setString(1, employee.getFirstName());
             pstmt.setString(2, employee.getLastName());
             pstmt.setString(3, employee.getEmail());
@@ -66,26 +70,26 @@ public class MysqlEmployeeDao implements EmployeeDao {
      */
     @Override
     public ArrayList<Employee> getAllEmployees() {
-        
+
         ArrayList<Employee> EmployeeList = new ArrayList<>();
-        
+
         try {
             //reading query from xml file
-             query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Edit_SelectAll");
-             pstmt = con.prepareStatement(query);
-             rset = pstmt.executeQuery(query);
+            query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Edit_SelectAll");
+            pstmt = con.prepareStatement(query);
+            rset = pstmt.executeQuery(query);
 
             Employee emp;
-            while(rset.next()){ 
-                 emp = new Employee();
-                 emp.setId(rset.getString("Id"));
-                 emp.setFirstName(rset.getString("FirstName"));
-                 emp.setLastName(rset.getString("LastName"));
-                 emp.setEmail(rset.getString("Email"));
-                 
-                 EmployeeList.add(emp);
+            while (rset.next()) {
+                emp = new Employee();
+                emp.setId(rset.getString("Id"));
+                emp.setFirstName(rset.getString("FirstName"));
+                emp.setLastName(rset.getString("LastName"));
+                emp.setEmail(rset.getString("Email"));
+
+                EmployeeList.add(emp);
             }
-            
+
         } catch (SQLException e) {
             LOG.error(e, e);
         }
