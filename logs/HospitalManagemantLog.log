@@ -1,2 +1,4 @@
-ERROR   2017-10-23 00:01:19,251 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters
-ERROR   2017-10-23 00:01:19,536 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters
+ERROR   2017-10-28 11:44:29,791 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-28 11:44:31,022 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-28 11:45:44,135 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-28 11:45:45,222 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException

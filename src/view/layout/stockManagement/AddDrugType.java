@@ -8,18 +8,30 @@ package view.layout.stockManagement;
 import Controller.StockManagement.DrugTypeController;
 import java.sql.SQLException;
 import model.DrugTypeModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import static util.Util.getScreenSizrRatio;
 
 /**
  *
  * @author EnTeRs
  */
 public class AddDrugType extends javax.swing.JFrame {
+    
+    static int ScreenW = (int) getScreenSizrRatio()[0];
+    static int ScreenH = (int) getScreenSizrRatio()[1];
 
-    /**
-     * Creates new form AddStockItem
-     */
+    Config cnf = new Config();
+    public Logger LOG;
+
     public AddDrugType() {
         initComponents();
+        
+        //initialize log file
+        LOG = cnf.getLogger(AddDrugType.class);
+        
+        this.setLocation((ScreenW - this.getWidth()) / 2, 
+                (ScreenH - this.getHeight()) / 2);
     }
 
     /**
@@ -45,7 +57,13 @@ public class AddDrugType extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setMaximumSize(new java.awt.Dimension(800, 400));
         setMinimumSize(new java.awt.Dimension(800, 400));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(800, 400));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         AddDrugTypePanel.setBackground(new java.awt.Color(0, 0, 0));
@@ -114,9 +132,16 @@ public class AddDrugType extends javax.swing.JFrame {
         try {
             DrugTypeModel drugType = new DrugTypeModel(adtDrugTypeNameInput.getText(), adtDrugTypeDescInput.getText());
             DrugTypeController.getInstance().save(drugType);
+            AddDrugItem.getInstance().getTypsInit();
         } catch (SQLException ex) {
+            LOG.error(ex);
         }
     }//GEN-LAST:event_adtAddNewBtnActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        AddDrugItem.getInstance().setEnabled(true);
+        AddDrugItem.getInstance().toFront();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

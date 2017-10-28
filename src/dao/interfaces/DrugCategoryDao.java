@@ -16,4 +16,5 @@ import model.DrugCategoryModel;
  */
 public interface DrugCategoryDao {
     DrugCategoryModel insert(DrugCategoryModel object) throws SQLException;
+    List<DrugCategoryModel> all() throws SQLException;
 }

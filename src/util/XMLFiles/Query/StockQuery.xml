@@ -10,7 +10,18 @@ and open the template in the editor.
     <query key="addDrugCategory">
         <entry>INSERT INTO drug_categories(name, description) VALUES(?, ?)</entry>
     </query>
+    <query key="getAllDrugCategories">
+        <entry>SELECT * FROM drug_categories</entry>
+    </query>
     <query key="addDrugType">
         <entry>INSERT INTO drug_types(name, description) VALUES(?, ?)</entry>
+    </query>
+    <query key="getAllDrugTypes">
+        <entry>SELECT * FROM drug_types</entry>
+    </query>
+    <query key="addDrug">
+        <entry>INSERT INTO drugs(name, category, type, price, 
+            remarks, drug_level, reorder_level, weight) VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?)</entry>
     </query>
 </root>

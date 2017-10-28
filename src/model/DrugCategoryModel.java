@@ -49,6 +49,11 @@ public class DrugCategoryModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     /*  Methods to work with the database **/
     /**
@@ -57,7 +62,14 @@ public class DrugCategoryModel {
     public void save() throws SQLException {
         DrugCategoryDAO().insert(this);
     }
-
+    
+    /**
+     * Get all drug categories
+     */
+    public static List<DrugCategoryModel> all() throws SQLException {
+        return DrugCategoryDAO().all();
+    }
+    
     /* 
      * Return the drug category DAO
      * @return dao the drug category dao 

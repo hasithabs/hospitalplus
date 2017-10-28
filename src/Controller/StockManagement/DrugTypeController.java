@@ -6,6 +6,7 @@
 package Controller.StockManagement;
 
 import java.sql.SQLException;
+import java.util.List;
 import model.DrugTypeModel;
 
 /**
@@ -28,6 +29,10 @@ public class DrugTypeController {
             drugType.save();
         }
         return drugType;
+    }
+    
+    public List<DrugTypeModel> allDrugTypes() throws SQLException {
+        return DrugTypeModel.all();
     }
 
 

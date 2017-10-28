@@ -9,6 +9,7 @@ import dao.interfaces.DrugTypeDao;
 import java.sql.SQLException;
 
 import daoFactory.DaoFactory;
+import java.util.List;
 
 /**
  *
@@ -48,6 +49,11 @@ public class DrugTypeModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     /*  Methods to work with the database **/
     /**
@@ -55,6 +61,13 @@ public class DrugTypeModel {
      */
     public void save() throws SQLException {
         DrugTypeDAO().insert(this);
+    }
+    
+    /**
+     * Get all drug types
+     */
+    public static List<DrugTypeModel> all() throws SQLException {
+        return DrugTypeDAO().all();
     }
 
     /* 

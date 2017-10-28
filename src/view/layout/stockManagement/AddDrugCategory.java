@@ -7,21 +7,30 @@ package view.layout.stockManagement;
 
 import Controller.StockManagement.DrugCategoryController;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.DrugCategoryModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import static util.Util.getScreenSizrRatio;
 
 /**
  *
  * @author EnTeRs
  */
 public class AddDrugCategory extends javax.swing.JFrame {
+    
+    static int ScreenW = (int) getScreenSizrRatio()[0];
+    static int ScreenH = (int) getScreenSizrRatio()[1];
 
-    /**
-     * Creates new form AddStockItem
-     */
+    Config cnf = new Config();
+    public Logger LOG;
+
     public AddDrugCategory() {
         initComponents();
+        this.setLocation((ScreenW - this.getWidth()) / 2, 
+                (ScreenH - this.getHeight()) / 2);
+        
+        //initialize log file
+        LOG = cnf.getLogger(AddDrugCategory.class);
     }
 
 
@@ -45,12 +54,18 @@ public class AddDrugCategory extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         adcDrugCatDescInput = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setMaximumSize(new java.awt.Dimension(800, 400));
         setMinimumSize(new java.awt.Dimension(800, 400));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(800, 400));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         AddDrugCategoryPanel.setBackground(new java.awt.Color(0, 0, 0));
@@ -115,14 +130,20 @@ public class AddDrugCategory extends javax.swing.JFrame {
         try {
             DrugCategoryModel drugCategory = new DrugCategoryModel(adcDrugCatNameInput.getText(), adcDrugCatDescInput.getText());
             DrugCategoryController.getInstance().save(drugCategory);
+            AddDrugItem.getInstance().getCategoriesInit();
         } catch (SQLException ex) {
-            Logger.getLogger(AddDrugCategory.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex);
         }
     }//GEN-LAST:event_adcAddNewBtnActionPerformed
 
     private void adcCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcCloseBtnActionPerformed
         dispose();
     }//GEN-LAST:event_adcCloseBtnActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        AddDrugItem.getInstance().setEnabled(true);
+        AddDrugItem.getInstance().toFront();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

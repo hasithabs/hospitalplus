@@ -25,10 +25,10 @@ public class DrugModel {
     private String remarks;
     private int drug_level;
     private int reorder_level;
-    private int weight;
+    private String weight;
 
     public DrugModel(String name, int category, int type, int price,
-            String remarks, int drug_level, int reorder_level, int weight) {
+            String remarks, int drug_level, int reorder_level, String weight) {
         this.name = name;
         this.category = category;
         this.type = type;
@@ -71,7 +71,7 @@ public class DrugModel {
         return reorder_level;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
@@ -107,22 +107,22 @@ public class DrugModel {
         this.reorder_level = reorder_level;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
 
     /*  Methods to work with the database **/
     /**
-     * Method to save the current user in the database
+     * Save Current Drug to DB
      */
     public void save() throws SQLException {
         DrugDAO().insert(this);
     }
 
     /* 
-     * Method to return the user DAO
-     * @return dao the user dao 
+     * Return the drug DAO
+     * @return dao the drug dao 
      */
     private static DrugDao DrugDAO() {
         DaoFactory dao = DaoFactory.getDatabase();

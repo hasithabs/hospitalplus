@@ -5,18 +5,146 @@
  */
 package view.layout.stockManagement;
 
+import Controller.StockManagement.DrugCategoryController;
+import Controller.StockManagement.DrugController;
+import Controller.StockManagement.DrugTypeController;
+import java.sql.SQLException;
+import java.util.List;
+import model.DrugCategoryModel;
+import model.DrugModel;
+import model.DrugTypeModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import util.Validation;
+import static util.messageAlert.getMessageAlert;
+
 /**
  *
  * @author EnTeRs
  */
 public class AddDrugItem extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddStockItem
-     */
+    private static AddDrugItem self;
+
+    Config cnf = new Config();
+    public Logger LOG;
+
     public AddDrugItem() {
         initComponents();
+        self = this;
+
+        //initialize log file
+        LOG = cnf.getLogger(AddDrugItem.class);
+
+        getCategoriesInit();
+        getTypsInit();
+
+        resetJframe();
     }
+
+    public static AddDrugItem getInstance() {
+        if (self == null) {
+            self = new AddDrugItem();
+        }
+
+        return self;
+    }
+
+    public final void resetJframe() {
+        util.Util.Clear(AddStockItemPanel);
+        asiDrugCatVali.setVisible(false);
+        asiDrugNameVali.setVisible(false);
+        asiDrugTypeVali.setVisible(false);
+        asiDrugPriceVali.setVisible(false);
+        asiDrugWeightVali.setVisible(false);
+    }
+
+    public final void getCategoriesInit() {
+        asiDrugCategorySelector.removeAllItems();
+
+        try {
+            List<DrugCategoryModel> drugCategories = DrugCategoryController.getInstance().allDrugCategories();
+            for (int c = 0; c < drugCategories.size(); c++) {
+                asiDrugCategorySelector.addItem(drugCategories.get(c));
+            }
+            asiDrugCategorySelector.insertItemAt(new DrugCategoryModel("Select Category", ""), 0);
+            asiDrugCategorySelector.setSelectedIndex(0);
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
+    }
+
+    public final void getTypsInit() {
+        asiDrugTypeSelector.removeAllItems();
+
+        try {
+            List<DrugTypeModel> drugTypes = DrugTypeController.getInstance().allDrugTypes();
+            for (int i = 0; i < drugTypes.size(); ++i) {
+                asiDrugTypeSelector.addItem(drugTypes.get(i));
+            }
+            asiDrugTypeSelector.insertItemAt(new DrugTypeModel("Select Type", ""), 0);
+            asiDrugTypeSelector.setSelectedIndex(0);
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
+    }
+
+    /**
+     * *** START Validation Section ****
+     */
+    public boolean validateCategory() {
+        if (asiDrugCategorySelector.getSelectedIndex() != 0) {
+            asiDrugCatVali.setVisible(false);
+            return true;
+        } else {
+            asiDrugCatVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateName() {
+        if (Validation.ContainLetters(asiDrugNameInput.getText())) {
+            asiDrugNameVali.setVisible(false);
+            return true;
+        } else {
+            asiDrugNameVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateType() {
+        if (asiDrugTypeSelector.getSelectedIndex() != 0) {
+            asiDrugTypeVali.setVisible(false);
+            return true;
+        } else {
+            asiDrugTypeVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validatePrice() {
+        if (Validation.ContainOnlyNumbers(asiDrugPriceInput.getText())) {
+            asiDrugPriceVali.setVisible(false);
+            return true;
+        } else {
+            asiDrugPriceVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateWeight() {
+        if (Validation.ContainLettersAndNumbers(asiDrugWeightInput.getText())) {
+            asiDrugWeightVali.setVisible(false);
+            return true;
+        } else {
+            asiDrugWeightVali.setVisible(true);
+            return false;
+        }
+    }
+
+    /**
+     * *** END Validation Section ****
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,12 +175,15 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiResetBtn = new javax.swing.JButton();
         asiInsertBtn = new javax.swing.JButton();
         asiDrugWeightLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        asiFormErrors = new javax.swing.JTextArea();
         asiUpdateRemoveCatBtn = new javax.swing.JButton();
         asiAddCatBtn = new javax.swing.JButton();
         asiAddTypeBtn = new javax.swing.JButton();
         asiUpdateRemoveTypeBtn = new javax.swing.JButton();
+        asiDrugWeightVali = new javax.swing.JLabel();
+        asiDrugPriceVali = new javax.swing.JLabel();
+        asiDrugNameVali = new javax.swing.JLabel();
+        asiDrugTypeVali = new javax.swing.JLabel();
+        asiDrugCatVali = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -77,7 +208,11 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiDrugCategoryLabel);
         asiDrugCategoryLabel.setBounds(160, 170, 200, 30);
 
-        asiDrugCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        asiDrugCategorySelector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                asiDrugCategorySelectorItemStateChanged(evt);
+            }
+        });
         AddStockItemPanel.add(asiDrugCategorySelector);
         asiDrugCategorySelector.setBounds(380, 170, 300, 30);
 
@@ -87,7 +222,11 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiDrugNameLabel);
         asiDrugNameLabel.setBounds(160, 240, 200, 30);
 
-        asiDrugNameInput.setText("jTextField1");
+        asiDrugNameInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                asiDrugNameInputCaretUpdate(evt);
+            }
+        });
         AddStockItemPanel.add(asiDrugNameInput);
         asiDrugNameInput.setBounds(380, 240, 300, 30);
 
@@ -97,7 +236,11 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiDrugTypeLabel);
         asiDrugTypeLabel.setBounds(160, 310, 200, 30);
 
-        asiDrugTypeSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        asiDrugTypeSelector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                asiDrugTypeSelectorItemStateChanged(evt);
+            }
+        });
         AddStockItemPanel.add(asiDrugTypeSelector);
         asiDrugTypeSelector.setBounds(380, 310, 300, 30);
 
@@ -107,11 +250,13 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiDrugPriceLabel);
         asiDrugPriceLabel.setBounds(160, 380, 200, 30);
 
-        asiDrugPriceInput.setText("jTextField1");
+        asiDrugPriceInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                asiDrugPriceInputCaretUpdate(evt);
+            }
+        });
         AddStockItemPanel.add(asiDrugPriceInput);
         asiDrugPriceInput.setBounds(380, 380, 300, 30);
-
-        asiRemarksInput.setText("jTextField1");
         AddStockItemPanel.add(asiRemarksInput);
         asiRemarksInput.setBounds(1310, 170, 300, 30);
 
@@ -120,6 +265,8 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiRemarksLabel.setText("Remarks");
         AddStockItemPanel.add(asiRemarksLabel);
         asiRemarksLabel.setBounds(1090, 170, 200, 30);
+
+        asiDrugLevelInput.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         AddStockItemPanel.add(asiDrugLevelInput);
         asiDrugLevelInput.setBounds(1310, 240, 300, 30);
 
@@ -128,6 +275,8 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiDrugLevelLabel.setText("Drug Level");
         AddStockItemPanel.add(asiDrugLevelLabel);
         asiDrugLevelLabel.setBounds(1090, 240, 200, 30);
+
+        asiReorderLevelInput.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         AddStockItemPanel.add(asiReorderLevelInput);
         asiReorderLevelInput.setBounds(1310, 310, 300, 30);
 
@@ -137,15 +286,29 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiReorderLevelLabel);
         asiReorderLevelLabel.setBounds(1090, 310, 200, 30);
 
-        asiDrugWeightInput.setText("jTextField1");
+        asiDrugWeightInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                asiDrugWeightInputCaretUpdate(evt);
+            }
+        });
         AddStockItemPanel.add(asiDrugWeightInput);
         asiDrugWeightInput.setBounds(1310, 380, 300, 30);
 
         asiResetBtn.setText("Reset");
+        asiResetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiResetBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiResetBtn);
         asiResetBtn.setBounds(900, 670, 200, 40);
 
         asiInsertBtn.setText("Insert");
+        asiInsertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiInsertBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiInsertBtn);
         asiInsertBtn.setBounds(620, 670, 200, 40);
 
@@ -155,40 +318,114 @@ public class AddDrugItem extends javax.swing.JFrame {
         AddStockItemPanel.add(asiDrugWeightLabel1);
         asiDrugWeightLabel1.setBounds(1090, 380, 200, 30);
 
-        asiFormErrors.setEditable(false);
-        asiFormErrors.setBackground(new java.awt.Color(0, 0, 0));
-        asiFormErrors.setColumns(20);
-        asiFormErrors.setFont(new java.awt.Font("Getone-Reg", 0, 13)); // NOI18N
-        asiFormErrors.setForeground(new java.awt.Color(255, 0, 0));
-        asiFormErrors.setRows(5);
-        asiFormErrors.setText("dfgdfhsfhdfhdhd");
-        asiFormErrors.setBorder(null);
-        jScrollPane1.setViewportView(asiFormErrors);
-
-        AddStockItemPanel.add(jScrollPane1);
-        jScrollPane1.setBounds(620, 476, 480, 120);
-
         asiUpdateRemoveCatBtn.setText("Update/Remove Selected");
         AddStockItemPanel.add(asiUpdateRemoveCatBtn);
-        asiUpdateRemoveCatBtn.setBounds(810, 170, 190, 30);
+        asiUpdateRemoveCatBtn.setBounds(840, 170, 190, 30);
 
         asiAddCatBtn.setText("Add New");
+        asiAddCatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiAddCatBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiAddCatBtn);
-        asiAddCatBtn.setBounds(710, 170, 90, 30);
+        asiAddCatBtn.setBounds(740, 170, 90, 30);
 
         asiAddTypeBtn.setText("Add New");
+        asiAddTypeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiAddTypeBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiAddTypeBtn);
-        asiAddTypeBtn.setBounds(710, 310, 90, 30);
+        asiAddTypeBtn.setBounds(740, 310, 90, 30);
 
         asiUpdateRemoveTypeBtn.setText("Update/Remove Selected");
         AddStockItemPanel.add(asiUpdateRemoveTypeBtn);
-        asiUpdateRemoveTypeBtn.setBounds(810, 310, 190, 30);
+        asiUpdateRemoveTypeBtn.setBounds(840, 310, 190, 30);
+
+        asiDrugWeightVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        AddStockItemPanel.add(asiDrugWeightVali);
+        asiDrugWeightVali.setBounds(1640, 380, 30, 30);
+
+        asiDrugPriceVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        AddStockItemPanel.add(asiDrugPriceVali);
+        asiDrugPriceVali.setBounds(710, 380, 30, 30);
+
+        asiDrugNameVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        AddStockItemPanel.add(asiDrugNameVali);
+        asiDrugNameVali.setBounds(710, 240, 30, 30);
+
+        asiDrugTypeVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        AddStockItemPanel.add(asiDrugTypeVali);
+        asiDrugTypeVali.setBounds(710, 310, 30, 30);
+
+        asiDrugCatVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        AddStockItemPanel.add(asiDrugCatVali);
+        asiDrugCatVali.setBounds(710, 170, 30, 30);
 
         getContentPane().add(AddStockItemPanel);
         AddStockItemPanel.setBounds(0, 0, 1765, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void asiInsertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiInsertBtnActionPerformed
+        if (validateCategory() & validateName() & validateType() & validatePrice() & validateWeight()) {
+            DrugCategoryModel selectedDrugCategory = (DrugCategoryModel) asiDrugCategorySelector.getSelectedItem();
+            DrugTypeModel selectedDrugType = (DrugTypeModel) asiDrugTypeSelector.getSelectedItem();
+            try {
+                DrugModel drug = new DrugModel(asiDrugNameInput.getText(),
+                        selectedDrugCategory.getId(),
+                        selectedDrugType.getId(),
+                        Integer.parseInt(asiDrugPriceInput.getText()),
+                        asiRemarksInput.getText(),
+                        Integer.parseInt(asiDrugLevelInput.getValue().toString()),
+                        Integer.parseInt(asiReorderLevelInput.getValue().toString()),
+                        asiDrugWeightInput.getText());
+                DrugController.getInstance().save(drug);
+                getMessageAlert("Drug has been successfully added.", "success");
+                resetJframe();
+            } catch (SQLException ex) {
+                getMessageAlert("Oops! Something went wrong. Please try again.", "error");
+                LOG.error(ex);
+            }
+        }
+    }//GEN-LAST:event_asiInsertBtnActionPerformed
+
+    private void asiResetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiResetBtnActionPerformed
+        resetJframe();
+    }//GEN-LAST:event_asiResetBtnActionPerformed
+
+    private void asiDrugNameInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_asiDrugNameInputCaretUpdate
+        validateName();
+    }//GEN-LAST:event_asiDrugNameInputCaretUpdate
+
+    private void asiDrugPriceInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_asiDrugPriceInputCaretUpdate
+        validatePrice();
+    }//GEN-LAST:event_asiDrugPriceInputCaretUpdate
+
+    private void asiAddCatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiAddCatBtnActionPerformed
+        new AddDrugCategory().setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_asiAddCatBtnActionPerformed
+
+    private void asiAddTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiAddTypeBtnActionPerformed
+        new AddDrugType().setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_asiAddTypeBtnActionPerformed
+
+    private void asiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugCategorySelectorItemStateChanged
+        validateCategory();
+    }//GEN-LAST:event_asiDrugCategorySelectorItemStateChanged
+
+    private void asiDrugTypeSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugTypeSelectorItemStateChanged
+        validateType();
+    }//GEN-LAST:event_asiDrugTypeSelectorItemStateChanged
+
+    private void asiDrugWeightInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_asiDrugWeightInputCaretUpdate
+        validateWeight();
+    }//GEN-LAST:event_asiDrugWeightInputCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -230,19 +467,23 @@ public class AddDrugItem extends javax.swing.JFrame {
     private javax.swing.JPanel AddStockItemPanel;
     private javax.swing.JButton asiAddCatBtn;
     private javax.swing.JButton asiAddTypeBtn;
+    private javax.swing.JLabel asiDrugCatVali;
     private javax.swing.JLabel asiDrugCategoryLabel;
-    private javax.swing.JComboBox<String> asiDrugCategorySelector;
+    private javax.swing.JComboBox<DrugCategoryModel> asiDrugCategorySelector;
     private javax.swing.JSpinner asiDrugLevelInput;
     private javax.swing.JLabel asiDrugLevelLabel;
     private javax.swing.JTextField asiDrugNameInput;
     private javax.swing.JLabel asiDrugNameLabel;
+    private javax.swing.JLabel asiDrugNameVali;
     private javax.swing.JTextField asiDrugPriceInput;
     private javax.swing.JLabel asiDrugPriceLabel;
+    private javax.swing.JLabel asiDrugPriceVali;
     private javax.swing.JLabel asiDrugTypeLabel;
-    private javax.swing.JComboBox<String> asiDrugTypeSelector;
+    private javax.swing.JComboBox<DrugTypeModel> asiDrugTypeSelector;
+    private javax.swing.JLabel asiDrugTypeVali;
     private javax.swing.JTextField asiDrugWeightInput;
     private javax.swing.JLabel asiDrugWeightLabel1;
-    private javax.swing.JTextArea asiFormErrors;
+    private javax.swing.JLabel asiDrugWeightVali;
     private javax.swing.JButton asiInsertBtn;
     private javax.swing.JTextField asiRemarksInput;
     private javax.swing.JLabel asiRemarksLabel;
@@ -252,6 +493,5 @@ public class AddDrugItem extends javax.swing.JFrame {
     private javax.swing.JLabel asiTitleLabel;
     private javax.swing.JButton asiUpdateRemoveCatBtn;
     private javax.swing.JButton asiUpdateRemoveTypeBtn;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

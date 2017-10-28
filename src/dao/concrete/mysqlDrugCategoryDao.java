@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import model.DrugCategoryModel;
 import dao.interfaces.DrugCategoryDao;
 import daoFactory.DaoFactory;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
@@ -24,11 +27,13 @@ import static util.messageAlert.getMessageAlert;
 public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
     Config cnf = new Config();
+    public Logger LOG;
 
     public mysqlDrugCategoryDao() {
-        //create log variablle
-        Logger LOG = cnf.getLogger(mysqlDrugCategoryDao.class);
+        //initialize log file
+        LOG = cnf.getLogger(mysqlDrugTypeDao.class);
     }
+
     /**
      * Insert Drug Category to DB
      * 
@@ -39,9 +44,9 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
     @Override
     public DrugCategoryModel insert(DrugCategoryModel drugCategory) throws SQLException {
         try {
-            Connection c = DaoFactory.getDatabase().openConnection();
+            Connection con = DaoFactory.getDatabase().openConnection();
             try {
-                PreparedStatement pstmt = c.prepareStatement(getXMLData("StockQuery", "query", "addDrugCategory"), 
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "addDrugCategory"), 
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, drugCategory.getName());
                 pstmt.setString(2, drugCategory.getDescription());
@@ -49,15 +54,65 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
                 pstmt.executeUpdate();
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
-                c.close();
+                con.close();
             } catch (Exception ee) {
                 getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
             }
         } catch (Exception e) {
-            getMessageAlert(e.getMessage(), "error");
+            LOG.error(e);
         }
 
         return drugCategory;
+    }
+    
+    /**
+     * Get All Drug Categories from DB
+     * 
+     * @param drugCategory drug category model 
+     * @return DrugCategoryModel
+     * @throws SQLException 
+     */
+    @Override
+    public List<DrugCategoryModel> all() throws SQLException {
+        ArrayList<DrugCategoryModel> drugCategories = new ArrayList<>();
+
+        try {
+            Connection con = DaoFactory.getDatabase().openConnection();
+            try {
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "getAllDrugCategories"));
+
+                ResultSet rset = pstmt.executeQuery();
+                while (rset.next()) {
+                    drugCategories.add(createDrugCategory(rset));
+                }
+
+                pstmt.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
+            }
+        } catch (Exception e) {
+            LOG.error(e);
+        }
+
+        return drugCategories;
+    }
+   
+    /**
+     * Create Drug Category
+     * 
+     * @param rset resultset
+     * @return DrugCategoryModel
+     * @throws SQLException 
+     */
+    private DrugCategoryModel createDrugCategory(ResultSet rset) throws SQLException {
+        DrugCategoryModel DrugCategory = new DrugCategoryModel(rset.getString("name"),
+                rset.getString("description"));
+
+        DrugCategory.setId(rset.getInt("id"));
+
+        return DrugCategory;
     }
     
 }
