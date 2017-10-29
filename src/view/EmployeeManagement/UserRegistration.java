@@ -110,7 +110,6 @@ public class UserRegistration extends javax.swing.JFrame {
 
         btnCancelBotton.setBackground(new java.awt.Color(102, 102, 102));
         btnCancelBotton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btnCancelBotton.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelBotton.setText("Cancel");
         btnCancelBotton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +121,6 @@ public class UserRegistration extends javax.swing.JFrame {
 
         btnRegister.setBackground(new java.awt.Color(102, 102, 102));
         btnRegister.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
