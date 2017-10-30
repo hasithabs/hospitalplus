@@ -20,6 +20,8 @@ import static util.messageAlert.getMessageAlert;
  */
 public class AddDrugCategory extends javax.swing.JFrame {
 
+    private static AddDrugCategory self;
+
     static int ScreenW = (int) getScreenSizrRatio()[0];
     static int ScreenH = (int) getScreenSizrRatio()[1];
 
@@ -28,13 +30,22 @@ public class AddDrugCategory extends javax.swing.JFrame {
 
     public AddDrugCategory() {
         initComponents();
+        self = this;
         this.setLocation((ScreenW - this.getWidth()) / 2,
                 (ScreenH - this.getHeight()) / 2);
 
         //initialize log file
         LOG = cnf.getLogger(AddDrugCategory.class);
     }
-    
+
+    public static AddDrugCategory getInstance() {
+        if (self == null) {
+            self = new AddDrugCategory();
+        }
+
+        return self;
+    }
+
     public final void resetJframe() {
         util.Util.Clear(AddDrugCategoryPanel);
     }

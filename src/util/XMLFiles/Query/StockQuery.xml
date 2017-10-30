@@ -19,6 +19,7 @@ and open the template in the editor.
     <query key="removeDrugCategory">
         <entry>DELETE FROM drug_categories WHERE id = ?</entry>
     </query>
+
     <query key="addDrugType">
         <entry>INSERT INTO drug_types(name, description) VALUES(?, ?)</entry>
     </query>
@@ -31,9 +32,20 @@ and open the template in the editor.
     <query key="removeDrugType">
         <entry>DELETE FROM drug_types WHERE id = ?</entry>
     </query>
+
     <query key="addDrug">
         <entry>INSERT INTO drugs(name, category, type, price, 
             remarks, drug_level, reorder_level, weight) VALUES 
             (?, ?, ?, ?, ?, ?, ?, ?)</entry>
+    </query>
+    <query key="getAllDrugs">
+        <entry>SELECT * FROM drugs</entry>
+    </query>
+    <query key="updateDrug">
+        <entry>UPDATE drugs SET name = ?, category = ?, type = ?, price = ?,
+            remarks = ?, drug_level = ?, reorder_level = ? weight WHERE id = ?</entry>
+    </query>
+    <query key="removeDrug">
+        <entry>DELETE FROM drugs WHERE id = ?</entry>
     </query>
 </root>

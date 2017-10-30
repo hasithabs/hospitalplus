@@ -11,11 +11,29 @@ package view.layout.stockManagement;
  */
 public class DrugList extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddStockItem
-     */
+    private static DrugList self;
+
+    Config cnf = new Config();
+    public Logger LOG;
+
     public DrugList() {
         initComponents();
+        self = this;
+
+        //initialize log file
+        LOG = cnf.getLogger(DrugList.class);
+    }
+
+    public static DrugList getInstance() {
+        if (self == null) {
+            self = new DrugList();
+        }
+
+        return self;
+    }
+
+    public final void resetJframe() {
+        util.Util.Clear(DrugListPanel);
     }
 
     /**

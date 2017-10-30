@@ -11,11 +11,25 @@ package view.layout.stockManagement;
  */
 public class UpdateDrugItem extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddStockItem
-     */
+    private static UpdateDrugItem self;
+
+    Config cnf = new Config();
+    public Logger LOG;
+
     public UpdateDrugItem() {
         initComponents();
+        self = this;
+
+        //initialize log file
+        LOG = cnf.getLogger(UpdateDrugItem.class);
+    }
+
+    public static UpdateDrugItem getInstance() {
+        if (self == null) {
+            self = new UpdateDrugItem();
+        }
+
+        return self;
     }
 
     /**

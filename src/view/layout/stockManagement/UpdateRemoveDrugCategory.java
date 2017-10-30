@@ -20,6 +20,8 @@ import static util.messageAlert.getMessageAlert;
  */
 public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
 
+    private static UpdateRemoveDrugCategory self;
+
     static int ScreenW = (int) getScreenSizrRatio()[0];
     static int ScreenH = (int) getScreenSizrRatio()[1];
 
@@ -30,6 +32,8 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
 
     public UpdateRemoveDrugCategory(DrugCategoryModel drugCategory) {
         initComponents();
+        self = this;
+
         this.setLocation((ScreenW - this.getWidth()) / 2,
                 (ScreenH - this.getHeight()) / 2);
 
@@ -39,6 +43,14 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
         selectedDrugCategoryId = drugCategory.getId();
         urdcDrugCatNameInput.setText(drugCategory.getName());
         urdcDrugCatDescInput.setText(drugCategory.getDescription());
+    }
+
+    public static UpdateRemoveDrugCategory getInstance() {
+        if (self == null) {
+            self = new UpdateRemoveDrugCategory();
+        }
+
+        return self;
     }
 
     /**

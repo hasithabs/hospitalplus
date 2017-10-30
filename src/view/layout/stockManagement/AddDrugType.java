@@ -19,7 +19,9 @@ import static util.messageAlert.getMessageAlert;
  * @author EnTeRs
  */
 public class AddDrugType extends javax.swing.JFrame {
-    
+
+    private static AddDrugType self;
+
     static int ScreenW = (int) getScreenSizrRatio()[0];
     static int ScreenH = (int) getScreenSizrRatio()[1];
 
@@ -28,6 +30,7 @@ public class AddDrugType extends javax.swing.JFrame {
 
     public AddDrugType() {
         initComponents();
+        self = this;
         
         //initialize log file
         LOG = cnf.getLogger(AddDrugType.class);
@@ -36,6 +39,14 @@ public class AddDrugType extends javax.swing.JFrame {
                 (ScreenH - this.getHeight()) / 2);
     }
     
+    public static AddDrugType getInstance() {
+        if (self == null) {
+            self = new AddDrugType();
+        }
+
+        return self;
+    }
+
     public final void resetJframe() {
         util.Util.Clear(AddDrugTypePanel);
     }
