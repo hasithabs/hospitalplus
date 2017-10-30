@@ -13,11 +13,23 @@ and open the template in the editor.
     <query key="getAllDrugCategories">
         <entry>SELECT * FROM drug_categories</entry>
     </query>
+    <query key="updateDrugCategory">
+        <entry>UPDATE drug_categories SET name = ?, description = ? WHERE id = ?</entry>
+    </query>
+    <query key="removeDrugCategory">
+        <entry>DELETE FROM drug_categories WHERE id = ?</entry>
+    </query>
     <query key="addDrugType">
         <entry>INSERT INTO drug_types(name, description) VALUES(?, ?)</entry>
     </query>
     <query key="getAllDrugTypes">
         <entry>SELECT * FROM drug_types</entry>
+    </query>
+    <query key="updateDrugType">
+        <entry>UPDATE drug_types SET name = ?, description = ? WHERE id = ?</entry>
+    </query>
+    <query key="removeDrugType">
+        <entry>DELETE FROM drug_types WHERE id = ?</entry>
     </query>
     <query key="addDrug">
         <entry>INSERT INTO drugs(name, category, type, price, 

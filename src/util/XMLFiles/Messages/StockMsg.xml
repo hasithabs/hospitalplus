@@ -7,5 +7,16 @@ and open the template in the editor.
 
 
 <root>
-    
+    <message key="addedMsg">
+        <entry>%s has been successfully added.</entry>
+    </message>
+    <message key="updatedMsg">
+        <entry>%s has been successfully updated.</entry>
+    </message>
+    <message key="removedMsg">
+        <entry>%s has been successfully removed.</entry>
+    </message>
+    <message key="somethingWrong">
+        <entry>Oops! Something went wrong. Please try again.</entry>
+    </message>
 </root>

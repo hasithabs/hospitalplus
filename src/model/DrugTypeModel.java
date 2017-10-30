@@ -70,6 +70,19 @@ public class DrugTypeModel {
         return DrugTypeDAO().all();
     }
 
+    /**
+     * Update Existing Drug Type
+     */
+    public DrugTypeModel update() throws SQLException {
+        return DrugTypeDAO().update(this);
+    }
+    
+    /**
+     * Remove Existing Drug Type
+     */
+    public static void remove(int id) throws SQLException {
+        DrugTypeDAO().remove(id);
+    }
     /* 
      * Return the drug type DAO
      * @return dao the drug type dao 

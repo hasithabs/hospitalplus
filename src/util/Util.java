@@ -2,11 +2,14 @@ package util;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -42,6 +45,12 @@ public class Util {
             } else if (c instanceof JComboBox) {
                 JComboBox cb = (JComboBox) c;
                 cb.setSelectedIndex(0);
+            } else if (c instanceof JScrollPane) {
+                JScrollPane sp = (JScrollPane) c;
+                if (sp.getViewport().getComponent(0) instanceof JTextArea) {
+                    JTextArea ta = (JTextArea) sp.getViewport().getComponent(0);
+                    ta.setText("");
+                }
             }
         }
     }

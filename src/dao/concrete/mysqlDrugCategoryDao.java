@@ -98,6 +98,68 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
         return drugCategories;
     }
+    
+    /**
+     * Update Existing Drug Category
+     * 
+     * @param drugCategory drug category model 
+     * @return DrugCategoryModel
+     * @throws SQLException 
+     */
+    @Override
+    public DrugCategoryModel update(DrugCategoryModel drugCategory) throws SQLException {
+        try {
+            Connection con = DaoFactory.getDatabase().openConnection();
+            try {
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "updateDrugCategory"), 
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setString(1, drugCategory.getName());
+                pstmt.setString(2, drugCategory.getDescription());
+                pstmt.setInt(3, drugCategory.getId());
+
+                pstmt.executeUpdate();
+
+                //ResultSet rset = pstmt.getGeneratedKeys();
+                con.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
+            }
+        } catch (Exception e) {
+            LOG.error(e);
+        }
+
+        return drugCategory;
+    }
+    
+    /**
+     * Remove Existing Drug Category
+     * 
+     * @param drugCategory drug category model 
+     * @return DrugCategoryModel
+     * @throws SQLException 
+     */
+    @Override
+    public void remove(int id) throws SQLException {
+        try {
+            Connection con = DaoFactory.getDatabase().openConnection();
+            try {
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "removeDrugCategory"), 
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, id);
+
+                pstmt.executeUpdate();
+
+                //ResultSet rset = pstmt.getGeneratedKeys();
+                con.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
+            }
+        } catch (Exception e) {
+            LOG.error(e);
+        }
+    }
    
     /**
      * Create Drug Category

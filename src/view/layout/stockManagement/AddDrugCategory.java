@@ -10,14 +10,16 @@ import java.sql.SQLException;
 import model.DrugCategoryModel;
 import org.apache.log4j.Logger;
 import util.Config;
+import static util.DBUtil.getXMLData;
 import static util.Util.getScreenSizrRatio;
+import static util.messageAlert.getMessageAlert;
 
 /**
  *
  * @author EnTeRs
  */
 public class AddDrugCategory extends javax.swing.JFrame {
-    
+
     static int ScreenW = (int) getScreenSizrRatio()[0];
     static int ScreenH = (int) getScreenSizrRatio()[1];
 
@@ -26,14 +28,16 @@ public class AddDrugCategory extends javax.swing.JFrame {
 
     public AddDrugCategory() {
         initComponents();
-        this.setLocation((ScreenW - this.getWidth()) / 2, 
+        this.setLocation((ScreenW - this.getWidth()) / 2,
                 (ScreenH - this.getHeight()) / 2);
-        
+
         //initialize log file
         LOG = cnf.getLogger(AddDrugCategory.class);
     }
-
-
+    
+    public final void resetJframe() {
+        util.Util.Clear(AddDrugCategoryPanel);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,7 +135,11 @@ public class AddDrugCategory extends javax.swing.JFrame {
             DrugCategoryModel drugCategory = new DrugCategoryModel(adcDrugCatNameInput.getText(), adcDrugCatDescInput.getText());
             DrugCategoryController.getInstance().save(drugCategory);
             AddDrugItem.getInstance().getCategoriesInit();
+            AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
+            getMessageAlert(String.format(getXMLData("StockMsg", "message", "addedMsg"), "Drug Category"), "success");
+            resetJframe();
         } catch (SQLException ex) {
+            getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
             LOG.error(ex);
         }
     }//GEN-LAST:event_adcAddNewBtnActionPerformed

@@ -15,6 +15,7 @@ import model.DrugModel;
 import model.DrugTypeModel;
 import org.apache.log4j.Logger;
 import util.Config;
+import static util.DBUtil.getXMLData;
 import util.Validation;
 import static util.messageAlert.getMessageAlert;
 
@@ -319,6 +320,11 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiDrugWeightLabel1.setBounds(1090, 380, 200, 30);
 
         asiUpdateRemoveCatBtn.setText("Update/Remove Selected");
+        asiUpdateRemoveCatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiUpdateRemoveCatBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiUpdateRemoveCatBtn);
         asiUpdateRemoveCatBtn.setBounds(840, 170, 190, 30);
 
@@ -341,6 +347,11 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiAddTypeBtn.setBounds(740, 310, 90, 30);
 
         asiUpdateRemoveTypeBtn.setText("Update/Remove Selected");
+        asiUpdateRemoveTypeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asiUpdateRemoveTypeBtnActionPerformed(evt);
+            }
+        });
         AddStockItemPanel.add(asiUpdateRemoveTypeBtn);
         asiUpdateRemoveTypeBtn.setBounds(840, 310, 190, 30);
 
@@ -384,10 +395,10 @@ public class AddDrugItem extends javax.swing.JFrame {
                         Integer.parseInt(asiReorderLevelInput.getValue().toString()),
                         asiDrugWeightInput.getText());
                 DrugController.getInstance().save(drug);
-                getMessageAlert("Drug has been successfully added.", "success");
+                getMessageAlert(String.format(getXMLData("StockMsg", "message", "addedMsg"), "Drug"), "success");
                 resetJframe();
             } catch (SQLException ex) {
-                getMessageAlert("Oops! Something went wrong. Please try again.", "error");
+                getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
                 LOG.error(ex);
             }
         }
@@ -426,6 +437,16 @@ public class AddDrugItem extends javax.swing.JFrame {
     private void asiDrugWeightInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_asiDrugWeightInputCaretUpdate
         validateWeight();
     }//GEN-LAST:event_asiDrugWeightInputCaretUpdate
+
+    private void asiUpdateRemoveCatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiUpdateRemoveCatBtnActionPerformed
+        new UpdateRemoveDrugCategory((DrugCategoryModel) asiDrugCategorySelector.getSelectedItem()).setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_asiUpdateRemoveCatBtnActionPerformed
+
+    private void asiUpdateRemoveTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiUpdateRemoveTypeBtnActionPerformed
+        new UpdateRemoveDrugType((DrugTypeModel) asiDrugTypeSelector.getSelectedItem()).setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_asiUpdateRemoveTypeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,7 +488,7 @@ public class AddDrugItem extends javax.swing.JFrame {
     private javax.swing.JPanel AddStockItemPanel;
     private javax.swing.JButton asiAddCatBtn;
     private javax.swing.JButton asiAddTypeBtn;
-    private javax.swing.JLabel asiDrugCatVali;
+    public javax.swing.JLabel asiDrugCatVali;
     private javax.swing.JLabel asiDrugCategoryLabel;
     private javax.swing.JComboBox<DrugCategoryModel> asiDrugCategorySelector;
     private javax.swing.JSpinner asiDrugLevelInput;
@@ -480,7 +501,7 @@ public class AddDrugItem extends javax.swing.JFrame {
     private javax.swing.JLabel asiDrugPriceVali;
     private javax.swing.JLabel asiDrugTypeLabel;
     private javax.swing.JComboBox<DrugTypeModel> asiDrugTypeSelector;
-    private javax.swing.JLabel asiDrugTypeVali;
+    public javax.swing.JLabel asiDrugTypeVali;
     private javax.swing.JTextField asiDrugWeightInput;
     private javax.swing.JLabel asiDrugWeightLabel1;
     private javax.swing.JLabel asiDrugWeightVali;

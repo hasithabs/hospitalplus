@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import model.DrugTypeModel;
 import org.apache.log4j.Logger;
 import util.Config;
+import static util.DBUtil.getXMLData;
 import static util.Util.getScreenSizrRatio;
+import static util.messageAlert.getMessageAlert;
 
 /**
  *
@@ -32,6 +34,10 @@ public class AddDrugType extends javax.swing.JFrame {
         
         this.setLocation((ScreenW - this.getWidth()) / 2, 
                 (ScreenH - this.getHeight()) / 2);
+    }
+    
+    public final void resetJframe() {
+        util.Util.Clear(AddDrugTypePanel);
     }
 
     /**
@@ -133,7 +139,11 @@ public class AddDrugType extends javax.swing.JFrame {
             DrugTypeModel drugType = new DrugTypeModel(adtDrugTypeNameInput.getText(), adtDrugTypeDescInput.getText());
             DrugTypeController.getInstance().save(drugType);
             AddDrugItem.getInstance().getTypsInit();
+            AddDrugItem.getInstance().asiDrugTypeVali.setVisible(false);
+            getMessageAlert(String.format(getXMLData("StockMsg", "message", "addedMsg"), "Drug Type"), "success");
+            resetJframe();
         } catch (SQLException ex) {
+            getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
             LOG.error(ex);
         }
     }//GEN-LAST:event_adtAddNewBtnActionPerformed

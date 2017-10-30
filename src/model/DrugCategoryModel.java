@@ -70,6 +70,20 @@ public class DrugCategoryModel {
         return DrugCategoryDAO().all();
     }
     
+    /**
+     * Update Existing Drug Category
+     */
+    public DrugCategoryModel update() throws SQLException {
+        return DrugCategoryDAO().update(this);
+    }
+    
+    /**
+     * Remove Existing Drug Category
+     */
+    public static void remove(int id) throws SQLException {
+        DrugCategoryDAO().remove(id);
+    }
+    
     /* 
      * Return the drug category DAO
      * @return dao the drug category dao 

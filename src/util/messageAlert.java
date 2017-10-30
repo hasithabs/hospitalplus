@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static util.Util.getIcon;
 import static util.Util.getScreenSizrRatio;
+import view.layout.stockManagement.AddDrugItem;
 
 /**
  *
@@ -96,5 +97,10 @@ public class messageAlert {
         msgFrame.setLocation((ScreenW - msgFrame.getWidth()) / 2, 
                 (ScreenH - msgFrame.getHeight()) / 2);
         msgFrame.show();
+    }
+    
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {
+        AddDrugItem.getInstance().setEnabled(true);
+        AddDrugItem.getInstance().toFront();
     }
 }

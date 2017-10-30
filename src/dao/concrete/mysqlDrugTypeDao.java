@@ -37,7 +37,7 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
     /**
      * Insert Drug Type to DB
      *
-     * @param drugType drug category model
+     * @param drugType drug type model
      * @return DrugTypeModel
      * @throws SQLException
      */
@@ -69,7 +69,7 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
     /**
      * Get All Drug Types from DB
      *
-     * @param drugType drug category model
+     * @param drugType drug type model
      * @return DrugTypeModel
      * @throws SQLException
      */
@@ -97,6 +97,68 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
         }
 
         return drugTypes;
+    }
+    
+    /**
+     * Update Existing Drug Category
+     * 
+     * @param drugType drug type model 
+     * @return DrugTypeModel
+     * @throws SQLException 
+     */
+    @Override
+    public DrugTypeModel update(DrugTypeModel drugType) throws SQLException {
+        try {
+            Connection con = DaoFactory.getDatabase().openConnection();
+            try {
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "updateDrugType"), 
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setString(1, drugType.getName());
+                pstmt.setString(2, drugType.getDescription());
+                pstmt.setInt(3, drugType.getId());
+
+                pstmt.executeUpdate();
+
+                //ResultSet rset = pstmt.getGeneratedKeys();
+                con.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
+            }
+        } catch (Exception e) {
+            LOG.error(e);
+        }
+
+        return drugType;
+    }
+    
+    /**
+     * Remove Existing Drug Category
+     * 
+     * @param drugType drug type model 
+     * @return DrugTypeModel
+     * @throws SQLException 
+     */
+    @Override
+    public void remove(int id) throws SQLException {
+        try {
+            Connection con = DaoFactory.getDatabase().openConnection();
+            try {
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "removeDrugType"), 
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, id);
+
+                pstmt.executeUpdate();
+
+                //ResultSet rset = pstmt.getGeneratedKeys();
+                con.close();
+            } catch (Exception ee) {
+                getMessageAlert(ee.getMessage(), "error");
+                LOG.error(ee);
+            }
+        } catch (Exception e) {
+            LOG.error(e);
+        }
     }
 
     /**

@@ -35,6 +35,15 @@ public class DrugTypeController {
         return DrugTypeModel.all();
     }
 
+    public DrugTypeModel update(DrugTypeModel drugType) throws SQLException {
+        if (drugType != null) {
+            drugType.update();
+        }
+        return drugType;
+    }
 
+    public void remove(int id) throws SQLException {
+        DrugTypeModel.remove(id);
+    }
 
 }

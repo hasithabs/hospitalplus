@@ -5,17 +5,41 @@
  */
 package view.layout.stockManagement;
 
+import Controller.StockManagement.DrugTypeController;
+import java.sql.SQLException;
+import model.DrugTypeModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import static util.DBUtil.getXMLData;
+import static util.Util.getScreenSizrRatio;
+import static util.messageAlert.getMessageAlert;
+
 /**
  *
  * @author EnTeRs
  */
 public class UpdateRemoveDrugType extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddStockItem
-     */
-    public UpdateRemoveDrugType() {
+    static int ScreenW = (int) getScreenSizrRatio()[0];
+    static int ScreenH = (int) getScreenSizrRatio()[1];
+
+    Config cnf = new Config();
+    public Logger LOG;
+
+    int selectedDrugTypeId;
+    
+    public UpdateRemoveDrugType(DrugTypeModel drugType) {
         initComponents();
+        
+        this.setLocation((ScreenW - this.getWidth()) / 2,
+                (ScreenH - this.getHeight()) / 2);
+
+        //initialize log file
+        LOG = cnf.getLogger(UpdateRemoveDrugType.class);
+
+        selectedDrugTypeId = drugType.getId();
+        urdtDrugTypeNameInput.setText(drugType.getName());
+        urdtDrugTypeDescInput.setText(drugType.getDescription());
     }
 
     /**
@@ -29,20 +53,29 @@ public class UpdateRemoveDrugType extends javax.swing.JFrame {
 
         UpdateRemoveDrugTypePanel = new javax.swing.JPanel();
         urdtTitleLabel = new javax.swing.JLabel();
-        urdtDrugCatNameLabel = new javax.swing.JLabel();
+        urdtDrugTypeNameLabel = new javax.swing.JLabel();
         urdtUpdateBtn = new javax.swing.JButton();
-        urdcCloseBtn = new javax.swing.JButton();
-        urdtDrugCatNameInput = new javax.swing.JTextField();
+        urdtCloseBtn = new javax.swing.JButton();
+        urdtDrugTypeNameInput = new javax.swing.JTextField();
         urdtRemoveBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        urdtDrugTypeDescInput = new javax.swing.JTextArea();
+        urdtDrugTypeDescLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
-        setMinimumSize(new java.awt.Dimension(800, 300));
+        setMaximumSize(new java.awt.Dimension(800, 400));
+        setMinimumSize(new java.awt.Dimension(800, 400));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         UpdateRemoveDrugTypePanel.setBackground(new java.awt.Color(0, 0, 0));
-        UpdateRemoveDrugTypePanel.setMaximumSize(new java.awt.Dimension(800, 300));
-        UpdateRemoveDrugTypePanel.setMinimumSize(new java.awt.Dimension(800, 300));
+        UpdateRemoveDrugTypePanel.setMaximumSize(new java.awt.Dimension(800, 400));
+        UpdateRemoveDrugTypePanel.setMinimumSize(new java.awt.Dimension(800, 400));
         UpdateRemoveDrugTypePanel.setLayout(null);
 
         urdtTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -52,40 +85,96 @@ public class UpdateRemoveDrugType extends javax.swing.JFrame {
         UpdateRemoveDrugTypePanel.add(urdtTitleLabel);
         urdtTitleLabel.setBounds(0, 30, 800, 50);
 
-        urdtDrugCatNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        urdtDrugCatNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        urdtDrugCatNameLabel.setText("Drug Type Name");
-        UpdateRemoveDrugTypePanel.add(urdtDrugCatNameLabel);
-        urdtDrugCatNameLabel.setBounds(120, 140, 180, 30);
+        urdtDrugTypeNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        urdtDrugTypeNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        urdtDrugTypeNameLabel.setText("Drug Type Name");
+        UpdateRemoveDrugTypePanel.add(urdtDrugTypeNameLabel);
+        urdtDrugTypeNameLabel.setBounds(120, 140, 180, 30);
 
         urdtUpdateBtn.setText("Update");
-        UpdateRemoveDrugTypePanel.add(urdtUpdateBtn);
-        urdtUpdateBtn.setBounds(230, 220, 140, 40);
-
-        urdcCloseBtn.setText("X");
-        urdcCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+        urdtUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                urdcCloseBtnActionPerformed(evt);
+                urdtUpdateBtnActionPerformed(evt);
             }
         });
-        UpdateRemoveDrugTypePanel.add(urdcCloseBtn);
-        urdcCloseBtn.setBounds(740, 10, 40, 40);
-        UpdateRemoveDrugTypePanel.add(urdtDrugCatNameInput);
-        urdtDrugCatNameInput.setBounds(310, 140, 300, 30);
+        UpdateRemoveDrugTypePanel.add(urdtUpdateBtn);
+        urdtUpdateBtn.setBounds(230, 310, 140, 40);
+
+        urdtCloseBtn.setText("X");
+        urdtCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urdtCloseBtnActionPerformed(evt);
+            }
+        });
+        UpdateRemoveDrugTypePanel.add(urdtCloseBtn);
+        urdtCloseBtn.setBounds(740, 10, 40, 40);
+        UpdateRemoveDrugTypePanel.add(urdtDrugTypeNameInput);
+        urdtDrugTypeNameInput.setBounds(310, 140, 300, 30);
 
         urdtRemoveBtn.setText("Remove");
+        urdtRemoveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urdtRemoveBtnActionPerformed(evt);
+            }
+        });
         UpdateRemoveDrugTypePanel.add(urdtRemoveBtn);
-        urdtRemoveBtn.setBounds(410, 220, 140, 40);
+        urdtRemoveBtn.setBounds(410, 310, 140, 40);
+
+        urdtDrugTypeDescInput.setColumns(20);
+        urdtDrugTypeDescInput.setRows(3);
+        jScrollPane1.setViewportView(urdtDrugTypeDescInput);
+
+        UpdateRemoveDrugTypePanel.add(jScrollPane1);
+        jScrollPane1.setBounds(310, 200, 300, 70);
+
+        urdtDrugTypeDescLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        urdtDrugTypeDescLabel.setForeground(new java.awt.Color(255, 255, 255));
+        urdtDrugTypeDescLabel.setText("Description");
+        UpdateRemoveDrugTypePanel.add(urdtDrugTypeDescLabel);
+        urdtDrugTypeDescLabel.setBounds(120, 200, 180, 30);
 
         getContentPane().add(UpdateRemoveDrugTypePanel);
-        UpdateRemoveDrugTypePanel.setBounds(0, 0, 800, 300);
+        UpdateRemoveDrugTypePanel.setBounds(0, 0, 800, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void urdcCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdcCloseBtnActionPerformed
+    private void urdtCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdtCloseBtnActionPerformed
         dispose();
-    }//GEN-LAST:event_urdcCloseBtnActionPerformed
+    }//GEN-LAST:event_urdtCloseBtnActionPerformed
+
+    private void urdtUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdtUpdateBtnActionPerformed
+        try {
+            DrugTypeModel drugCategory = new DrugTypeModel(urdtDrugTypeNameInput.getText(), urdtDrugTypeDescInput.getText());
+            drugCategory.setId(selectedDrugTypeId);
+            DrugTypeController.getInstance().update(drugCategory);
+            AddDrugItem.getInstance().getCategoriesInit();
+            AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
+            getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug Type"), "success");
+            dispose();
+        } catch (SQLException ex) {
+            getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_urdtUpdateBtnActionPerformed
+
+    private void urdtRemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdtRemoveBtnActionPerformed
+        try {
+            DrugTypeController.getInstance().remove(selectedDrugTypeId);
+            AddDrugItem.getInstance().getCategoriesInit();
+            AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
+            getMessageAlert(String.format(getXMLData("StockMsg", "message", "removedMsg"), "Drug Type"), "success");
+            dispose();
+        } catch (SQLException ex) {
+            getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_urdtRemoveBtnActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        AddDrugItem.getInstance().setEnabled(true);
+        AddDrugItem.getInstance().toFront();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -124,16 +213,20 @@ public class UpdateRemoveDrugType extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateRemoveDrugType().setVisible(true);
+                DrugTypeModel drugType = null;
+                new UpdateRemoveDrugType(drugType).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel UpdateRemoveDrugTypePanel;
-    private javax.swing.JButton urdcCloseBtn;
-    private javax.swing.JTextField urdtDrugCatNameInput;
-    private javax.swing.JLabel urdtDrugCatNameLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton urdtCloseBtn;
+    private javax.swing.JTextArea urdtDrugTypeDescInput;
+    private javax.swing.JLabel urdtDrugTypeDescLabel;
+    private javax.swing.JTextField urdtDrugTypeNameInput;
+    private javax.swing.JLabel urdtDrugTypeNameLabel;
     private javax.swing.JButton urdtRemoveBtn;
     private javax.swing.JLabel urdtTitleLabel;
     private javax.swing.JButton urdtUpdateBtn;

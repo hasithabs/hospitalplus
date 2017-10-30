@@ -1,4 +1,8 @@
-ERROR   2017-10-28 11:44:29,791 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
-ERROR   2017-10-28 11:44:31,022 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
-ERROR   2017-10-28 11:45:44,135 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
-ERROR   2017-10-28 11:45:45,222 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-29 23:17:58,072 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-29 23:17:59,149 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-29 23:18:15,357 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-29 23:18:16,426 [AWT-EventQueue-0] dao.concrete.mysqlDrugTypeDao  - java.lang.NullPointerException
+ERROR   2017-10-29 23:30:12,863 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter
+ERROR   2017-10-29 23:30:12,884 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters
+ERROR   2017-10-29 23:30:48,326 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter
+ERROR   2017-10-29 23:30:48,344 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters

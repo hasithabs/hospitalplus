@@ -17,4 +17,6 @@ import model.DrugCategoryModel;
 public interface DrugCategoryDao {
     DrugCategoryModel insert(DrugCategoryModel object) throws SQLException;
     List<DrugCategoryModel> all() throws SQLException;
+    DrugCategoryModel update(DrugCategoryModel object) throws SQLException;
+    void remove(int id) throws SQLException;
 }

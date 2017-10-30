@@ -14,7 +14,7 @@ import model.DrugCategoryModel;
  * @author EnTeRs
  */
 public class DrugCategoryController {
-    	
+
     private static DrugCategoryController instance = new DrugCategoryController();
 
     private DrugCategoryController() {
@@ -24,17 +24,26 @@ public class DrugCategoryController {
         return instance;
     }
 
-    public DrugCategoryModel save(DrugCategoryModel drugcategory) throws SQLException {
-        if (drugcategory != null) {
-            drugcategory.save();
+    public DrugCategoryModel save(DrugCategoryModel drugCategory) throws SQLException {
+        if (drugCategory != null) {
+            drugCategory.save();
         }
-        return drugcategory;
+        return drugCategory;
     }
-    
+
     public List<DrugCategoryModel> allDrugCategories() throws SQLException {
         return DrugCategoryModel.all();
     }
 
+    public DrugCategoryModel update(DrugCategoryModel drugCategory) throws SQLException {
+        if (drugCategory != null) {
+            drugCategory.update();
+        }
+        return drugCategory;
+    }
 
+    public void remove(int id) throws SQLException {
+        DrugCategoryModel.remove(id);
+    }
 
 }
