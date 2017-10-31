@@ -12,4 +12,7 @@ and open the template in the editor.
     <query key="Employee_Edit_SelectAll">
         <entry>SELECT * FROM Employee</entry>
     </query>
+    <query key="Employee_Edit_SelectAllById">
+        <entry>SELECT * FROM Employee WHERE Id IN (?) </entry>
+    </query>
 </root>

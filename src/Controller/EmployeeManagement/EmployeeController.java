@@ -67,6 +67,17 @@ public class EmployeeController {
         
     }
     
+    /*
+    *return all the employee registerd employee data as ArrayList
+    */
+    public Employee getEmployeeById(String Id) throws IOException{
+        
+        return employeeDao().getEnployeeFromId(Id);
+        
+    }
+    
+
+    
     
     
 }

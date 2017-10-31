@@ -4,6 +4,8 @@
  */
 package Model.EmployeeManagement;
 
+import java.sql.Date;
+
 public class Employee {
 
     private String Id;
@@ -12,6 +14,11 @@ public class Employee {
     private String Email;
     private String Password;
     private String ConfigPassword;
+    private String NIC;
+    private String gender;
+    private String Possition;
+    private String Address;
+    private java.sql.Date DOB;
 
     // getters and setters for the employee object
       public String getId() {
@@ -61,4 +68,50 @@ public class Employee {
     public void setConfigPassword(String ConfigPassword) {
         this.ConfigPassword = ConfigPassword;
     }
+
+    public String getNIC() {
+        return NIC;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPossition() {
+        return Possition;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    
+
+    public void setNIC(String NIC) {
+        this.NIC = NIC;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setPossition(String Possition) {
+        this.Possition = Possition;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public Date getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(Date DOB) {
+        this.DOB = DOB;
+    }
+
+  
+    
+    
 }

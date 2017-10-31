@@ -31,12 +31,12 @@ public class MysqlEmployeeDao implements EmployeeDao {
     PreparedStatement pstmt;
     ResultSet rset;
     String query;
-    Connection con ;
+    Connection con;
     //create connection to databaseF
 
     public MysqlEmployeeDao() throws IOException {
 
-       con = DaoFactory.getDatabase().openConnection();
+        con = DaoFactory.getDatabase().openConnection();
     }
 
     /*
@@ -95,6 +95,42 @@ public class MysqlEmployeeDao implements EmployeeDao {
         }
 
         return EmployeeList;
+    }
+
+    /*
+    *select all employee by given ID and give it as Employee Object.
+     */
+    @Override
+    public Employee getEnployeeFromId(String Id) {
+       
+         Employee emp =new Employee();
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Edit_SelectAllById");
+        try {
+
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, Id);
+            rset = pstmt.executeQuery();
+         
+           
+            while (rset.next()) {
+                
+                emp.setId(rset.getString("Id"));
+                emp.setFirstName(rset.getString("FirstName"));
+                emp.setLastName(rset.getString("LastName"));
+                emp.setEmail(rset.getString("Email"));
+                emp.setNIC(rset.getString("NIC"));
+                emp.setPassword(rset.getString("Password"));
+                emp.setAddress(rset.getString("Address"));
+                emp.setDOB(rset.getDate("DOB"));
+                emp.setGender(rset.getString("Gender"));
+                emp.setPossition(rset.getString("Possition"));
+            }
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
+        return emp;
     }
 
 }

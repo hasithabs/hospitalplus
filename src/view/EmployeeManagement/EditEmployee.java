@@ -5,12 +5,17 @@ import Model.EmployeeManagement.Employee;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import util.Config;
 import util.Util;
 
 public class EditEmployee extends javax.swing.JFrame {
+
+    Config cnf = new Config();
+    public org.apache.log4j.Logger LOG;
 
     DefaultTableModel model;
     int selectedIndex;
@@ -19,6 +24,9 @@ public class EditEmployee extends javax.swing.JFrame {
     public EditEmployee() throws IOException {
         initComponents();
         showUser(empCnt.getAllRegistedEmployeeData());
+
+        //initialize log file
+        LOG = cnf.getLogger(UserRegistration.class);
 
         //give initial forcus to ID field
         txtEditID.requestFocus();
@@ -33,7 +41,7 @@ public class EditEmployee extends javax.swing.JFrame {
             row[0] = dataList.get(i).getId();
             row[1] = dataList.get(i).getFirstName();
             row[2] = dataList.get(i).getLastName();
-            row[3] = dataList.get(i).getEmail();
+            row[3] = dataList.get(i).getNIC();
 
             model.addRow(row);
         }
@@ -59,7 +67,7 @@ public class EditEmployee extends javax.swing.JFrame {
         txtEditID = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtEditAddressLine2 = new javax.swing.JTextField();
-        txtxEditAddressLine1 = new javax.swing.JTextField();
+        txtEditAddressLine1 = new javax.swing.JTextField();
         dateEditDOB = new com.toedter.calendar.JDateChooser();
         btnClear = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -68,13 +76,16 @@ public class EditEmployee extends javax.swing.JFrame {
         rdbFemale = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         rdbMale = new javax.swing.JRadioButton();
-        cmbPossition = new javax.swing.JComboBox<>();
+        cmbEditPossition = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpData = new javax.swing.JTable();
         txtEditSearch = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtEditNIC = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtEditPassword = new javax.swing.JPasswordField();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1255, 547));
@@ -98,7 +109,7 @@ public class EditEmployee extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Address");
         pnlEditUser.add(jLabel7);
-        jLabel7.setBounds(490, 400, 80, 30);
+        jLabel7.setBounds(430, 400, 80, 30);
 
         txtEditFirstName.setBackground(new java.awt.Color(0, 0, 0));
         txtEditFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -110,38 +121,38 @@ public class EditEmployee extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Last Name");
         pnlEditUser.add(jLabel10);
-        jLabel10.setBounds(490, 340, 80, 30);
+        jLabel10.setBounds(430, 340, 80, 30);
 
         txtEditLastName.setBackground(new java.awt.Color(0, 0, 0));
         txtEditLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtEditLastName.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditLastName);
-        txtEditLastName.setBounds(610, 340, 250, 30);
+        txtEditLastName.setBounds(550, 340, 250, 30);
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email");
         pnlEditUser.add(jLabel11);
-        jLabel11.setBounds(820, 220, 80, 30);
+        jLabel11.setBounds(840, 220, 80, 30);
 
         txtEditEmail.setBackground(new java.awt.Color(0, 0, 0));
         txtEditEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtEditEmail.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditEmail);
-        txtEditEmail.setBounds(940, 220, 250, 30);
+        txtEditEmail.setBounds(960, 220, 250, 30);
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("ID");
         pnlEditUser.add(jLabel12);
-        jLabel12.setBounds(820, 100, 80, 30);
+        jLabel12.setBounds(840, 100, 80, 30);
 
         txtEditID.setBackground(new java.awt.Color(0, 0, 0));
         txtEditID.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtEditID.setForeground(new java.awt.Color(255, 255, 255));
         txtEditID.setEnabled(false);
         pnlEditUser.add(txtEditID);
-        txtEditID.setBounds(940, 100, 250, 30);
+        txtEditID.setBounds(960, 100, 250, 30);
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,13 +164,13 @@ public class EditEmployee extends javax.swing.JFrame {
         txtEditAddressLine2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtEditAddressLine2.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditAddressLine2);
-        txtEditAddressLine2.setBounds(610, 440, 250, 30);
+        txtEditAddressLine2.setBounds(550, 440, 250, 30);
 
-        txtxEditAddressLine1.setBackground(new java.awt.Color(0, 0, 0));
-        txtxEditAddressLine1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtxEditAddressLine1.setForeground(new java.awt.Color(255, 255, 255));
-        pnlEditUser.add(txtxEditAddressLine1);
-        txtxEditAddressLine1.setBounds(610, 400, 250, 30);
+        txtEditAddressLine1.setBackground(new java.awt.Color(0, 0, 0));
+        txtEditAddressLine1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtEditAddressLine1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlEditUser.add(txtEditAddressLine1);
+        txtEditAddressLine1.setBounds(550, 400, 250, 30);
 
         dateEditDOB.setBackground(new java.awt.Color(51, 51, 51));
         dateEditDOB.setForeground(new java.awt.Color(51, 51, 51));
@@ -177,7 +188,7 @@ public class EditEmployee extends javax.swing.JFrame {
             }
         });
         pnlEditUser.add(btnClear);
-        btnClear.setBounds(990, 440, 100, 30);
+        btnClear.setBounds(890, 440, 100, 30);
 
         btnUpdate.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         btnUpdate.setText("Update");
@@ -188,13 +199,13 @@ public class EditEmployee extends javax.swing.JFrame {
             }
         });
         pnlEditUser.add(btnUpdate);
-        btnUpdate.setBounds(1100, 440, 100, 30);
+        btnUpdate.setBounds(1110, 440, 100, 30);
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Possition");
         pnlEditUser.add(jLabel14);
-        jLabel14.setBounds(820, 160, 80, 30);
+        jLabel14.setBounds(840, 160, 80, 30);
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,9 +235,9 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(rdbMale);
         rdbMale.setBounds(150, 390, 55, 27);
 
-        cmbPossition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Doctor", "Nurse", "Laberor" }));
-        pnlEditUser.add(cmbPossition);
-        cmbPossition.setBounds(940, 160, 250, 30);
+        cmbEditPossition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Doctor", "Nurse", "Laberor", "CEO" }));
+        pnlEditUser.add(cmbEditPossition);
+        cmbEditPossition.setBounds(960, 160, 250, 30);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(null);
@@ -291,23 +302,42 @@ public class EditEmployee extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("NIC");
         pnlEditUser.add(jLabel16);
-        jLabel16.setBounds(820, 280, 80, 30);
+        jLabel16.setBounds(840, 280, 80, 30);
 
         txtEditNIC.setBackground(new java.awt.Color(0, 0, 0));
         txtEditNIC.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtEditNIC.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditNIC);
-        txtEditNIC.setBounds(940, 280, 250, 30);
+        txtEditNIC.setBounds(960, 280, 250, 30);
+
+        jLabel17.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Password");
+        pnlEditUser.add(jLabel17);
+        jLabel17.setBounds(840, 340, 80, 30);
+
+        txtEditPassword.setBackground(new java.awt.Color(0, 0, 0));
+        txtEditPassword.setForeground(new java.awt.Color(255, 255, 255));
+        pnlEditUser.add(txtEditPassword);
+        txtEditPassword.setBounds(960, 340, 250, 30);
+        txtEditPassword.getAccessibleContext().setAccessibleName("");
+
+        btnDelete.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        pnlEditUser.add(btnDelete);
+        btnDelete.setBounds(1000, 440, 100, 30);
 
         getContentPane().add(pnlEditUser);
         pnlEditUser.setBounds(0, 0, 1255, 548);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         Util.Clear(pnlEditUser);
@@ -329,14 +359,79 @@ public class EditEmployee extends javax.swing.JFrame {
 
     //load data to text fileds
     private void tblEmpDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpDataMouseClicked
-        model = (DefaultTableModel) tblEmpData.getModel();
-        selectedIndex = tblEmpData.getSelectedRow();
+        try {
+            model = (DefaultTableModel) tblEmpData.getModel();
+            selectedIndex = tblEmpData.getSelectedRow();
 
-        txtEditID.setText(model.getValueAt(selectedIndex, 0).toString());
-        txtEditFirstName.setText(model.getValueAt(selectedIndex, 1).toString());
-        txtEditLastName.setText(model.getValueAt(selectedIndex, 2).toString());
-        txtEditNIC.setText(model.getValueAt(selectedIndex, 3).toString());
+            Employee emp = new Employee();
+            EmployeeController empContro = new EmployeeController();
+            //call to DB to get the data from ID.
+            emp = empContro.getEmployeeById(model.getValueAt(selectedIndex, 0).toString());
+
+            // set data to text fields
+            txtEditID.setText(emp.getId());
+            txtEditFirstName.setText(emp.getFirstName());
+            txtEditLastName.setText(emp.getLastName());
+            txtEditEmail.setText(emp.getEmail());
+            txtEditNIC.setText(emp.getNIC());
+            txtEditPassword.setText(emp.getPassword());
+            dateEditDOB.setDate(emp.getDOB());
+            cmbEditPossition.setSelectedItem(emp.getPossition());
+
+            //set address
+            try {
+                txtEditAddressLine1.setText(emp.getAddress().split(";")[0]);
+                txtEditAddressLine2.setText(emp.getAddress().split(";")[1]);
+            }
+            catch(Exception e){
+                LOG.error("Address has not defined in database");
+                txtEditAddressLine1.setText("");
+                txtEditAddressLine2.setText("");
+                
+            }
+            
+            //set gender
+            try{
+                if(emp.getGender().equals("Male"))rdbMale.setSelected(true);
+                else if (emp.getGender().equals("Female"))rdbFemale.setSelected(true);
+            }catch(Exception e){
+                LOG.error("gender has not defined in database");
+                buttonGroup1.clearSelection();
+                
+            }
+            
+
+        } catch (IOException ex) {
+            LOG.error(ex, ex);
+        }
     }//GEN-LAST:event_tblEmpDataMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
+        String Gender = null;
+        Employee emp = new Employee();
+
+        if (rdbFemale.isSelected()) {
+            Gender = "Female";
+        } else if (rdbMale.isSelected()) {
+            Gender = "Male";
+        }
+
+        emp.setFirstName(txtEditFirstName.getText());
+        emp.setLastName(txtEditLastName.getText());
+        emp.setEmail(txtEditEmail.getText());
+        emp.setNIC(txtEditID.getText());
+        emp.setPossition(cmbEditPossition.getSelectedItem().toString());
+        emp.setGender(Gender);
+        emp.setAddress(txtEditAddressLine1.getText() + ";" + txtEditAddressLine2.getText());
+        emp.setDOB(new java.sql.Date(dateEditDOB.getDate().getTime()));
+        emp.setPassword(Arrays.toString(txtEditPassword.getPassword()));
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     public static void main(String args[]) {
 
@@ -353,9 +448,10 @@ public class EditEmployee extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cmbPossition;
+    private javax.swing.JComboBox<String> cmbEditPossition;
     private com.toedter.calendar.JDateChooser dateEditDOB;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -364,6 +460,7 @@ public class EditEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -373,13 +470,14 @@ public class EditEmployee extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbFemale;
     private javax.swing.JRadioButton rdbMale;
     private javax.swing.JTable tblEmpData;
+    private javax.swing.JTextField txtEditAddressLine1;
     private javax.swing.JTextField txtEditAddressLine2;
     private javax.swing.JTextField txtEditEmail;
     private javax.swing.JTextField txtEditFirstName;
     private javax.swing.JTextField txtEditID;
     private javax.swing.JTextField txtEditLastName;
     private javax.swing.JTextField txtEditNIC;
+    private javax.swing.JPasswordField txtEditPassword;
     private javax.swing.JTextField txtEditSearch;
-    private javax.swing.JTextField txtxEditAddressLine1;
     // End of variables declaration//GEN-END:variables
 }
