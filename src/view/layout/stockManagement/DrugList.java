@@ -5,6 +5,20 @@
  */
 package view.layout.stockManagement;
 
+import Controller.StockManagement.DrugController;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import model.DrugModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import static util.DBUtil.getXMLData;
+import static util.messageAlert.getMessageAlert;
+
 /**
  *
  * @author EnTeRs
@@ -22,6 +36,10 @@ public class DrugList extends javax.swing.JFrame {
 
         //initialize log file
         LOG = cnf.getLogger(DrugList.class);
+
+        resetJframe();
+        getDrugsInit();
+        setupDrugTable();
     }
 
     public static DrugList getInstance() {
@@ -34,6 +52,41 @@ public class DrugList extends javax.swing.JFrame {
 
     public final void resetJframe() {
         util.Util.Clear(DrugListPanel);
+        dlUpdateSelectedBtn.setEnabled(false);
+        dlDeleteSelectedBtn.setEnabled(false);
+    }
+
+    private void setupDrugTable() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        dlDrugTable.setDefaultRenderer(String.class, centerRenderer);
+
+        ((DefaultTableCellRenderer) dlDrugTable.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+
+        dlDrugTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    private void getDrugsInit() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) dlDrugTable.getModel();
+            model.setRowCount(0);
+            List<DrugModel> drugs = DrugController.getInstance().allDrugs();
+            for (int r = 0; r < drugs.size(); r++) {
+                Object[] row = {drugs.get(r).getId(),
+                    drugs.get(r).getName(),
+                    drugs.get(r).getCategory(),
+                    drugs.get(r).getType(),
+                    drugs.get(r).getPrice(),
+                    drugs.get(r).getRemarks(),
+                    drugs.get(r).getDrugLevel(),
+                    drugs.get(r).getReorderLevel(),
+                    drugs.get(r).getWeight()};
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
     }
 
     /**
@@ -45,7 +98,7 @@ public class DrugList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AddStockItemPanel = new javax.swing.JPanel();
+        DrugListPanel = new javax.swing.JPanel();
         dlTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dlDrugTable = new javax.swing.JTable();
@@ -54,42 +107,44 @@ public class DrugList extends javax.swing.JFrame {
         dlSearchTypeCheckbox = new javax.swing.JCheckBox();
         dlSearchNameCheckbox = new javax.swing.JCheckBox();
         dlSearchCategoryCheckbox = new javax.swing.JCheckBox();
-        slDownloadQtyReportBtn = new javax.swing.JButton();
+        dlDownloadQtyReportBtn = new javax.swing.JButton();
         dlDownloadFullReportBtn = new javax.swing.JButton();
+        dlUpdateSelectedBtn = new javax.swing.JButton();
+        dlDeleteSelectedBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setMaximumSize(new java.awt.Dimension(1765, 770));
         setMinimumSize(new java.awt.Dimension(1765, 770));
+        setPreferredSize(new java.awt.Dimension(1765, 770));
         getContentPane().setLayout(null);
 
-        AddStockItemPanel.setBackground(new java.awt.Color(0, 0, 0));
-        AddStockItemPanel.setMaximumSize(new java.awt.Dimension(1765, 770));
-        AddStockItemPanel.setMinimumSize(new java.awt.Dimension(1765, 770));
-        AddStockItemPanel.setLayout(null);
+        DrugListPanel.setBackground(new java.awt.Color(0, 0, 0));
+        DrugListPanel.setMaximumSize(new java.awt.Dimension(1765, 770));
+        DrugListPanel.setMinimumSize(new java.awt.Dimension(1765, 770));
+        DrugListPanel.setLayout(null);
 
         dlTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         dlTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         dlTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dlTitleLabel.setText("Drug List");
-        AddStockItemPanel.add(dlTitleLabel);
+        DrugListPanel.add(dlTitleLabel);
         dlTitleLabel.setBounds(0, 30, 1760, 50);
 
+        dlDrugTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dlDrugTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "Category", "Type", "Price(Rs.)", "Remarks", "Danger Level", "Reorder Level", "Weight", "Qty.", "Action"
+                "ID", "Name", "Category", "Type", "Price(Rs.)", "Remarks", "Danger Level", "Reorder Level", "Weight", "Qty."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -98,6 +153,13 @@ public class DrugList extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        dlDrugTable.setRowHeight(20);
+        dlDrugTable.getTableHeader().setReorderingAllowed(false);
+        dlDrugTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dlDrugTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(dlDrugTable);
@@ -113,50 +175,106 @@ public class DrugList extends javax.swing.JFrame {
             dlDrugTable.getColumnModel().getColumn(9).setPreferredWidth(25);
         }
 
-        AddStockItemPanel.add(jScrollPane1);
+        DrugListPanel.add(jScrollPane1);
         jScrollPane1.setBounds(30, 180, 1710, 480);
 
         dlSearchLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dlSearchLabel.setForeground(new java.awt.Color(255, 255, 255));
         dlSearchLabel.setText("Search");
-        AddStockItemPanel.add(dlSearchLabel);
+        DrugListPanel.add(dlSearchLabel);
         dlSearchLabel.setBounds(30, 120, 120, 30);
-
-        dlSearchInput.setText("jTextField1");
-        AddStockItemPanel.add(dlSearchInput);
+        DrugListPanel.add(dlSearchInput);
         dlSearchInput.setBounds(160, 120, 300, 30);
 
         dlSearchTypeCheckbox.setBackground(new java.awt.Color(0, 0, 0));
+        dlSearchTypeCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dlSearchTypeCheckbox.setForeground(new java.awt.Color(255, 255, 255));
         dlSearchTypeCheckbox.setText("Type");
-        AddStockItemPanel.add(dlSearchTypeCheckbox);
+        DrugListPanel.add(dlSearchTypeCheckbox);
         dlSearchTypeCheckbox.setBounds(700, 120, 90, 30);
 
         dlSearchNameCheckbox.setBackground(new java.awt.Color(0, 0, 0));
+        dlSearchNameCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dlSearchNameCheckbox.setForeground(new java.awt.Color(255, 255, 255));
         dlSearchNameCheckbox.setText("Name");
-        AddStockItemPanel.add(dlSearchNameCheckbox);
+        DrugListPanel.add(dlSearchNameCheckbox);
         dlSearchNameCheckbox.setBounds(500, 120, 80, 30);
 
         dlSearchCategoryCheckbox.setBackground(new java.awt.Color(0, 0, 0));
+        dlSearchCategoryCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dlSearchCategoryCheckbox.setForeground(new java.awt.Color(255, 255, 255));
         dlSearchCategoryCheckbox.setText("Category");
-        AddStockItemPanel.add(dlSearchCategoryCheckbox);
+        DrugListPanel.add(dlSearchCategoryCheckbox);
         dlSearchCategoryCheckbox.setBounds(590, 120, 90, 30);
 
-        slDownloadQtyReportBtn.setText("Download Quantity Report");
-        AddStockItemPanel.add(slDownloadQtyReportBtn);
-        slDownloadQtyReportBtn.setBounds(1300, 690, 200, 40);
+        dlDownloadQtyReportBtn.setText("Download Quantity Report");
+        DrugListPanel.add(dlDownloadQtyReportBtn);
+        dlDownloadQtyReportBtn.setBounds(1300, 690, 200, 40);
 
         dlDownloadFullReportBtn.setText("Download Full Report");
-        AddStockItemPanel.add(dlDownloadFullReportBtn);
+        DrugListPanel.add(dlDownloadFullReportBtn);
         dlDownloadFullReportBtn.setBounds(1530, 690, 200, 40);
 
-        getContentPane().add(AddStockItemPanel);
-        AddStockItemPanel.setBounds(0, 0, 1765, 770);
+        dlUpdateSelectedBtn.setText("Update");
+        dlUpdateSelectedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlUpdateSelectedBtnActionPerformed(evt);
+            }
+        });
+        DrugListPanel.add(dlUpdateSelectedBtn);
+        dlUpdateSelectedBtn.setBounds(1490, 110, 110, 40);
+
+        dlDeleteSelectedBtn.setText("Delete");
+        dlDeleteSelectedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlDeleteSelectedBtnActionPerformed(evt);
+            }
+        });
+        DrugListPanel.add(dlDeleteSelectedBtn);
+        dlDeleteSelectedBtn.setBounds(1630, 110, 110, 40);
+
+        getContentPane().add(DrugListPanel);
+        DrugListPanel.setBounds(0, 0, 1765, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dlDrugTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dlDrugTableMouseClicked
+        if (dlDrugTable.getSelectedRow() > -1) {
+            dlUpdateSelectedBtn.setEnabled(true);
+            dlDeleteSelectedBtn.setEnabled(true);
+        } else {
+            dlUpdateSelectedBtn.setEnabled(false);
+            dlDeleteSelectedBtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_dlDrugTableMouseClicked
+
+    private void dlDeleteSelectedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlDeleteSelectedBtnActionPerformed
+        try {
+            DrugController.getInstance().remove(Integer.parseInt(
+                    dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 0).toString()));
+            getDrugsInit();
+            getMessageAlert(String.format(getXMLData("StockMsg", "message", "removedMsg"), "Drug"), "success");
+        } catch (SQLException ex) {
+            getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_dlDeleteSelectedBtnActionPerformed
+
+    private void dlUpdateSelectedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlUpdateSelectedBtnActionPerformed
+        DrugModel selectedDrug = new DrugModel(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 1).toString(),
+                Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 2).toString()),
+                Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 3).toString()),
+                Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 4).toString()),
+                dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 5).toString(),
+                Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 6).toString()),
+                Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 7).toString()),
+                dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 8).toString());
+        selectedDrug.setId(Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 0).toString()));
+        
+        new UpdateDrugItem(selectedDrug).setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_dlUpdateSelectedBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,8 +315,10 @@ public class DrugList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AddStockItemPanel;
+    private javax.swing.JPanel DrugListPanel;
+    private javax.swing.JButton dlDeleteSelectedBtn;
     private javax.swing.JButton dlDownloadFullReportBtn;
+    private javax.swing.JButton dlDownloadQtyReportBtn;
     private javax.swing.JTable dlDrugTable;
     private javax.swing.JCheckBox dlSearchCategoryCheckbox;
     private javax.swing.JTextField dlSearchInput;
@@ -206,7 +326,7 @@ public class DrugList extends javax.swing.JFrame {
     private javax.swing.JCheckBox dlSearchNameCheckbox;
     private javax.swing.JCheckBox dlSearchTypeCheckbox;
     private javax.swing.JLabel dlTitleLabel;
+    private javax.swing.JButton dlUpdateSelectedBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton slDownloadQtyReportBtn;
     // End of variables declaration//GEN-END:variables
 }

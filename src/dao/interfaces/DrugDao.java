@@ -15,5 +15,9 @@ import model.DrugModel;
  * @author EnTeRs
  */
 public interface DrugDao {
+
     DrugModel insert(DrugModel object) throws SQLException;
+    List<DrugModel> all() throws SQLException;
+    DrugModel update(DrugModel object) throws SQLException;
+    void remove(int id) throws SQLException;
 }

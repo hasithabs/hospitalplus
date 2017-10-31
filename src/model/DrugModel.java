@@ -23,19 +23,19 @@ public class DrugModel {
     private int type;
     private int price;
     private String remarks;
-    private int drug_level;
-    private int reorder_level;
+    private int drugLevel;
+    private int reorderLevel;
     private String weight;
 
     public DrugModel(String name, int category, int type, int price,
-            String remarks, int drug_level, int reorder_level, String weight) {
+            String remarks, int drugLevel, int reorderLevel, String weight) {
         this.name = name;
         this.category = category;
         this.type = type;
         this.price = price;
         this.remarks = remarks;
-        this.drug_level = drug_level;
-        this.reorder_level = reorder_level;
+        this.drugLevel = drugLevel;
+        this.reorderLevel = reorderLevel;
         this.weight = weight;
     }
 
@@ -63,12 +63,12 @@ public class DrugModel {
         return remarks;
     }
 
-    public int getDrug_level() {
-        return drug_level;
+    public int getDrugLevel() {
+        return drugLevel;
     }
 
-    public int getReorder_level() {
-        return reorder_level;
+    public int getReorderLevel() {
+        return reorderLevel;
     }
 
     public String getWeight() {
@@ -99,12 +99,12 @@ public class DrugModel {
         this.remarks = remarks;
     }
 
-    public void setDrug_level(int drug_level) {
-        this.drug_level = drug_level;
+    public void setDrugLevel(int drugLevel) {
+        this.drugLevel = drugLevel;
     }
 
-    public void setReorder_level(int reorder_level) {
-        this.reorder_level = reorder_level;
+    public void setReorderLevel(int reorderLevel) {
+        this.reorderLevel = reorderLevel;
     }
 
     public void setWeight(String weight) {
@@ -118,6 +118,27 @@ public class DrugModel {
      */
     public void save() throws SQLException {
         DrugDAO().insert(this);
+    }
+    
+    /**
+     * Get all drugs
+     */
+    public static List<DrugModel> all() throws SQLException {
+        return DrugDAO().all();
+    }
+    
+    /**
+     * Update Existing Drug
+     */
+    public DrugModel update() throws SQLException {
+        return DrugDAO().update(this);
+    }
+    
+    /**
+     * Remove Existing Drug
+     */
+    public static void remove(int id) throws SQLException {
+        DrugDAO().remove(id);
     }
 
     /* 

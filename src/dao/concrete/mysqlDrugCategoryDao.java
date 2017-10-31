@@ -69,7 +69,6 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
     /**
      * Get All Drug Categories from DB
      * 
-     * @param drugCategory drug category model 
      * @return DrugCategoryModel
      * @throws SQLException 
      */
@@ -135,7 +134,7 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
     /**
      * Remove Existing Drug Category
      * 
-     * @param drugCategory drug category model 
+     * @param id drug category id
      * @return DrugCategoryModel
      * @throws SQLException 
      */

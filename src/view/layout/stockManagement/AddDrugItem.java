@@ -142,7 +142,6 @@ public class AddDrugItem extends javax.swing.JFrame {
             return false;
         }
     }
-
     /**
      * *** END Validation Section ****
      */
@@ -428,10 +427,20 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugCategorySelectorItemStateChanged
         validateCategory();
+        if (asiDrugCategorySelector.getSelectedIndex() > 0) {
+            asiUpdateRemoveCatBtn.setEnabled(true);
+        } else {
+            asiUpdateRemoveCatBtn.setEnabled(false);
+        }
     }//GEN-LAST:event_asiDrugCategorySelectorItemStateChanged
 
     private void asiDrugTypeSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugTypeSelectorItemStateChanged
         validateType();
+        if (asiDrugTypeSelector.getSelectedIndex() > 0) {
+            asiUpdateRemoveTypeBtn.setEnabled(true);
+        } else {
+            asiUpdateRemoveTypeBtn.setEnabled(false);
+        }
     }//GEN-LAST:event_asiDrugTypeSelectorItemStateChanged
 
     private void asiDrugWeightInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_asiDrugWeightInputCaretUpdate

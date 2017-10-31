@@ -44,7 +44,8 @@ public class Util {
                 p.setText("");
             } else if (c instanceof JComboBox) {
                 JComboBox cb = (JComboBox) c;
-                cb.setSelectedIndex(0);
+                if (cb.getItemCount() > 0)
+                    cb.setSelectedIndex(0);
             } else if (c instanceof JScrollPane) {
                 JScrollPane sp = (JScrollPane) c;
                 if (sp.getViewport().getComponent(0) instanceof JTextArea) {

@@ -5,6 +5,20 @@
  */
 package view.layout.stockManagement;
 
+import Controller.StockManagement.DrugCategoryController;
+import Controller.StockManagement.DrugController;
+import Controller.StockManagement.DrugTypeController;
+import java.sql.SQLException;
+import java.util.List;
+import model.DrugCategoryModel;
+import model.DrugModel;
+import model.DrugTypeModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import static util.DBUtil.getXMLData;
+import util.Validation;
+import static util.messageAlert.getMessageAlert;
+
 /**
  *
  * @author EnTeRs
@@ -15,22 +29,144 @@ public class UpdateDrugItem extends javax.swing.JFrame {
 
     Config cnf = new Config();
     public Logger LOG;
+    
+    int selectedDrugId;
+    int selectedDrugCategoryId;
+    int selectedDrugTypeId;
 
-    public UpdateDrugItem() {
+    public UpdateDrugItem(DrugModel drug) {
         initComponents();
         self = this;
 
         //initialize log file
         LOG = cnf.getLogger(UpdateDrugItem.class);
+        
+        selectedDrugId = drug.getId();
+        selectedDrugCategoryId = drug.getCategory();
+        selectedDrugTypeId = drug.getType();
+
+        resetJframe();
+        getCategoriesInit();
+        getTypsInit();
+        
+        udiDrugNameInput.setText(drug.getName());
+        udiDrugPriceInput.setText(String.valueOf(drug.getPrice()));
+        udiRemarksInput.setText(drug.getRemarks());
+        udiDrugLevelInput.setValue(drug.getDrugLevel());
+        udiReorderLevelInput.setValue(drug.getReorderLevel());
+        udiDrugWeightInput.setText(drug.getWeight());
     }
 
     public static UpdateDrugItem getInstance() {
         if (self == null) {
-            self = new UpdateDrugItem();
+            DrugModel drug = null;
+            self = new UpdateDrugItem(drug);
         }
 
         return self;
     }
+    
+    public final void resetJframe() {
+        util.Util.Clear(UpdateDrugItemPanel);
+        udiDrugCatVali.setVisible(false);
+        udiDrugNameVali.setVisible(false);
+        udiDrugTypeVali.setVisible(false);
+        udiDrugPriceVali.setVisible(false);
+        udiDrugWeightVali.setVisible(false);
+    }
+    
+    public final void getCategoriesInit() {
+        udiDrugCategorySelector.removeAllItems();
+        int selectedCatComboboxId = 0;
+        try {
+            List<DrugCategoryModel> drugCategories = DrugCategoryController.getInstance().allDrugCategories();
+            for (int c = 0; c < drugCategories.size(); c++) {
+                udiDrugCategorySelector.addItem(drugCategories.get(c));
+                if (selectedDrugId == drugCategories.get(c).getId()) {
+                    selectedCatComboboxId = c;
+                }
+            }
+            udiDrugCategorySelector.insertItemAt(new DrugCategoryModel("Select Category", ""), 0);
+            udiDrugCategorySelector.setSelectedIndex(selectedCatComboboxId + 1);
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
+    }
+
+    public final void getTypsInit() {
+        udiDrugTypeSelector.removeAllItems();
+        int selectedCatComboboxId = 0;
+
+        try {
+            List<DrugTypeModel> drugTypes = DrugTypeController.getInstance().allDrugTypes();
+            for (int i = 0; i < drugTypes.size(); ++i) {
+                udiDrugTypeSelector.addItem(drugTypes.get(i));
+                if (selectedDrugId == drugTypes.get(i).getId()) {
+                    selectedCatComboboxId = i;
+                }
+            }
+            udiDrugTypeSelector.insertItemAt(new DrugTypeModel("Select Type", ""), 0);
+            udiDrugTypeSelector.setSelectedIndex(selectedCatComboboxId + 1);
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
+    }
+    
+    /**
+     * *** START Validation Section ****
+     */
+    public boolean validateCategory() {
+        if (udiDrugCategorySelector.getSelectedIndex() != 0) {
+            udiDrugCatVali.setVisible(false);
+            return true;
+        } else {
+            udiDrugCatVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateName() {
+        if (Validation.ContainLetters(udiDrugNameInput.getText())) {
+            udiDrugNameVali.setVisible(false);
+            return true;
+        } else {
+            udiDrugNameVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateType() {
+        if (udiDrugTypeSelector.getSelectedIndex() != 0) {
+            udiDrugTypeVali.setVisible(false);
+            return true;
+        } else {
+            udiDrugTypeVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validatePrice() {
+        if (Validation.ContainOnlyNumbers(udiDrugPriceInput.getText())) {
+            udiDrugPriceVali.setVisible(false);
+            return true;
+        } else {
+            udiDrugPriceVali.setVisible(true);
+            return false;
+        }
+    }
+
+    public boolean validateWeight() {
+        if (Validation.ContainLettersAndNumbers(udiDrugWeightInput.getText())) {
+            udiDrugWeightVali.setVisible(false);
+            return true;
+        } else {
+            udiDrugWeightVali.setVisible(true);
+            return false;
+        }
+    }
+    /**
+     * *** END Validation Section ****
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,14 +195,17 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiReorderLevelLabel = new javax.swing.JLabel();
         udiDrugWeightInput = new javax.swing.JTextField();
         udiResetBtn = new javax.swing.JButton();
-        udiInsertBtn = new javax.swing.JButton();
+        udiUpdateBtn = new javax.swing.JButton();
         udiDrugWeightLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        udiFormErrors = new javax.swing.JTextArea();
         asiAddCatBtn = new javax.swing.JButton();
         asiUpdateRemoveCatBtn = new javax.swing.JButton();
         asiAddTypeBtn = new javax.swing.JButton();
         asiUpdateRemoveTypeBtn = new javax.swing.JButton();
+        udiDrugCatVali = new javax.swing.JLabel();
+        udiDrugNameVali = new javax.swing.JLabel();
+        udiDrugTypeVali = new javax.swing.JLabel();
+        udiDrugPriceVali = new javax.swing.JLabel();
+        udiDrugWeightVali = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -91,7 +230,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugCategoryLabel);
         udiDrugCategoryLabel.setBounds(160, 170, 200, 30);
 
-        udiDrugCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        udiDrugCategorySelector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                udiDrugCategorySelectorItemStateChanged(evt);
+            }
+        });
         UpdateDrugItemPanel.add(udiDrugCategorySelector);
         udiDrugCategorySelector.setBounds(380, 170, 300, 30);
 
@@ -101,7 +244,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugNameLabel);
         udiDrugNameLabel.setBounds(160, 240, 200, 30);
 
-        udiDrugNameInput.setText("jTextField1");
+        udiDrugNameInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                udiDrugNameInputCaretUpdate(evt);
+            }
+        });
         UpdateDrugItemPanel.add(udiDrugNameInput);
         udiDrugNameInput.setBounds(380, 240, 300, 30);
 
@@ -111,7 +258,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugTypeLabel);
         udiDrugTypeLabel.setBounds(160, 310, 200, 30);
 
-        udiDrugTypeSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        udiDrugTypeSelector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                udiDrugTypeSelectorItemStateChanged(evt);
+            }
+        });
         UpdateDrugItemPanel.add(udiDrugTypeSelector);
         udiDrugTypeSelector.setBounds(380, 310, 300, 30);
 
@@ -121,11 +272,13 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugPriceLabel);
         udiDrugPriceLabel.setBounds(160, 380, 200, 30);
 
-        udiDrugPriceInput.setText("jTextField1");
+        udiDrugPriceInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                udiDrugPriceInputCaretUpdate(evt);
+            }
+        });
         UpdateDrugItemPanel.add(udiDrugPriceInput);
         udiDrugPriceInput.setBounds(380, 380, 300, 30);
-
-        udiRemarksInput.setText("jTextField1");
         UpdateDrugItemPanel.add(udiRemarksInput);
         udiRemarksInput.setBounds(1310, 170, 300, 30);
 
@@ -134,6 +287,8 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiRemarksLabel.setText("Remarks");
         UpdateDrugItemPanel.add(udiRemarksLabel);
         udiRemarksLabel.setBounds(1090, 170, 200, 30);
+
+        udiDrugLevelInput.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         UpdateDrugItemPanel.add(udiDrugLevelInput);
         udiDrugLevelInput.setBounds(1310, 240, 300, 30);
 
@@ -142,6 +297,8 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiDrugLevelLabel.setText("Drug Level");
         UpdateDrugItemPanel.add(udiDrugLevelLabel);
         udiDrugLevelLabel.setBounds(1090, 240, 200, 30);
+
+        udiReorderLevelInput.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         UpdateDrugItemPanel.add(udiReorderLevelInput);
         udiReorderLevelInput.setBounds(1310, 310, 300, 30);
 
@@ -151,7 +308,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiReorderLevelLabel);
         udiReorderLevelLabel.setBounds(1090, 310, 200, 30);
 
-        udiDrugWeightInput.setText("jTextField1");
+        udiDrugWeightInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                udiDrugWeightInputCaretUpdate(evt);
+            }
+        });
         UpdateDrugItemPanel.add(udiDrugWeightInput);
         udiDrugWeightInput.setBounds(1310, 380, 300, 30);
 
@@ -159,9 +320,14 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiResetBtn);
         udiResetBtn.setBounds(900, 670, 200, 40);
 
-        udiInsertBtn.setText("Insert");
-        UpdateDrugItemPanel.add(udiInsertBtn);
-        udiInsertBtn.setBounds(620, 670, 200, 40);
+        udiUpdateBtn.setText("Update");
+        udiUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                udiUpdateBtnActionPerformed(evt);
+            }
+        });
+        UpdateDrugItemPanel.add(udiUpdateBtn);
+        udiUpdateBtn.setBounds(620, 670, 200, 40);
 
         udiDrugWeightLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         udiDrugWeightLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,40 +335,90 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugWeightLabel1);
         udiDrugWeightLabel1.setBounds(1090, 380, 200, 30);
 
-        udiFormErrors.setEditable(false);
-        udiFormErrors.setBackground(new java.awt.Color(0, 0, 0));
-        udiFormErrors.setColumns(20);
-        udiFormErrors.setFont(new java.awt.Font("Getone-Reg", 0, 13)); // NOI18N
-        udiFormErrors.setForeground(new java.awt.Color(255, 0, 0));
-        udiFormErrors.setRows(5);
-        udiFormErrors.setText("dfgdfhsfhdfhdhd");
-        udiFormErrors.setBorder(null);
-        jScrollPane1.setViewportView(udiFormErrors);
-
-        UpdateDrugItemPanel.add(jScrollPane1);
-        jScrollPane1.setBounds(620, 476, 480, 120);
-
         asiAddCatBtn.setText("Add New");
         UpdateDrugItemPanel.add(asiAddCatBtn);
-        asiAddCatBtn.setBounds(710, 170, 90, 30);
+        asiAddCatBtn.setBounds(740, 170, 90, 30);
 
         asiUpdateRemoveCatBtn.setText("Update/Remove Selected");
         UpdateDrugItemPanel.add(asiUpdateRemoveCatBtn);
-        asiUpdateRemoveCatBtn.setBounds(810, 170, 190, 30);
+        asiUpdateRemoveCatBtn.setBounds(840, 170, 190, 30);
 
         asiAddTypeBtn.setText("Add New");
         UpdateDrugItemPanel.add(asiAddTypeBtn);
-        asiAddTypeBtn.setBounds(710, 310, 90, 30);
+        asiAddTypeBtn.setBounds(740, 310, 90, 30);
 
         asiUpdateRemoveTypeBtn.setText("Update/Remove Selected");
         UpdateDrugItemPanel.add(asiUpdateRemoveTypeBtn);
-        asiUpdateRemoveTypeBtn.setBounds(810, 310, 190, 30);
+        asiUpdateRemoveTypeBtn.setBounds(840, 310, 190, 30);
+
+        udiDrugCatVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        UpdateDrugItemPanel.add(udiDrugCatVali);
+        udiDrugCatVali.setBounds(710, 170, 30, 30);
+
+        udiDrugNameVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        UpdateDrugItemPanel.add(udiDrugNameVali);
+        udiDrugNameVali.setBounds(710, 240, 30, 30);
+
+        udiDrugTypeVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        UpdateDrugItemPanel.add(udiDrugTypeVali);
+        udiDrugTypeVali.setBounds(710, 310, 30, 30);
+
+        udiDrugPriceVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        UpdateDrugItemPanel.add(udiDrugPriceVali);
+        udiDrugPriceVali.setBounds(710, 380, 30, 30);
+
+        udiDrugWeightVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
+        UpdateDrugItemPanel.add(udiDrugWeightVali);
+        udiDrugWeightVali.setBounds(1640, 380, 30, 30);
 
         getContentPane().add(UpdateDrugItemPanel);
         UpdateDrugItemPanel.setBounds(0, 0, 1765, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void udiUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_udiUpdateBtnActionPerformed
+        if (validateCategory() & validateName() & validateType() & validatePrice() & validateWeight()) {
+            DrugCategoryModel selectedDrugCategory = (DrugCategoryModel) udiDrugCategorySelector.getSelectedItem();
+            DrugTypeModel selectedDrugType = (DrugTypeModel) udiDrugTypeSelector.getSelectedItem();
+            try {
+                DrugModel drugUpdate = new DrugModel(udiDrugNameInput.getText(),
+                        selectedDrugCategory.getId(),
+                        selectedDrugType.getId(),
+                        Integer.parseInt(udiDrugPriceInput.getText()),
+                        udiRemarksInput.getText(),
+                        Integer.parseInt(udiDrugLevelInput.getValue().toString()),
+                        Integer.parseInt(udiReorderLevelInput.getValue().toString()),
+                        udiDrugWeightInput.getText());
+                drugUpdate.setId(selectedDrugId);
+                DrugController.getInstance().update(drugUpdate);
+                getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug Category"), "success");
+            } catch (SQLException ex) {
+                getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+                LOG.error(ex);
+            }
+        }
+    }//GEN-LAST:event_udiUpdateBtnActionPerformed
+
+    private void udiDrugNameInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_udiDrugNameInputCaretUpdate
+        validateName();
+    }//GEN-LAST:event_udiDrugNameInputCaretUpdate
+
+    private void udiDrugPriceInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_udiDrugPriceInputCaretUpdate
+        validatePrice();
+    }//GEN-LAST:event_udiDrugPriceInputCaretUpdate
+
+    private void udiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_udiDrugCategorySelectorItemStateChanged
+        validateCategory();
+    }//GEN-LAST:event_udiDrugCategorySelectorItemStateChanged
+
+    private void udiDrugTypeSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_udiDrugTypeSelectorItemStateChanged
+        validateType();
+    }//GEN-LAST:event_udiDrugTypeSelectorItemStateChanged
+
+    private void udiDrugWeightInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_udiDrugWeightInputCaretUpdate
+        validateWeight();
+    }//GEN-LAST:event_udiDrugWeightInputCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -235,7 +451,8 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateDrugItem().setVisible(true);
+                DrugModel drug = null;
+                new UpdateDrugItem(drug).setVisible(true);
             }
         });
     }
@@ -246,26 +463,29 @@ public class UpdateDrugItem extends javax.swing.JFrame {
     private javax.swing.JButton asiAddTypeBtn;
     private javax.swing.JButton asiUpdateRemoveCatBtn;
     private javax.swing.JButton asiUpdateRemoveTypeBtn;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel udiDrugCatVali;
     private javax.swing.JLabel udiDrugCategoryLabel;
-    private javax.swing.JComboBox<String> udiDrugCategorySelector;
+    public javax.swing.JComboBox<DrugCategoryModel> udiDrugCategorySelector;
     private javax.swing.JSpinner udiDrugLevelInput;
     private javax.swing.JLabel udiDrugLevelLabel;
     private javax.swing.JTextField udiDrugNameInput;
     private javax.swing.JLabel udiDrugNameLabel;
+    private javax.swing.JLabel udiDrugNameVali;
     private javax.swing.JTextField udiDrugPriceInput;
     private javax.swing.JLabel udiDrugPriceLabel;
+    private javax.swing.JLabel udiDrugPriceVali;
     private javax.swing.JLabel udiDrugTypeLabel;
-    private javax.swing.JComboBox<String> udiDrugTypeSelector;
+    public javax.swing.JComboBox<DrugTypeModel> udiDrugTypeSelector;
+    private javax.swing.JLabel udiDrugTypeVali;
     private javax.swing.JTextField udiDrugWeightInput;
     private javax.swing.JLabel udiDrugWeightLabel1;
-    private javax.swing.JTextArea udiFormErrors;
-    private javax.swing.JButton udiInsertBtn;
+    private javax.swing.JLabel udiDrugWeightVali;
     private javax.swing.JTextField udiRemarksInput;
     private javax.swing.JLabel udiRemarksLabel;
     private javax.swing.JSpinner udiReorderLevelInput;
     private javax.swing.JLabel udiReorderLevelLabel;
     private javax.swing.JButton udiResetBtn;
     private javax.swing.JLabel udiTitleLabel;
+    private javax.swing.JButton udiUpdateBtn;
     // End of variables declaration//GEN-END:variables
 }

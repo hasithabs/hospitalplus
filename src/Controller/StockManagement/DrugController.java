@@ -29,4 +29,19 @@ public class DrugController {
         }
         return drug;
     }
+    
+    public List<DrugModel> allDrugs() throws SQLException {
+        return DrugModel.all();
+    }
+
+    public DrugModel update(DrugModel drug) throws SQLException {
+        if (drug != null) {
+            drug.update();
+        }
+        return drug;
+    }
+    
+    public void remove(int id) throws SQLException {
+        DrugModel.remove(id);
+    }
 }

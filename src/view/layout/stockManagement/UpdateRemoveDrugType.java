@@ -47,7 +47,8 @@ public class UpdateRemoveDrugType extends javax.swing.JFrame {
 
     public static UpdateRemoveDrugType getInstance() {
         if (self == null) {
-            self = new UpdateRemoveDrugType();
+            DrugTypeModel drugType = null;
+            self = new UpdateRemoveDrugType(drugType);
         }
 
         return self;
