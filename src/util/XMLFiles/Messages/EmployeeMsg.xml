@@ -16,5 +16,11 @@ and open the template in the editor.
     <message  key="Sucessfully_Save">
         <entry>Successfully saved</entry>
     </message >
+    <message  key="Sucessfully_updated">
+        <entry>Successfully Updated</entry>
+    </message >
+    <message  key="Sucessfully_Deleted">
+        <entry>Successfully Deleted</entry>
+    </message >
     
 </root>

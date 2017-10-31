@@ -35,6 +35,9 @@ public class EditEmployee extends javax.swing.JFrame {
 
     public void showUser(ArrayList<Employee> dataList) {
         model = (DefaultTableModel) tblEmpData.getModel();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
         Object[] row = new Object[4];
 
         for (int i = 0; i < dataList.size(); i++) {
@@ -382,24 +385,25 @@ public class EditEmployee extends javax.swing.JFrame {
             try {
                 txtEditAddressLine1.setText(emp.getAddress().split(";")[0]);
                 txtEditAddressLine2.setText(emp.getAddress().split(";")[1]);
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 LOG.error("Address has not defined in database");
                 txtEditAddressLine1.setText("");
                 txtEditAddressLine2.setText("");
-                
+
             }
-            
+
             //set gender
-            try{
-                if(emp.getGender().equals("Male"))rdbMale.setSelected(true);
-                else if (emp.getGender().equals("Female"))rdbFemale.setSelected(true);
-            }catch(Exception e){
+            try {
+                if (emp.getGender().equals("Male")) {
+                    rdbMale.setSelected(true);
+                } else if (emp.getGender().equals("Female")) {
+                    rdbFemale.setSelected(true);
+                }
+            } catch (Exception e) {
                 LOG.error("gender has not defined in database");
                 buttonGroup1.clearSelection();
-                
+
             }
-            
 
         } catch (IOException ex) {
             LOG.error(ex, ex);
@@ -416,21 +420,51 @@ public class EditEmployee extends javax.swing.JFrame {
         } else if (rdbMale.isSelected()) {
             Gender = "Male";
         }
-
+        emp.setId(txtEditID.getText());
         emp.setFirstName(txtEditFirstName.getText());
         emp.setLastName(txtEditLastName.getText());
         emp.setEmail(txtEditEmail.getText());
-        emp.setNIC(txtEditID.getText());
-        emp.setPossition(cmbEditPossition.getSelectedItem().toString());
+        emp.setNIC(txtEditNIC.getText());
+
         emp.setGender(Gender);
         emp.setAddress(txtEditAddressLine1.getText() + ";" + txtEditAddressLine2.getText());
-        emp.setDOB(new java.sql.Date(dateEditDOB.getDate().getTime()));
+
         emp.setPassword(Arrays.toString(txtEditPassword.getPassword()));
+
+        try {
+            emp.setPossition(cmbEditPossition.getSelectedItem().toString());
+            emp.setDOB(new java.sql.Date(dateEditDOB.getDate().getTime()));
+        } catch (Exception e) {
+            LOG.error("Update With Empty Values");
+            emp.setPossition(null);
+            emp.setDOB(null);
+        }
+
+        try {
+            empCnt.AdminUpdate(emp);
+            showUser(empCnt.getAllRegistedEmployeeData());
+            Util.Clear(pnlEditUser);
+
+        } catch (IOException e) {
+            LOG.error("Cannot Update the Employee", e);
+        }
+
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+       
+        String Id = txtEditID.getText();
+        
+         try {
+            empCnt.DeleteEmployee(Id);
+            showUser(empCnt.getAllRegistedEmployeeData());
+            Util.Clear(pnlEditUser);
+
+        } catch (IOException e) {
+            LOG.error("Cannot Delete Employee process", e);
+        }
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     public static void main(String args[]) {

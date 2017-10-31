@@ -18,4 +18,6 @@ public interface EmployeeDao {
     public void insert(Employee object) throws SQLException;
     public ArrayList<Employee> getAllEmployees();
     public Employee getEnployeeFromId(String Id);
+    public void UpdateEditEmployeeData(Employee emp);
+    public void DeleteEmployee(String Id);
 }

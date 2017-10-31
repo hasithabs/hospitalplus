@@ -85,7 +85,7 @@ public class MysqlEmployeeDao implements EmployeeDao {
                 emp.setId(rset.getString("Id"));
                 emp.setFirstName(rset.getString("FirstName"));
                 emp.setLastName(rset.getString("LastName"));
-                emp.setEmail(rset.getString("Email"));
+                emp.setNIC(rset.getString("NIC"));
 
                 EmployeeList.add(emp);
             }
@@ -131,6 +131,62 @@ public class MysqlEmployeeDao implements EmployeeDao {
             LOG.error(e, e);
         }
         return emp;
+    }
+
+    /*
+    *Update Employee Data According to the given Employee Object
+    *emp-> object with all updated data.
+     */
+    @Override
+    public void UpdateEditEmployeeData(Employee emp) {
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Edit_Update");
+
+        try {
+
+            pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            pstmt.setString(1, emp.getFirstName());
+            pstmt.setString(2, emp.getLastName());
+            pstmt.setString(3, emp.getEmail());
+            pstmt.setString(4, emp.getPassword());
+            pstmt.setDate(5,emp.getDOB());
+            pstmt.setString(6, emp.getNIC());
+            pstmt.setString(7, emp.getGender());
+            pstmt.setString(8, emp.getPossition());
+            pstmt.setString(9, emp.getAddress());
+            pstmt.setString(10, emp.getId());
+
+            System.out.println(pstmt);
+            
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
+    }
+
+    /*
+    *Delete employee from given Id.
+    *Id -> Employee ID
+    */
+    @Override
+    public void DeleteEmployee(String Id) {
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Delete");
+
+        try {
+
+            pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, Id);
+         
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
+        
+        
     }
 
 }

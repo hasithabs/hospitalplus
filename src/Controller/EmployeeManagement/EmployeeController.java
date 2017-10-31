@@ -76,8 +76,21 @@ public class EmployeeController {
         
     }
     
-
     
+    /*
+    *return all the employee registerd employee data as ArrayList
+    */
+    public void AdminUpdate(Employee emp) throws IOException{
+        
+        employeeDao().UpdateEditEmployeeData(emp);
+        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
+    }
+    
+    public void DeleteEmployee(String Id) throws IOException{
+        
+        employeeDao().DeleteEmployee(Id);
+        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Deleted"));
+    }
     
     
 }
