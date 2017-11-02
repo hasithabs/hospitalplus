@@ -1,15 +1,79 @@
-
 package view.EmployeeManagement;
 
+import Controller.EmployeeManagement.LeaveController;
+import Model.EmployeeManagement.Employee;
+import Model.EmployeeManagement.Leave;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import util.Config;
+import util.Util;
 
 public class LeaveManagement extends javax.swing.JFrame {
 
+    Config cnf = new Config();
+    public Logger LOG;
     
-    public LeaveManagement() {
+    DefaultTableModel model;
+    LeaveController leaveContro = new LeaveController();
+    
+    String HardCordId = "5";
+
+    public LeaveManagement() throws IOException {
         initComponents();
+        
+        
+        loadBasicData(HardCordId);
+        showAllLeaveData(HardCordId);
+       
+        //initialize log file
+        LOG = cnf.getLogger(UserRegistration.class);
     }
 
+    /*
+    *Load Basic Employee details to page
+    *Id -> Employee Id Pass by the Login
+    */
+    private void loadBasicData(String Id) throws IOException {
+        
+       Employee emp ;
+       emp = leaveContro.getEmployeeById(Id);
+       
+       txtLeaveId.setText(emp.getId());
+       txtLeaveFirstName.setText(emp.getFirstName());
+       txtLeaveLastName.setText(emp.getLastName());
+       dateLeaveDate.setDate(new Date());
+    }
     
+    private void showAllLeaveData(String Id){
+        model = (DefaultTableModel) tblLeaveData.getModel();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        ArrayList<Leave> leaves = new ArrayList<>();
+        
+        try{
+           leaves= leaveContro.getLeaves(Id);
+        }
+        catch(IOException e){
+            LOG.error("Cannot Get Leave Data to Table", e);
+        }
+        
+        Object[] row = new Object[4];
+
+        for (int i = 0; i < leaves.size(); i++) {
+            row[0] = leaves.get(i).getDate();
+            row[1] = leaves.get(i).getReportingManager();
+            row[2] = leaves.get(i).getStatus();
+            
+
+            model.addRow(row);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -30,7 +94,7 @@ public class LeaveManagement extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnLeaveClear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblLeaveData = new javax.swing.JTable();
         btnLeaveRequest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,11 +121,13 @@ public class LeaveManagement extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 80, 100, 30);
 
+        txtLeaveId.setEditable(false);
         txtLeaveId.setBackground(new java.awt.Color(0, 0, 0));
         txtLeaveId.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(txtLeaveId);
         txtLeaveId.setBounds(140, 80, 250, 30);
 
+        txtLeaveFirstName.setEditable(false);
         txtLeaveFirstName.setBackground(new java.awt.Color(0, 0, 0));
         txtLeaveFirstName.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(txtLeaveFirstName);
@@ -79,6 +145,7 @@ public class LeaveManagement extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(430, 140, 100, 30);
 
+        txtLeaveLastName.setEditable(false);
         txtLeaveLastName.setBackground(new java.awt.Color(0, 0, 0));
         txtLeaveLastName.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(txtLeaveLastName);
@@ -124,7 +191,10 @@ public class LeaveManagement extends javax.swing.JFrame {
         jPanel1.add(btnLeaveClear);
         btnLeaveClear.setBounds(550, 460, 100, 30);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblLeaveData.setBackground(new java.awt.Color(102, 102, 102));
+        tblLeaveData.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        tblLeaveData.setForeground(new java.awt.Color(255, 255, 255));
+        tblLeaveData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -140,18 +210,23 @@ public class LeaveManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblLeaveData);
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(800, 70, 420, 420);
 
         btnLeaveRequest.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         btnLeaveRequest.setText("Request ");
+        btnLeaveRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaveRequestActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnLeaveRequest);
         btnLeaveRequest.setBounds(670, 460, 100, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1255, 547);
+        jPanel1.setBounds(0, 0, 1240, 540);
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -160,15 +235,22 @@ public class LeaveManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLeaveClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveClearActionPerformed
-       
+
     }//GEN-LAST:event_btnLeaveClearActionPerformed
 
-    
+    private void btnLeaveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveRequestActionPerformed
+                leaveContro.sendMail(txtLeaveReason.getText());
+    }//GEN-LAST:event_btnLeaveRequestActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LeaveManagement().setVisible(true);
+                try {
+                    new LeaveManagement().setVisible(true);
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(LeaveManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -187,7 +269,7 @@ public class LeaveManagement extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblLeaveData;
     private javax.swing.JTextField txtLeaveFirstName;
     private javax.swing.JTextField txtLeaveId;
     private javax.swing.JTextField txtLeaveLastName;

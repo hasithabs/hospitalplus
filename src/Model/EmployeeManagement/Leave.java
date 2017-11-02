@@ -1,11 +1,13 @@
 
 package Model.EmployeeManagement;
 
+import java.sql.Date;
+
 
 public class Leave {
     
    private String EmpId;
-   private String Date;
+   private java.sql.Date Date;
    private String Discription;
    private String ReportingManager;
    private String Status;
@@ -15,7 +17,7 @@ public class Leave {
         return EmpId;
     }
 
-    public String getDate() {
+    public java.sql.Date getDate() {
         return Date;
     }
 
@@ -35,9 +37,11 @@ public class Leave {
         this.EmpId = EmpId;
     }
 
-    public void setDate(String Date) {
+    public void setDate(Date Date) {
         this.Date = Date;
     }
+
+   
 
     public void setDiscription(String Discription) {
         this.Discription = Discription;

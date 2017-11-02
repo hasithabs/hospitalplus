@@ -22,5 +22,11 @@ and open the template in the editor.
     <message  key="Sucessfully_Deleted">
         <entry>Successfully Deleted</entry>
     </message >
+    <message  key="Mail_Send_pass">
+        <entry>Your Request Sucessfully Send</entry>
+    </message >
+    <message  key="Mail_Send_fail">
+        <entry>Your request can not send in this moment</entry>
+    </message >
     
 </root>

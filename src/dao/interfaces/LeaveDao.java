@@ -5,10 +5,16 @@
  */
 package dao.interfaces;
 
+import Model.EmployeeManagement.Employee;
+import Model.EmployeeManagement.Leave;
+import java.util.ArrayList;
+
 /**
  *
  * @author kasun
  */
 public interface LeaveDao {
     
+    public Employee getBsicDetails(String Id);
+    public ArrayList<Leave> getAllLeaveData(String Id);
 }

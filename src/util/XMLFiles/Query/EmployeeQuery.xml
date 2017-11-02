@@ -21,4 +21,12 @@ and open the template in the editor.
     <query key="Employee_Delete">
         <entry>DELETE FROM Employee WHERE Id = ?</entry>
     </query>
+    
+    <query key="Employee_Basic_Details">
+        <entry>SELECT Id,FirstName,LastName,Email FROM Employee WHERE Id IN (?) </entry>
+    </query>
+    
+    <query key="Leave_allData_ByEmpId">
+        <entry>SELECT * FROM `Leave` WHERE EmpId IN (?)</entry>
+    </query>
 </root>

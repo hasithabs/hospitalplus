@@ -1,7 +1,9 @@
 package daoFactory;
 
+import dao.concrete.MySqlLeaveDao;
 import dao.concrete.MysqlEmployeeDao;
 import dao.interfaces.EmployeeDao;
+import dao.interfaces.LeaveDao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,6 +55,16 @@ public class Mysql extends DaoFactory {
     public EmployeeDao getEmployeeDao() {
         try {
             return new MysqlEmployeeDao();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Mysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public LeaveDao getLeaveDao() {
+        try {
+            return new MySqlLeaveDao();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(Mysql.class.getName()).log(Level.SEVERE, null, ex);
         }

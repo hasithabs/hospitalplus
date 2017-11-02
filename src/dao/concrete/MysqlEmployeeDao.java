@@ -32,10 +32,10 @@ public class MysqlEmployeeDao implements EmployeeDao {
     ResultSet rset;
     String query;
     Connection con;
-    //create connection to databaseF
+    
 
     public MysqlEmployeeDao() throws IOException {
-
+        //create connection to database
         con = DaoFactory.getDatabase().openConnection();
     }
 
