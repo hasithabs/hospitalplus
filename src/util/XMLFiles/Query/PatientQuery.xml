@@ -5,7 +5,56 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-
 <root>
+    <!-- Patient Management -->
+    <query key="Patient_SignUp_Insert">
+        <entry>INSERT INTO patient(PatientID, FirstName, LastName, Sex, DateofBirth, Email, PhoneNumber, NIC, Address, City, ZipPostalCode, AdditionalInfo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)</entry>
+    </query>
+    <query key="Patient_SignUp_Insert_Food">
+        <entry>INSERT INTO PatientDiat(DiatName, StartDate, EndDate, PatientID) VALUES(NULL,NULL,NULL,?)</entry>
+    </query>
+    <query key="Patient_Get_Latest_PatientID">
+        <entry>SELECT MAX(P.PatientID) AS MaxPID FROM patient P</entry>
+    </query>
+    <query key="Patient_Get_Patient_Details">
+        <entry>SELECT * FROM patient p where p.PatientID like ? OR p.FirstName like ? OR p.LastName like ?</entry>
+    </query>
+    <query key="Patient_Update_Patient_Details">
+        <entry>UPDATE patient SET FirstName = ?, LastName = ?, Sex = ?, DateofBirth = ?, Email = ?, PhoneNumber = ?, NIC = ?, Address = ?, City = ?, ZipPostalCode = ?, AdditionalInfo = ? WHERE PatientID = ?</entry>
+    </query>
+    <query key="PatientFood_Get_Patient_Diat_Details">
+        <entry>SELECT p.PatientID,p.FirstName,p.LastName,f.DiatName,f.StartDate,f.EndDate FROM patient p, PatientDiat f where p.PatientID = f.PatientID AND (p.PatientID like ? OR p.FirstName like ? OR p.LastName like ?)</entry>
+    </query>
+    <query key="PatientFood_Update_Patient_Diat_Details">
+        <entry>UPDATE PatientDiat SET DiatName = ?, StartDate = ?, EndDate = ? WHERE PatientID = ?</entry>
+    </query>
     
+    <!-- Services -->
+    <query key="Operation_Get_All_PatientID">
+        <entry>SELECT PatientID FROM patient</entry>
+    </query>
+        <!-- Operations -->
+        <query key="Operation_Resitration">
+            <entry>INSERT INTO operation(PatientID, OperationType, Doctor, OperationDate) VALUES(?,?,?,?)</entry>
+        </query>
+        <!-- CheckUps -->
+        <query key="CheckUp_Assignment">
+            <entry>INSERT INTO checkups(PatientID, CheckUpType,AdditionalInfo, CheckUpDate) VALUES(?,?,?,?)</entry>
+        </query>
+         <!--Chanel Doctor-->
+        <query key="Channel_Doctor">
+           <entry>INSERT INTO Channelling(DoctorsName, ChanelDate, ChannelSession, PatientID) VALUES(?,?,?,?)</entry>
+       </query>
+       <query key="Get_Patient_Email_Address">
+           <entry>SELECT Email FROM patient WHERE PatientID = ?</entry>
+       </query>
+       
+        
+    <!-- WardRounds -->
+    <query key="GET_All_Registered_Doctors">
+        <entry>SELECT e.FirstName , e.LastName FROM Employee e WHERE e.Possition = 'Doctor'</entry>
+    </query>
+    <query key="Schedule_Ward_Rrounds">
+        <entry>INSERT INTO wardRounds(DoctorName, WardName, WardRoundDate, RoundTime) VALUES(?,?,?,?)</entry>
+    </query>
 </root>

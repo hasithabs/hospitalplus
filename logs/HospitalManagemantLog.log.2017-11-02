@@ -1,0 +1,18 @@
+ERROR   2017-11-02 13:45:25,123 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:46:03,281 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:47:16,720 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:53:41,999 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:53:59,423 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:54:28,383 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:58:22,137 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:58:39,111 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 13:59:01,236 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'ZipPostalCode' at row 2
+ERROR   2017-11-02 13:59:34,302 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 14:00:16,682 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 14:01:32,708 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 14:02:19,163 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-02 14:53:09,249 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'PatientDiatID' in 'field list'
+ERROR   2017-11-02 17:31:39,881 [AWT-EventQueue-0] util.DBUtil  - java.lang.NullPointerException
+ERROR   2017-11-02 17:32:49,615 [AWT-EventQueue-0] util.DBUtil  - java.lang.NullPointerException
+ERROR   2017-11-02 17:37:39,816 [AWT-EventQueue-0] util.DBUtil  - java.lang.NullPointerException
+ERROR   2017-11-02 17:37:57,009 [AWT-EventQueue-0] util.DBUtil  - java.lang.NullPointerException

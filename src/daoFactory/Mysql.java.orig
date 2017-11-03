@@ -1,5 +1,6 @@
 package daoFactory;
 
+<<<<<<< HEAD
 import dao.concrete.MySqlLeaveDao;
 import dao.concrete.MysqlEmployeeDao;
 import dao.interfaces.EmployeeDao;
@@ -10,9 +11,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import util.Config;
 
@@ -20,18 +18,23 @@ import dao.concrete.mysqlDrugDao;
 import dao.concrete.mysqlDrugCategoryDao;
 import dao.concrete.mysqlDrugTypeDao;
 import dao.concrete.mysqlOrderDao;
-import dao.concrete.patientConcrete.MysqlServicesDao;
-import dao.concrete.patientConcrete.MysqlPatientDao;
-import dao.interfaces.patientInterfaces.PatientDao;
 
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
 import dao.interfaces.OrderDao;
-
+=======
+import dao.concrete.patientConcrete.MysqlServicesDao;
+import dao.concrete.patientConcrete.MysqlPatientDao;
+import dao.interfaces.patientInterfaces.PatientDao;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import dao.interfaces.patientInterfaces.ServicesDao;
 import dao.interfaces.patientInterfaces.WardRoundDao;
 import dao.concrete.patientConcrete.MysqlWardRoundDao;
+
+>>>>>>> feature/patientManagement
 
 /**
  *
@@ -39,6 +42,7 @@ import dao.concrete.patientConcrete.MysqlWardRoundDao;
  */
 public class Mysql extends DaoFactory {
 
+<<<<<<< HEAD
     Config cnf = new Config();
     Logger LOG = cnf.getLogger(Mysql.class);
     
@@ -60,6 +64,13 @@ public class Mysql extends DaoFactory {
             LOG.error(ex);
         }
     }
+=======
+    private static String url = "jdbc:mysql://127.0.0.1:3306/";
+    private static String database = "hospitalplus";
+    private static String driver = "com.mysql.jdbc.Driver";
+    private static String user = "hospitalplus";
+    private static String password = "pluscrew";
+>>>>>>> feature/patientManagement
 
     @Override
     public Connection openConnection(){
@@ -132,4 +143,6 @@ public class Mysql extends DaoFactory {
     public WardRoundDao getWardRoundDao() {
         return new MysqlWardRoundDao();
     }
+
+    
 }

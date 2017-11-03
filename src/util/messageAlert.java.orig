@@ -17,8 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+<<<<<<< HEAD
 import static util.Util.getIcon;
 import static util.Util.getScreenSizrRatio;
+import view.layout.stockManagement.AddDrugItem;
+=======
+>>>>>>> feature/patientManagement
 
 /**
  *
@@ -47,9 +51,15 @@ public class messageAlert {
             backgroundFile = "common/messagebox_success";
             typeColor = new Color(0, 39, 106);
         }
+<<<<<<< HEAD
         Image resizedBackgroundImg = getIcon(messageAlert.class, backgroundFile).getImage()
                 .getScaledInstance((int) (screenWRatio * 800),
                         (int) (screenHRatio * 215), java.awt.Image.SCALE_SMOOTH);
+=======
+        Image resizedBackgroundImg = Util.getIcon(messageAlert.class, backgroundFile).getImage()
+                .getScaledInstance((int) (screenW_ratio * 800),
+                        (int) (screenH_ratio * 215), java.awt.Image.SCALE_SMOOTH);
+>>>>>>> feature/patientManagement
         ImageIcon resizedBackgroundImgIcon = new ImageIcon(resizedBackgroundImg);
 
         JLabel backgroundImgLabel = new JLabel();
@@ -96,5 +106,10 @@ public class messageAlert {
         msgFrame.setLocation((ScreenW - msgFrame.getWidth()) / 2, 
                 (ScreenH - msgFrame.getHeight()) / 2);
         msgFrame.show();
+    }
+    
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {
+        AddDrugItem.getInstance().setEnabled(true);
+        AddDrugItem.getInstance().toFront();
     }
 }

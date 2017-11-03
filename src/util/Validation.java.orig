@@ -7,8 +7,11 @@ package util;
 
 import java.awt.Component;
 import java.awt.Font;
+<<<<<<< HEAD
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+=======
+>>>>>>> feature/patientManagement
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -51,6 +54,7 @@ public class Validation {
         Pattern p = Pattern.compile("[a-zA-Z]");
         Matcher m = p.matcher(word);
 
+<<<<<<< HEAD
         return m.find();
     }
     
@@ -78,6 +82,10 @@ public class Validation {
         return (number && letter);
     }
 
+    
+    //Contact Number
+    public static boolean isAcceptableContactNumber(String cNumber) {
+=======
     
     //Contact Number
     public static boolean isAcceptableContactNumber(String cNumber) {
@@ -114,6 +122,46 @@ public class Validation {
     }
 
     public static boolean isAcceptableNIC(String NIC) {
+>>>>>>> feature/patientManagement
+        int UC_Count = 0;
+        int LC_Count = 0;
+        int DC_Count = 0;
+        int SC_Count = 0;
+<<<<<<< HEAD
+
+        if (cNumber.isEmpty()) {
+=======
+        if (NIC.isEmpty()) {
+            System.out.println("empty string.");
+>>>>>>> feature/patientManagement
+            return false;
+        }
+        cNumber = cNumber.trim();
+
+        int len = cNumber.length();
+        if (len != 10) {
+            return false;
+        }
+<<<<<<< HEAD
+        char[] aC = cNumber.toCharArray();
+        for (char c : aC) {
+            if (Character.isUpperCase(c)) {
+                UC_Count++;
+            } else if (Character.isLowerCase(c)) {
+                LC_Count++;
+            } else if (Character.isDigit(c)) {
+                DC_Count++;
+            } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                SC_Count++;
+            }
+        }
+        if (UC_Count > 0 || LC_Count > 0 || DC_Count != 10 || SC_Count > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isAcceptableNIC(String NIC) {
         int UC_Count = 0;
         int LC_Count = 0;
         int DC_Count = 0;
@@ -123,6 +171,8 @@ public class Validation {
             return false;
 
         }
+=======
+>>>>>>> feature/patientManagement
         int len = NIC.length();
         if (len != 10) {
             return false;

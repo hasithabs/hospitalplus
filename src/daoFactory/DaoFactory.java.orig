@@ -1,5 +1,6 @@
 package daoFactory;
 
+<<<<<<< HEAD
 import dao.interfaces.EmployeeDao;
 import dao.interfaces.LeaveDao;
 import java.sql.Connection;
@@ -7,10 +8,12 @@ import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
 import dao.interfaces.OrderDao;
+=======
 import dao.interfaces.patientInterfaces.PatientDao;
 import java.sql.Connection;
 import dao.interfaces.patientInterfaces.ServicesDao;
 import dao.interfaces.patientInterfaces.WardRoundDao;
+>>>>>>> feature/patientManagement
 
 /**
  *
@@ -18,6 +21,7 @@ import dao.interfaces.patientInterfaces.WardRoundDao;
  */
 public abstract class DaoFactory {
 
+<<<<<<< HEAD
   public abstract Connection openConnection();
   public abstract DrugDao getDrugDao();
   public abstract DrugCategoryDao getDrugCategoryDao();
@@ -25,9 +29,12 @@ public abstract class DaoFactory {
   public abstract OrderDao getOrderDao();
   public abstract EmployeeDao getEmployeeDao();
   public abstract LeaveDao getLeaveDao();
+=======
+  public abstract Connection openConnection();	
   public abstract PatientDao getPatientDao();
   public abstract ServicesDao getServiceDao();
   public abstract WardRoundDao getWardRoundDao();
+>>>>>>> feature/patientManagement
   
   public static DaoFactory getDatabase() {
       return new Mysql();
