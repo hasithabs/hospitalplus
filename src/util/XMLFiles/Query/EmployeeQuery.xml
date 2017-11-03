@@ -15,6 +15,9 @@ and open the template in the editor.
     <query key="Employee_Edit_SelectAllById">
         <entry>SELECT * FROM Employee WHERE Id IN (?) </entry>
     </query>
+    <query key="Employee_Single_Update">
+        <entry>UPDATE Employee SET FirstName = ? ,LastName = ? ,Email = ? ,Password = ? ,DOB = ? ,NIC = ? ,Address =? WHERE Id = ? </entry>
+    </query>
     <query key="Employee_Edit_Update">
         <entry>UPDATE Employee SET FirstName = ? ,LastName = ? ,Email = ? ,Password = ? ,DOB = ? ,NIC = ? ,Gender = ? ,Possition = ? ,Address =? WHERE Id = ? </entry>
     </query>

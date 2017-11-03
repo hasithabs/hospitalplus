@@ -5,11 +5,11 @@ import Model.EmployeeManagement.Employee;
 import Model.EmployeeManagement.Leave;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import util.Config;
+import java.util.Date;
 import util.Util;
 
 public class LeaveManagement extends javax.swing.JFrame {
@@ -125,6 +125,7 @@ public class LeaveManagement extends javax.swing.JFrame {
         jLabel3.setBounds(40, 460, 130, 30);
 
         dateLeaveDate.setDateFormatString("yyyy-MM-dd");
+        dateLeaveDate.setMinSelectableDate(new Date());
         LeavePannel.add(dateLeaveDate);
         dateLeaveDate.setBounds(140, 200, 250, 30);
 

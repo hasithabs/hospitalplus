@@ -2,14 +2,16 @@ package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
 import Model.EmployeeManagement.Employee;
-import java.awt.Color;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import util.Config;
+import java.util.Date;
 import util.Util;
 
 public class EditEmployee extends javax.swing.JFrame {
@@ -21,7 +23,7 @@ public class EditEmployee extends javax.swing.JFrame {
     int selectedIndex;
     EmployeeController empCnt = new EmployeeController();
 
-    public EditEmployee() throws IOException {
+    public EditEmployee() throws IOException, ParseException {       
         initComponents();
         showUser(empCnt.getAllRegistedEmployeeData());
 
@@ -31,6 +33,13 @@ public class EditEmployee extends javax.swing.JFrame {
         //give initial forcus to ID field
         txtEditID.requestFocus();
 
+        //load data to combobox
+        for (String str : empCnt.getPosiition()) {
+            cmbEditPossition.addItem(str);
+        }
+
+       
+   
     }
 
     public void showUser(ArrayList<Employee> dataList) {
@@ -49,9 +58,6 @@ public class EditEmployee extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
-
-    Color SearchBackground = Color.lightGray;
-    Color SearchForground = Color.black;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,6 +184,7 @@ public class EditEmployee extends javax.swing.JFrame {
         dateEditDOB.setBackground(new java.awt.Color(51, 51, 51));
         dateEditDOB.setForeground(new java.awt.Color(51, 51, 51));
         dateEditDOB.setDateFormatString("yyyy-MM-dd");
+        dateEditDOB.setMaxSelectableDate(new java.util.Date(946666875000L));
         dateEditDOB.setOpaque(false);
         pnlEditUser.add(dateEditDOB);
         dateEditDOB.setBounds(150, 440, 250, 30);
@@ -238,7 +245,6 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(rdbMale);
         rdbMale.setBounds(150, 390, 55, 27);
 
-        cmbEditPossition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Doctor", "Nurse", "Laberor", "CEO" }));
         pnlEditUser.add(cmbEditPossition);
         cmbEditPossition.setBounds(960, 160, 250, 30);
 
@@ -453,10 +459,10 @@ public class EditEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       
+
         String Id = txtEditID.getText();
-        
-         try {
+
+        try {
             empCnt.DeleteEmployee(Id);
             showUser(empCnt.getAllRegistedEmployeeData());
             Util.Clear(pnlEditUser);
@@ -464,7 +470,7 @@ public class EditEmployee extends javax.swing.JFrame {
         } catch (IOException e) {
             LOG.error("Cannot Delete Employee process", e);
         }
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     public static void main(String args[]) {
@@ -474,6 +480,8 @@ public class EditEmployee extends javax.swing.JFrame {
                 try {
                     new EditEmployee().setVisible(true);
                 } catch (IOException ex) {
+                    Logger.getLogger(EditEmployee.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(EditEmployee.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

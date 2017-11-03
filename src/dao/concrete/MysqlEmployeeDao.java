@@ -157,7 +157,7 @@ public class MysqlEmployeeDao implements EmployeeDao {
             pstmt.setString(9, emp.getAddress());
             pstmt.setString(10, emp.getId());
 
-            System.out.println(pstmt);
+            
             
             pstmt.executeUpdate();
 
@@ -187,6 +187,35 @@ public class MysqlEmployeeDao implements EmployeeDao {
         }
         
         
+    }
+
+    @Override
+    public void UpdateSingleUser(Employee emp) {
+        
+        
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Single_Update");
+
+        try {
+
+            pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            pstmt.setString(1, emp.getFirstName());
+            pstmt.setString(2, emp.getLastName());
+            pstmt.setString(3, emp.getEmail());
+            pstmt.setString(4, emp.getPassword());
+            pstmt.setDate(5,emp.getDOB());
+            pstmt.setString(6, emp.getNIC());
+            pstmt.setString(7, emp.getAddress());
+            pstmt.setString(8, emp.getId());
+
+           
+            
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
     }
 
 }

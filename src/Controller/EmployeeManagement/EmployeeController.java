@@ -93,6 +93,37 @@ public class EmployeeController {
     }
     
     
+    /*
+    *chrck the password is changed, then give the new one. otherwise return old password.
+    *
+    */
+    
+    public String getLatestPassword(String newPass,String confPass ,String oldpass){
+        
+       
+        
+        if(newPass != null||confPass != null){
+            
+            if(newPass.trim().endsWith(confPass.trim())){
+                return newPass;
+            }
+        }
+        
+        return oldpass;
+        
+        
+    }
+    
+    public void updateSingleUser(Employee emp) throws IOException{
+        
+        employeeDao().UpdateSingleUser(emp);
+        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
+    }
     
     
+     public String[] getPosiition() throws IOException{
+        String reportingManagers = cnf.getPropertyValue("possition");
+       
+        return reportingManagers.split(",");
+    }
 }

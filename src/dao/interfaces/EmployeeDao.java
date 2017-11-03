@@ -20,4 +20,5 @@ public interface EmployeeDao {
     public Employee getEnployeeFromId(String Id);
     public void UpdateEditEmployeeData(Employee emp);
     public void DeleteEmployee(String Id);
+    public void UpdateSingleUser(Employee emp);
 }
