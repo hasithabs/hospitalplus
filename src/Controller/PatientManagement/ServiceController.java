@@ -19,7 +19,6 @@ import model.patientModels.ChanelDoctorModel;
 import model.patientModels.Checkup;
 import model.patientModels.Operation;
 import util.Util;
-import util.imageIconUtil;
 
 /**
  *

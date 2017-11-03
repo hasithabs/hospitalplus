@@ -21,7 +21,6 @@ import util.DBUtil;
 import static util.DBUtil.LOG;
 import util.Util;
 import util.Validation;
-import util.imageIconUtil;
 import util.messageAlert;
 
 /**
@@ -202,7 +201,6 @@ public class PatientManaging extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(null);
 
         Servicespnel.setBackground(new java.awt.Color(0, 0, 0));

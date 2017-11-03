@@ -1,1 +1,3 @@
 ERROR   2017-11-04 01:37:06,113 [AWT-EventQueue-0] dao.concrete.mysqlOrderDao  - java.sql.SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+ERROR   2017-11-04 04:03:38,263 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
+ERROR   2017-11-04 04:05:28,110 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
