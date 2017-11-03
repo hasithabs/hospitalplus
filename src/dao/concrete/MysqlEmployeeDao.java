@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.DBUtil;
@@ -32,7 +33,6 @@ public class MysqlEmployeeDao implements EmployeeDao {
     ResultSet rset;
     String query;
     Connection con;
-    
 
     public MysqlEmployeeDao() throws IOException {
         //create connection to database
@@ -59,8 +59,12 @@ public class MysqlEmployeeDao implements EmployeeDao {
 
             pstmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
+            LOG.info(DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
         } catch (SQLException e) {
-            LOG.error(e, e);
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
+            LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"), e);
+
         }
 
     }
@@ -102,8 +106,8 @@ public class MysqlEmployeeDao implements EmployeeDao {
      */
     @Override
     public Employee getEnployeeFromId(String Id) {
-       
-         Employee emp =new Employee();
+
+        Employee emp = new Employee();
         //reading query from xml file
         query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Edit_SelectAllById");
         try {
@@ -111,10 +115,9 @@ public class MysqlEmployeeDao implements EmployeeDao {
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, Id);
             rset = pstmt.executeQuery();
-         
-           
+
             while (rset.next()) {
-                
+
                 emp.setId(rset.getString("Id"));
                 emp.setFirstName(rset.getString("FirstName"));
                 emp.setLastName(rset.getString("LastName"));
@@ -150,16 +153,15 @@ public class MysqlEmployeeDao implements EmployeeDao {
             pstmt.setString(2, emp.getLastName());
             pstmt.setString(3, emp.getEmail());
             pstmt.setString(4, emp.getPassword());
-            pstmt.setDate(5,emp.getDOB());
+            pstmt.setDate(5, emp.getDOB());
             pstmt.setString(6, emp.getNIC());
             pstmt.setString(7, emp.getGender());
             pstmt.setString(8, emp.getPossition());
             pstmt.setString(9, emp.getAddress());
             pstmt.setString(10, emp.getId());
 
-            
-            
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
 
         } catch (SQLException e) {
             LOG.error(e, e);
@@ -169,7 +171,7 @@ public class MysqlEmployeeDao implements EmployeeDao {
     /*
     *Delete employee from given Id.
     *Id -> Employee ID
-    */
+     */
     @Override
     public void DeleteEmployee(String Id) {
         //reading query from xml file
@@ -179,20 +181,18 @@ public class MysqlEmployeeDao implements EmployeeDao {
 
             pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, Id);
-         
-            pstmt.executeUpdate();
 
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Deleted"));
         } catch (SQLException e) {
             LOG.error(e, e);
         }
-        
-        
+
     }
 
     @Override
     public void UpdateSingleUser(Employee emp) {
-        
-        
+
         //reading query from xml file
         query = DBUtil.getXMLData("EmployeeQuery", "query", "Employee_Single_Update");
 
@@ -204,18 +204,79 @@ public class MysqlEmployeeDao implements EmployeeDao {
             pstmt.setString(2, emp.getLastName());
             pstmt.setString(3, emp.getEmail());
             pstmt.setString(4, emp.getPassword());
-            pstmt.setDate(5,emp.getDOB());
+            pstmt.setDate(5, emp.getDOB());
             pstmt.setString(6, emp.getNIC());
             pstmt.setString(7, emp.getAddress());
             pstmt.setString(8, emp.getId());
 
-           
-            
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
 
         } catch (SQLException e) {
             LOG.error(e, e);
         }
+    }
+
+    @Override
+    public Employee logInCheck(String UserName, String Password) {
+
+        Employee emp = new Employee();
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Login_GetData");
+        try {
+
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, UserName);
+            pstmt.setString(2, Password);
+            rset = pstmt.executeQuery();
+
+            while (rset.next()) {
+
+                emp.setId(rset.getString("Id"));
+                emp.setFirstName(rset.getString("FirstName"));
+                emp.setPossition(rset.getString("Possition"));
+
+            }
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
+        return emp;
+
+    }
+
+    /*
+    * give boolean value about login
+     */
+    @Override
+    public boolean isLogin(String UserName, String Password) {
+        Employee emp = new Employee();
+        //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Login_GetData");
+        try {
+
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, UserName);
+            pstmt.setString(2, Password);
+            rset = pstmt.executeQuery();
+
+                       
+            boolean results = rset.next();
+            
+            if (results) {
+                JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Successfully_Login"));
+            } else {
+                JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Fail_Login"));
+            }
+
+            
+            return results;
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+            return false;
+        }
+
     }
 
 }

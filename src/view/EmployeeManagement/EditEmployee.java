@@ -120,9 +120,7 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel7);
         jLabel7.setBounds(430, 400, 80, 30);
 
-        txtEditFirstName.setBackground(new java.awt.Color(0, 0, 0));
         txtEditFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditFirstName.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditFirstName);
         txtEditFirstName.setBounds(150, 340, 250, 30);
 
@@ -132,9 +130,7 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel10);
         jLabel10.setBounds(430, 340, 80, 30);
 
-        txtEditLastName.setBackground(new java.awt.Color(0, 0, 0));
         txtEditLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditLastName.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditLastName);
         txtEditLastName.setBounds(550, 340, 250, 30);
 
@@ -144,9 +140,7 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel11);
         jLabel11.setBounds(840, 220, 80, 30);
 
-        txtEditEmail.setBackground(new java.awt.Color(0, 0, 0));
         txtEditEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditEmail.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditEmail);
         txtEditEmail.setBounds(960, 220, 250, 30);
 
@@ -156,9 +150,7 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel12);
         jLabel12.setBounds(840, 100, 80, 30);
 
-        txtEditID.setBackground(new java.awt.Color(0, 0, 0));
         txtEditID.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditID.setForeground(new java.awt.Color(255, 255, 255));
         txtEditID.setEnabled(false);
         pnlEditUser.add(txtEditID);
         txtEditID.setBounds(960, 100, 250, 30);
@@ -169,15 +161,11 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel13);
         jLabel13.setBounds(30, 390, 80, 30);
 
-        txtEditAddressLine2.setBackground(new java.awt.Color(0, 0, 0));
         txtEditAddressLine2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditAddressLine2.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditAddressLine2);
         txtEditAddressLine2.setBounds(550, 440, 250, 30);
 
-        txtEditAddressLine1.setBackground(new java.awt.Color(0, 0, 0));
         txtEditAddressLine1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditAddressLine1.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditAddressLine1);
         txtEditAddressLine1.setBounds(550, 400, 250, 30);
 
@@ -313,9 +301,7 @@ public class EditEmployee extends javax.swing.JFrame {
         pnlEditUser.add(jLabel16);
         jLabel16.setBounds(840, 280, 80, 30);
 
-        txtEditNIC.setBackground(new java.awt.Color(0, 0, 0));
         txtEditNIC.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtEditNIC.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditNIC);
         txtEditNIC.setBounds(960, 280, 250, 30);
 
@@ -324,9 +310,6 @@ public class EditEmployee extends javax.swing.JFrame {
         jLabel17.setText("Password");
         pnlEditUser.add(jLabel17);
         jLabel17.setBounds(840, 340, 80, 30);
-
-        txtEditPassword.setBackground(new java.awt.Color(0, 0, 0));
-        txtEditPassword.setForeground(new java.awt.Color(255, 255, 255));
         pnlEditUser.add(txtEditPassword);
         txtEditPassword.setBounds(960, 340, 250, 30);
         txtEditPassword.getAccessibleContext().setAccessibleName("");
@@ -435,7 +418,7 @@ public class EditEmployee extends javax.swing.JFrame {
         emp.setGender(Gender);
         emp.setAddress(txtEditAddressLine1.getText() + ";" + txtEditAddressLine2.getText());
 
-        emp.setPassword(Arrays.toString(txtEditPassword.getPassword()));
+        emp.setPassword(new String(txtEditPassword.getPassword()));
 
         try {
             emp.setPossition(cmbEditPossition.getSelectedItem().toString());

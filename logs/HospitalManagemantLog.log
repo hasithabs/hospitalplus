@@ -538,3 +538,14 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Dupl
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+INFO    2017-11-03 22:39:32,512 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - true | 14 | Laberor
+INFO    2017-11-03 22:40:35,570 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - true | 14 | Laberor
+INFO    2017-11-03 22:45:23,879 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
+INFO    2017-11-03 22:46:12,877 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
+INFO    2017-11-03 22:46:46,776 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
+ERROR   2017-11-03 22:47:59,250 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - Address has not defined in database
+ERROR   2017-11-03 22:47:59,254 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - gender has not defined in database
+ERROR   2017-11-03 22:49:01,647 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - Address has not defined in database
+ERROR   2017-11-03 22:49:01,647 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - gender has not defined in database
+ERROR   2017-11-03 22:49:38,887 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - Address has not defined in database
+ERROR   2017-11-03 22:49:38,887 [AWT-EventQueue-0] view.EmployeeManagement.UserRegistration  - gender has not defined in database

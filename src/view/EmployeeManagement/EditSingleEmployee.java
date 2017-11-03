@@ -113,9 +113,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(jLabel3);
         jLabel3.setBounds(140, 160, 80, 30);
 
-        txtUserEditFirstName.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditFirstName.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditFirstName);
         txtUserEditFirstName.setBounds(280, 160, 250, 30);
 
@@ -125,9 +123,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(jLabel4);
         jLabel4.setBounds(690, 160, 90, 30);
 
-        txtUserEditLastName.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditLastName.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditLastName);
         txtUserEditLastName.setBounds(850, 160, 250, 30);
 
@@ -137,9 +133,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(jLabel5);
         jLabel5.setBounds(140, 230, 60, 30);
 
-        txtUserEditEmail.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditEmail.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditEmail);
         txtUserEditEmail.setBounds(280, 230, 250, 30);
 
@@ -149,9 +143,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(jLabel6);
         jLabel6.setBounds(690, 230, 30, 30);
 
-        txtUserEditNIC.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditNIC.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditNIC.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditNIC);
         txtUserEditNIC.setBounds(850, 230, 250, 30);
 
@@ -161,9 +153,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(Addrress);
         Addrress.setBounds(140, 300, 80, 30);
 
-        txtUserEditAddressLine2.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditAddressLine2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditAddressLine2.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditAddressLine2);
         txtUserEditAddressLine2.setBounds(280, 340, 250, 30);
 
@@ -173,9 +163,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         EditSingleUserPannel.add(jLabel8);
         jLabel8.setBounds(690, 300, 100, 30);
 
-        txtUserEditAddressLine1.setBackground(new java.awt.Color(0, 0, 0));
         txtUserEditAddressLine1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtUserEditAddressLine1.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(txtUserEditAddressLine1);
         txtUserEditAddressLine1.setBounds(280, 300, 250, 30);
 
@@ -196,14 +184,8 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         jLabel9.setText("Confirm New Password");
         EditSingleUserPannel.add(jLabel9);
         jLabel9.setBounds(690, 400, 150, 30);
-
-        psdUserEditConfPassword.setBackground(new java.awt.Color(0, 0, 0));
-        psdUserEditConfPassword.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(psdUserEditConfPassword);
         psdUserEditConfPassword.setBounds(850, 400, 250, 30);
-
-        psdUserEditPassword.setBackground(new java.awt.Color(0, 0, 0));
-        psdUserEditPassword.setForeground(new java.awt.Color(255, 255, 255));
         EditSingleUserPannel.add(psdUserEditPassword);
         psdUserEditPassword.setBounds(280, 400, 250, 30);
 
@@ -246,7 +228,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
         jLabel2.setBounds(10, 20, 120, 30);
 
         EditSingleUserPannel.add(jPanel1);
-        jPanel1.setBounds(440, 70, 420, 70);
+        jPanel1.setBounds(390, 70, 420, 70);
 
         getContentPane().add(EditSingleUserPannel);
         EditSingleUserPannel.setBounds(0, 0, 1255, 547);

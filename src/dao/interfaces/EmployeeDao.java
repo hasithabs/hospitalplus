@@ -21,4 +21,6 @@ public interface EmployeeDao {
     public void UpdateEditEmployeeData(Employee emp);
     public void DeleteEmployee(String Id);
     public void UpdateSingleUser(Employee emp);
+    public Employee logInCheck(String UserName,String Password);
+    public boolean isLogin(String UserName,String Password);
 }

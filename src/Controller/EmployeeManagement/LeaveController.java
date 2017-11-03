@@ -54,7 +54,7 @@ public class LeaveController {
 
     /*
     *return all reporting manager names in property file
-     */
+    */
     public String[] getReportingManagers() throws IOException {
 
         String reportingManagers = cnf.getPropertyValue("ReporttingManagers");

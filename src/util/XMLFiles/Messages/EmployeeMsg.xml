@@ -28,8 +28,14 @@ and open the template in the editor.
     <message  key="Mail_Send_fail">
         <entry>Your request can not send in this moment</entry>
     </message >
-     <message  key="Leave_Successfully_Insert">
+    <message  key="Leave_Successfully_Insert">
         <entry>Leave Sucessfully Saved</entry>
+    </message >
+    <message  key="Successfully_Login">
+        <entry>LogIn Successful</entry>
+    </message >
+    <message  key="Fail_Login">
+        <entry>LogIn Fail</entry>
     </message >
     
 </root>

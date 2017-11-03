@@ -37,4 +37,8 @@ and open the template in the editor.
         <entry>INSERT INTO `Leave` (`EmpId`, `Date`, `Description`, `Reporting_Manager`, `Status`) VALUES (?, ?, ?, ?, ?)</entry>
     </query>
     
+    <query key="Login_GetData">
+        <entry>SELECT Id,FirstName,Possition FROM Employee WHERE Email =? AND Password= ?</entry>
+    </query>
+    
 </root>

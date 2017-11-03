@@ -45,17 +45,12 @@ public class EmployeeController {
 
         if (Emp != null) {
             if (compairePasswords(Emp) && !Emp.getPassword().equals(Util.PASSWORD_DEFAULT_VALUE) && !Emp.getConfigPassword().equals(Util.PASSWORD_DEFAULT_VALUE)) {
-                employeeDao().insert(Emp);
-                JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
-                LOG.info(DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
+                employeeDao().insert(Emp);   
             } else {
                 JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_Password_NotCompair"));
                 LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_Password_NotCompair"));
             }
-        } else {
-            JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
-            LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
-        }
+        } 
     }
     
     /*
@@ -83,13 +78,13 @@ public class EmployeeController {
     public void AdminUpdate(Employee emp) throws IOException{
         
         employeeDao().UpdateEditEmployeeData(emp);
-        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
+        
     }
     
     public void DeleteEmployee(String Id) throws IOException{
         
         employeeDao().DeleteEmployee(Id);
-        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Deleted"));
+        
     }
     
     
@@ -99,8 +94,6 @@ public class EmployeeController {
     */
     
     public String getLatestPassword(String newPass,String confPass ,String oldpass){
-        
-       
         
         if(newPass != null||confPass != null){
             
@@ -114,16 +107,43 @@ public class EmployeeController {
         
     }
     
+    /*
+    *Update Single User by given Employee Object
+    */
     public void updateSingleUser(Employee emp) throws IOException{
         
         employeeDao().UpdateSingleUser(emp);
-        JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_updated"));
+       
     }
     
-    
+    /*
+    *Read the App.Property file and give all possitions as Array
+    */
      public String[] getPosiition() throws IOException{
         String reportingManagers = cnf.getPropertyValue("possition");
        
         return reportingManagers.split(",");
     }
+     
+    /*
+    *give Employee data from login employees
+    */
+    public Employee logIn(String USername, String Password) throws IOException{
+        Employee emp ;
+        emp = employeeDao().logInCheck(USername, Password);
+        System.out.println(emp);
+        return emp;
+    }
+    
+    
+   /*
+   *check wether user is loged in or not
+   */
+   public boolean isLog(String USername, String Password) throws IOException{
+       
+       return employeeDao().isLogin(USername.trim(), Password.trim());
+      
+   } 
+   
+   
 }
