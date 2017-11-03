@@ -19,6 +19,14 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import util.Util;
+import view.EmployeeManagement.EditEmployee;
+import view.EmployeeManagement.LeaveManagement;
+import view.EmployeeManagement.UserRegistration;
+import view.PatientManagement.ChanelDoctor;
+import view.PatientManagement.PatientManaging;
+import view.layout.stockManagement.AddDrugItem;
+import view.layout.stockManagement.DrugList;
+import view.layout.stockManagement.OrderManage;
 
 /**
  *
@@ -182,6 +190,7 @@ public class MainJFrame extends JFrame {
         private final JButton[] menuSubBtnArr;
         private final JPanel menuBackdrop;
         private final JPanel centerPanel;
+        private final JFrame centerFrame;
 
         /**
          * 
@@ -190,11 +199,12 @@ public class MainJFrame extends JFrame {
          * @param centerPanel frame center JPanel
          */
         public menuSubBtnAction(JButton[] menuSubBtnArr, JPanel menuBackdrop,
-                JPanel centerPanel) {
+                JPanel centerPanel, JFrame jframeObj) {
             super();
             this.menuSubBtnArr = menuSubBtnArr;
             this.menuBackdrop = menuBackdrop;
             this.centerPanel = centerPanel;
+            this.centerFrame = jframeObj;
         }
 
         @Override
@@ -213,6 +223,8 @@ public class MainJFrame extends JFrame {
         public void mousePressed(MouseEvent e) {
             centerPanel.removeAll();
             centerPanel.updateUI();
+            centerFrame.getContentPane().setBackground(Color.BLACK);
+            centerPanel.add(centerFrame.getContentPane(), BorderLayout.CENTER);
         }
 
         @Override
@@ -386,8 +398,8 @@ public class MainJFrame extends JFrame {
 
         /* ~~~~~~~~~~ SUB MENU 1 ~~~~~~~~~~ */
         JPanel menu1Backdrop = createSubMenuBackdrop(1140, 155, 160, 110);
-        JButton menu1SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1150, 155, 140, 50);
-        JButton menu1SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1150, 205, 140, 50);
+        JButton menu1SubMenuBtn1 = createSubMenuItem("Patient Manage", 1150, 155, 140, 50);
+        JButton menu1SubMenuBtn2 = createSubMenuItem("Chanelling", 1150, 205, 140, 50);
         JButton[] SubMenu1BtnArray = new JButton[]{menu1SubMenuBtn1, menu1SubMenuBtn2};
 
         guiTopLayer.add(menu1SubMenuBtn1);
@@ -395,27 +407,42 @@ public class MainJFrame extends JFrame {
         guiTopLayer.add(menu1Backdrop);
 
         menuMainIconBtn1.addMouseListener(new menuMainBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        menu1SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page));
+        
+        // Load JFrames to center panel
+        PatientManaging patientManagingObj = new PatientManaging();
+        menu1SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, patientManagingObj));
+        ChanelDoctor chanelDoctor = new ChanelDoctor();
+        menu1SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, chanelDoctor));
         menu1Backdrop.addMouseListener(new menuBackDropAction(SubMenu1BtnArray, menu1Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 2 ~~~~~~~~~~ */
         JPanel menu2Backdrop = createSubMenuBackdrop(1330, 155, 160, 110);
-        JButton menu2SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1340, 155, 140, 50);
-        JButton menu2SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1340, 205, 140, 50);
-        JButton[] SubMenu2BtnArray = new JButton[]{menu2SubMenuBtn1, menu2SubMenuBtn2};
+        JButton menu2SubMenuBtn1 = createSubMenuItem("Drug List", 1340, 155, 140, 50);
+        JButton menu2SubMenuBtn2 = createSubMenuItem("Add Drug", 1340, 205, 140, 50);
+        JButton menu2SubMenuBtn3 = createSubMenuItem("Order Manage", 1340, 255, 140, 50);
+        JButton[] SubMenu2BtnArray = new JButton[]{menu2SubMenuBtn1, menu2SubMenuBtn2, menu2SubMenuBtn3};
 
         guiTopLayer.add(menu2SubMenuBtn1);
         guiTopLayer.add(menu2SubMenuBtn2);
+        guiTopLayer.add(menu2SubMenuBtn3);
         guiTopLayer.add(menu2Backdrop);
 
         menuMainIconBtn2.addMouseListener(new menuMainBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        menu2SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page));
+        
+        // Load JFrames to center panel
+        DrugList druglistObj = new DrugList();
+        menu2SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, druglistObj));
+        AddDrugItem addDrugItemObj = new AddDrugItem();
+        menu2SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, addDrugItemObj));
+        OrderManage orderManageObj = new OrderManage();
+        menu2SubMenuBtn3.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, orderManageObj));
+
         menu2Backdrop.addMouseListener(new menuBackDropAction(SubMenu2BtnArray, menu2Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 3 ~~~~~~~~~~ */
         JPanel menu3Backdrop = createSubMenuBackdrop(1520, 155, 160, 110);
-        JButton menu3SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1530, 155, 140, 50);
-        JButton menu3SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1530, 205, 140, 50);
+        JButton menu3SubMenuBtn1 = createSubMenuItem("Prescription", 1530, 155, 140, 50);
+        JButton menu3SubMenuBtn2 = createSubMenuItem("Available Drugs", 1530, 205, 140, 50);
         JButton[] SubMenu3BtnArray = new JButton[]{menu3SubMenuBtn1, menu3SubMenuBtn2};
 
         guiTopLayer.add(menu3SubMenuBtn1);
@@ -423,21 +450,29 @@ public class MainJFrame extends JFrame {
         guiTopLayer.add(menu3Backdrop);
 
         menuMainIconBtn3.addMouseListener(new menuMainBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
+        //menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
         menu3Backdrop.addMouseListener(new menuBackDropAction(SubMenu3BtnArray, menu3Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
         JPanel menu4Backdrop = createSubMenuBackdrop(1710, 155, 160, 110);
-        JButton menu4SubMenuBtn1 = createSubMenuItem("Sub Menu 1", 1720, 155, 140, 50);
-        JButton menu4SubMenuBtn2 = createSubMenuItem("Sub Menu 2", 1720, 205, 140, 50);
-        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2};
+        JButton menu4SubMenuBtn1 = createSubMenuItem("Register", 1720, 155, 140, 50);
+        JButton menu4SubMenuBtn2 = createSubMenuItem("User Manage", 1720, 205, 140, 50);
+        JButton menu4SubMenuBtn3 = createSubMenuItem("Leave Handling", 1720, 255, 140, 50);
+        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2, menu4SubMenuBtn3};
 
         guiTopLayer.add(menu4SubMenuBtn1);
         guiTopLayer.add(menu4SubMenuBtn2);
         guiTopLayer.add(menu4Backdrop);
 
         menuMainIconBtn4.addMouseListener(new menuMainBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        menu4SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page));
+        
+        // Load JFrames to center panel
+        UserRegistration userRegistrationObj = new UserRegistration();
+        menu4SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
+        //EditEmployee editEmployee = new EditEmployee();
+        menu4SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
+        //LeaveManagement leaveManagement = new LeaveManagement();
+        menu4SubMenuBtn3.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
         menu4Backdrop.addMouseListener(new menuBackDropAction(SubMenu4BtnArray, menu4Backdrop));
 
 //        logout_btn.setBounds((int) (screenH_ratio * 1750), (int) (screenH_ratio * 980), (int) (screenH_ratio * 100), (int) (screenH_ratio * 30));
