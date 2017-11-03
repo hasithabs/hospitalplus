@@ -24,26 +24,26 @@ public class DrugCategoryController {
         return instance;
     }
 
-    public DrugCategoryModel save(DrugCategoryModel drugCategory) throws SQLException {
-        if (drugCategory != null) {
-            drugCategory.save();
+    public boolean save(DrugCategoryModel drugCategory) throws SQLException {
+        if (drugCategory == null) {
+            return false;
         }
-        return drugCategory;
+        return drugCategory.save();
     }
 
     public List<DrugCategoryModel> allDrugCategories() throws SQLException {
         return DrugCategoryModel.all();
     }
 
-    public DrugCategoryModel update(DrugCategoryModel drugCategory) throws SQLException {
-        if (drugCategory != null) {
-            drugCategory.update();
+    public boolean update(DrugCategoryModel drugCategory) throws SQLException {
+        if (drugCategory == null) {
+            return false;
         }
-        return drugCategory;
+        return drugCategory.update();
     }
 
-    public void remove(int id) throws SQLException {
-        DrugCategoryModel.remove(id);
+    public boolean remove(int id) throws SQLException {
+        return DrugCategoryModel.remove(id);
     }
 
 }

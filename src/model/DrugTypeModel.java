@@ -59,8 +59,8 @@ public class DrugTypeModel {
     /**
      * Save Current Drug Type to DB
      */
-    public void save() throws SQLException {
-        DrugTypeDAO().insert(this);
+    public boolean save() throws SQLException {
+        return DrugTypeDAO().insert(this);
     }
     
     /**
@@ -73,15 +73,15 @@ public class DrugTypeModel {
     /**
      * Update Existing Drug Type
      */
-    public DrugTypeModel update() throws SQLException {
+    public boolean update() throws SQLException {
         return DrugTypeDAO().update(this);
     }
     
     /**
      * Remove Existing Drug Type
      */
-    public static void remove(int id) throws SQLException {
-        DrugTypeDAO().remove(id);
+    public static boolean remove(int id) throws SQLException {
+        return DrugTypeDAO().remove(id);
     }
     /* 
      * Return the drug type DAO

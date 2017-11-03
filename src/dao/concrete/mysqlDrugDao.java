@@ -42,11 +42,11 @@ public class mysqlDrugDao implements DrugDao {
      * @throws SQLException
      */
     @Override
-    public DrugModel insert(DrugModel drug) throws SQLException {
+    public boolean insert(DrugModel drug) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
-                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "addDrug"), 
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "addDrug"),
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, drug.getName());
                 pstmt.setInt(2, drug.getCategory());
@@ -60,22 +60,22 @@ public class mysqlDrugDao implements DrugDao {
                 pstmt.executeUpdate();
 
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
-
-        return drug;
+        
+        return false;
     }
-    
+
     /**
      * Get All Drugs from DB
-     * 
+     *
      * @return DrugModel
-     * @throws SQLException 
+     * @throws SQLException
      */
     @Override
     public List<DrugModel> all() throws SQLException {
@@ -93,7 +93,6 @@ public class mysqlDrugDao implements DrugDao {
 
                 pstmt.close();
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
@@ -102,20 +101,20 @@ public class mysqlDrugDao implements DrugDao {
 
         return drugs;
     }
-    
+
     /**
      * Update Existing Drug
-     * 
-     * @param drug drug model 
+     *
+     * @param drug drug model
      * @return DrugModel
-     * @throws SQLException 
+     * @throws SQLException
      */
     @Override
-    public DrugModel update(DrugModel drug) throws SQLException {
+    public boolean update(DrugModel drug) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
-                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "updateDrug"), 
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "updateDrug"),
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, drug.getName());
                 pstmt.setInt(2, drug.getCategory());
@@ -131,30 +130,31 @@ public class mysqlDrugDao implements DrugDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
 
-        return drug;
+        return false;
     }
-    
+
     /**
      * Remove Existing Drug
-     * 
+     *
      * @param id drug id
      * @return DrugModel
-     * @throws SQLException 
+     * @throws SQLException
      */
     @Override
     public void remove(int id) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
-                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "removeDrug"), 
+                PreparedStatement pstmt = con.prepareStatement(getXMLData("StockQuery", "query", "removeDrug"),
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, id);
 
@@ -170,13 +170,13 @@ public class mysqlDrugDao implements DrugDao {
             LOG.error(e);
         }
     }
-    
+
     /**
-     * Create Drug 
-     * 
+     * Create Drug
+     *
      * @param rset resultset
      * @return DrugModel
-     * @throws SQLException 
+     * @throws SQLException
      */
     private DrugModel createDrug(ResultSet rset) throws SQLException {
         DrugModel Drug = new DrugModel(rset.getString("name"),
@@ -192,5 +192,5 @@ public class mysqlDrugDao implements DrugDao {
 
         return Drug;
     }
-    
+
 }

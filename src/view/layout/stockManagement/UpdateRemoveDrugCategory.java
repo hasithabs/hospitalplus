@@ -161,11 +161,15 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
         try {
             DrugCategoryModel drugCategory = new DrugCategoryModel(urdcDrugCatNameInput.getText(), urdcDrugCatDescInput.getText());
             drugCategory.setId(selectedDrugCategoryId);
-            DrugCategoryController.getInstance().update(drugCategory);
-            AddDrugItem.getInstance().getCategoriesInit();
-            AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
-            getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug Category"), "success");
-            dispose();
+            boolean dbStatus = DrugCategoryController.getInstance().update(drugCategory);
+            if (dbStatus) {
+                AddDrugItem.getInstance().getCategoriesInit();
+                AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
+                getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug Category"), "success");
+                dispose();
+            } else {
+                getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+            }
         } catch (SQLException ex) {
             getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
             LOG.error(ex);
@@ -174,11 +178,15 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
 
     private void urdcRemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdcRemoveBtnActionPerformed
         try {
-            DrugCategoryController.getInstance().remove(selectedDrugCategoryId);
-            AddDrugItem.getInstance().getCategoriesInit();
-            AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
-            getMessageAlert(String.format(getXMLData("StockMsg", "message", "removedMsg"), "Drug Category"), "success");
-            dispose();
+            boolean dbStatus = DrugCategoryController.getInstance().remove(selectedDrugCategoryId);
+            if (dbStatus) {
+                AddDrugItem.getInstance().getCategoriesInit();
+                AddDrugItem.getInstance().asiDrugCatVali.setVisible(false);
+                getMessageAlert(String.format(getXMLData("StockMsg", "message", "removedMsg"), "Drug Category"), "success");
+                this.dispose();
+            } else {
+                getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+            }
         } catch (SQLException ex) {
             getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
             LOG.error(ex);

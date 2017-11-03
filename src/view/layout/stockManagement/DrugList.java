@@ -6,17 +6,25 @@
 package view.layout.stockManagement;
 
 import Controller.StockManagement.DrugController;
+import Controller.StockManagement.OrderController;
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.DrugModel;
+import model.OrderModel;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
+import util.Util;
 import static util.messageAlert.getMessageAlert;
 
 /**
@@ -29,6 +37,8 @@ public class DrugList extends javax.swing.JFrame {
 
     Config cnf = new Config();
     public Logger LOG;
+
+    private List<Integer> qtyLowRows = new ArrayList<>();
 
     public DrugList() {
         initComponents();
@@ -56,18 +66,43 @@ public class DrugList extends javax.swing.JFrame {
         dlDeleteSelectedBtn.setEnabled(false);
     }
 
-    private void setupDrugTable() {
+    public class MonCellRenderer extends DefaultTableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus, row, column);
+
+            if (column == 9 && qtyLowRows.contains(row)) {
+                System.out.println(column);
+                System.out.println(row);
+                setBackground(Color.RED);
+            } else if (isSelected) {
+                setBackground(Color.BLUE);
+                setForeground(Color.WHITE);
+            } else {
+                setBackground(Color.WHITE);
+                setForeground(Color.BLACK);
+            }
+            return this;
+        }
+    }
+
+    public void setupDrugTable() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        dlDrugTable.setDefaultRenderer(String.class, centerRenderer);
+        //dlDrugTable.setDefaultRenderer(String.class, centerRenderer);
 
         ((DefaultTableCellRenderer) dlDrugTable.getTableHeader().getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
 
         dlDrugTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        Util.resizeColumnWidth(dlDrugTable);
+        dlDrugTable.setDefaultRenderer(Object.class, new MonCellRenderer());
     }
 
-    private void getDrugsInit() {
+    public void getDrugsInit() {
         try {
             DefaultTableModel model = (DefaultTableModel) dlDrugTable.getModel();
             model.setRowCount(0);
@@ -87,6 +122,27 @@ public class DrugList extends javax.swing.JFrame {
         } catch (SQLException ex) {
             LOG.error(ex);
         }
+
+        for (int z = 0; z < dlDrugTable.getRowCount(); z++) {
+            dlDrugTable.setValueAt(0, z, 9);
+        }
+        try {
+            List<OrderModel> orders = OrderController.getInstance().allOrders("false");
+            for (int q = 0; q < dlDrugTable.getRowCount(); q++) {
+                for (int s = 0; s < orders.size(); s++) {
+                    if (dlDrugTable.getValueAt(q, 1).toString().equals(orders.get(s).getDrug())) {
+                        int qtyTotal = (int) dlDrugTable.getValueAt(q, 9) + orders.get(s).getQty();
+                        dlDrugTable.setValueAt(qtyTotal, q, 9);
+                        if ((int) dlDrugTable.getValueAt(q, 7) >= (int) dlDrugTable.getValueAt(q, 9)) {
+                            qtyLowRows.add(q);
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            LOG.error(ex);
+        }
+
     }
 
     /**
@@ -107,8 +163,6 @@ public class DrugList extends javax.swing.JFrame {
         dlSearchTypeCheckbox = new javax.swing.JCheckBox();
         dlSearchNameCheckbox = new javax.swing.JCheckBox();
         dlSearchCategoryCheckbox = new javax.swing.JCheckBox();
-        dlDownloadQtyReportBtn = new javax.swing.JButton();
-        dlDownloadFullReportBtn = new javax.swing.JButton();
         dlUpdateSelectedBtn = new javax.swing.JButton();
         dlDeleteSelectedBtn = new javax.swing.JButton();
 
@@ -183,6 +237,12 @@ public class DrugList extends javax.swing.JFrame {
         dlSearchLabel.setText("Search");
         DrugListPanel.add(dlSearchLabel);
         dlSearchLabel.setBounds(30, 120, 120, 30);
+
+        dlSearchInput.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                dlSearchInputCaretUpdate(evt);
+            }
+        });
         DrugListPanel.add(dlSearchInput);
         dlSearchInput.setBounds(160, 120, 300, 30);
 
@@ -206,14 +266,6 @@ public class DrugList extends javax.swing.JFrame {
         dlSearchCategoryCheckbox.setText("Category");
         DrugListPanel.add(dlSearchCategoryCheckbox);
         dlSearchCategoryCheckbox.setBounds(590, 120, 90, 30);
-
-        dlDownloadQtyReportBtn.setText("Download Quantity Report");
-        DrugListPanel.add(dlDownloadQtyReportBtn);
-        dlDownloadQtyReportBtn.setBounds(1300, 690, 200, 40);
-
-        dlDownloadFullReportBtn.setText("Download Full Report");
-        DrugListPanel.add(dlDownloadFullReportBtn);
-        dlDownloadFullReportBtn.setBounds(1530, 690, 200, 40);
 
         dlUpdateSelectedBtn.setText("Update");
         dlUpdateSelectedBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -271,10 +323,14 @@ public class DrugList extends javax.swing.JFrame {
                 Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 7).toString()),
                 dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 8).toString());
         selectedDrug.setId(Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 0).toString()));
-        
+
         new UpdateDrugItem(selectedDrug).setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_dlUpdateSelectedBtnActionPerformed
+
+    private void dlSearchInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_dlSearchInputCaretUpdate
+        Util.filterDataFromJTable(dlDrugTable, dlSearchInput.getText());
+    }//GEN-LAST:event_dlSearchInputCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -317,8 +373,6 @@ public class DrugList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DrugListPanel;
     private javax.swing.JButton dlDeleteSelectedBtn;
-    private javax.swing.JButton dlDownloadFullReportBtn;
-    private javax.swing.JButton dlDownloadQtyReportBtn;
     private javax.swing.JTable dlDrugTable;
     private javax.swing.JCheckBox dlSearchCategoryCheckbox;
     private javax.swing.JTextField dlSearchInput;

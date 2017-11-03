@@ -29,7 +29,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
 
     Config cnf = new Config();
     public Logger LOG;
-    
+
     int selectedDrugId;
     int selectedDrugCategoryId;
     int selectedDrugTypeId;
@@ -40,7 +40,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
 
         //initialize log file
         LOG = cnf.getLogger(UpdateDrugItem.class);
-        
+
         selectedDrugId = drug.getId();
         selectedDrugCategoryId = drug.getCategory();
         selectedDrugTypeId = drug.getType();
@@ -48,7 +48,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         resetJframe();
         getCategoriesInit();
         getTypsInit();
-        
+
         udiDrugNameInput.setText(drug.getName());
         udiDrugPriceInput.setText(String.valueOf(drug.getPrice()));
         udiRemarksInput.setText(drug.getRemarks());
@@ -65,7 +65,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
 
         return self;
     }
-    
+
     public final void resetJframe() {
         util.Util.Clear(UpdateDrugItemPanel);
         udiDrugCatVali.setVisible(false);
@@ -74,7 +74,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiDrugPriceVali.setVisible(false);
         udiDrugWeightVali.setVisible(false);
     }
-    
+
     public final void getCategoriesInit() {
         udiDrugCategorySelector.removeAllItems();
         int selectedCatComboboxId = 0;
@@ -88,6 +88,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
             }
             udiDrugCategorySelector.insertItemAt(new DrugCategoryModel("Select Category", ""), 0);
             udiDrugCategorySelector.setSelectedIndex(selectedCatComboboxId + 1);
+            udiDrugCatVali.setVisible(false);
         } catch (SQLException ex) {
             LOG.error(ex);
         }
@@ -107,11 +108,12 @@ public class UpdateDrugItem extends javax.swing.JFrame {
             }
             udiDrugTypeSelector.insertItemAt(new DrugTypeModel("Select Type", ""), 0);
             udiDrugTypeSelector.setSelectedIndex(selectedCatComboboxId + 1);
+            udiDrugTypeVali.setVisible(false);
         } catch (SQLException ex) {
             LOG.error(ex);
         }
     }
-    
+
     /**
      * *** START Validation Section ****
      */
@@ -164,10 +166,10 @@ public class UpdateDrugItem extends javax.swing.JFrame {
             return false;
         }
     }
+
     /**
      * *** END Validation Section ****
      */
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,10 +199,6 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiResetBtn = new javax.swing.JButton();
         udiUpdateBtn = new javax.swing.JButton();
         udiDrugWeightLabel1 = new javax.swing.JLabel();
-        asiAddCatBtn = new javax.swing.JButton();
-        asiUpdateRemoveCatBtn = new javax.swing.JButton();
-        asiAddTypeBtn = new javax.swing.JButton();
-        asiUpdateRemoveTypeBtn = new javax.swing.JButton();
         udiDrugCatVali = new javax.swing.JLabel();
         udiDrugNameVali = new javax.swing.JLabel();
         udiDrugTypeVali = new javax.swing.JLabel();
@@ -210,6 +208,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(1765, 770));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         UpdateDrugItemPanel.setBackground(new java.awt.Color(0, 0, 0));
@@ -335,22 +338,6 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugWeightLabel1);
         udiDrugWeightLabel1.setBounds(1090, 380, 200, 30);
 
-        asiAddCatBtn.setText("Add New");
-        UpdateDrugItemPanel.add(asiAddCatBtn);
-        asiAddCatBtn.setBounds(740, 170, 90, 30);
-
-        asiUpdateRemoveCatBtn.setText("Update/Remove Selected");
-        UpdateDrugItemPanel.add(asiUpdateRemoveCatBtn);
-        asiUpdateRemoveCatBtn.setBounds(840, 170, 190, 30);
-
-        asiAddTypeBtn.setText("Add New");
-        UpdateDrugItemPanel.add(asiAddTypeBtn);
-        asiAddTypeBtn.setBounds(740, 310, 90, 30);
-
-        asiUpdateRemoveTypeBtn.setText("Update/Remove Selected");
-        UpdateDrugItemPanel.add(asiUpdateRemoveTypeBtn);
-        asiUpdateRemoveTypeBtn.setBounds(840, 310, 190, 30);
-
         udiDrugCatVali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
         UpdateDrugItemPanel.add(udiDrugCatVali);
         udiDrugCatVali.setBounds(710, 170, 30, 30);
@@ -391,8 +378,15 @@ public class UpdateDrugItem extends javax.swing.JFrame {
                         Integer.parseInt(udiReorderLevelInput.getValue().toString()),
                         udiDrugWeightInput.getText());
                 drugUpdate.setId(selectedDrugId);
-                DrugController.getInstance().update(drugUpdate);
-                getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug Category"), "success");
+                boolean dbStatus = DrugController.getInstance().update(drugUpdate);
+                if (dbStatus) {
+                    DrugList.getInstance().getDrugsInit();
+                    DrugList.getInstance().setupDrugTable();
+                    getMessageAlert(String.format(getXMLData("StockMsg", "message", "updatedMsg"), "Drug"), "success");
+                    this.dispose();
+                } else {
+                    getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+                }
             } catch (SQLException ex) {
                 getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
                 LOG.error(ex);
@@ -419,6 +413,11 @@ public class UpdateDrugItem extends javax.swing.JFrame {
     private void udiDrugWeightInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_udiDrugWeightInputCaretUpdate
         validateWeight();
     }//GEN-LAST:event_udiDrugWeightInputCaretUpdate
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        DrugList.getInstance().setEnabled(true);
+        DrugList.getInstance().toFront();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -459,10 +458,6 @@ public class UpdateDrugItem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel UpdateDrugItemPanel;
-    private javax.swing.JButton asiAddCatBtn;
-    private javax.swing.JButton asiAddTypeBtn;
-    private javax.swing.JButton asiUpdateRemoveCatBtn;
-    private javax.swing.JButton asiUpdateRemoveTypeBtn;
     private javax.swing.JLabel udiDrugCatVali;
     private javax.swing.JLabel udiDrugCategoryLabel;
     public javax.swing.JComboBox<DrugCategoryModel> udiDrugCategorySelector;

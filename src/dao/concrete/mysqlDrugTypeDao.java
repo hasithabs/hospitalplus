@@ -18,7 +18,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
-import static util.messageAlert.getMessageAlert;
 
 /**
  *
@@ -42,7 +41,7 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
      * @throws SQLException
      */
     @Override
-    public DrugTypeModel insert(DrugTypeModel drugType) throws SQLException {
+    public boolean insert(DrugTypeModel drugType) throws SQLException {
         try {
             Connection c = DaoFactory.getDatabase().openConnection();
             try {
@@ -55,15 +54,15 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 c.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
 
-        return drugType;
+        return false;
     }
 
     /**
@@ -88,7 +87,6 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
 
                 pstmt.close();
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
@@ -106,7 +104,7 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
      * @throws SQLException 
      */
     @Override
-    public DrugTypeModel update(DrugTypeModel drugType) throws SQLException {
+    public boolean update(DrugTypeModel drugType) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
@@ -120,15 +118,15 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
 
-        return drugType;
+        return false;
     }
     
     /**
@@ -139,7 +137,7 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
      * @throws SQLException 
      */
     @Override
-    public void remove(int id) throws SQLException {
+    public boolean remove(int id) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
@@ -151,13 +149,15 @@ public class mysqlDrugTypeDao implements DrugTypeDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
+        
+        return false;
     }
 
     /**

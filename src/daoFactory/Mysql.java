@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import dao.concrete.mysqlDrugDao;
 import dao.concrete.mysqlDrugCategoryDao;
 import dao.concrete.mysqlDrugTypeDao;
+import dao.concrete.mysqlOrderDao;
 
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
+import dao.interfaces.OrderDao;
 
 /**
  *
@@ -52,5 +54,9 @@ public class Mysql extends DaoFactory {
     public DrugTypeDao getDrugTypeDao() {
         return new mysqlDrugTypeDao();
     }
-
+    
+    @Override
+    public OrderDao getOrderDao() {
+        return new mysqlOrderDao();
+    }
 }

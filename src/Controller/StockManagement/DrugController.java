@@ -14,6 +14,7 @@ import model.DrugModel;
  * @author EnTeRs
  */
 public class DrugController {
+
     private static DrugController instance = new DrugController();
 
     private DrugController() {
@@ -23,24 +24,25 @@ public class DrugController {
         return instance;
     }
 
-    public DrugModel save(DrugModel drug) throws SQLException {
-        if (drug != null) {
-            drug.save();
+    public boolean save(DrugModel drug) throws SQLException {
+        if (drug == null) {
+            return false;
         }
-        return drug;
+
+        return drug.save();
     }
-    
+
     public List<DrugModel> allDrugs() throws SQLException {
         return DrugModel.all();
     }
 
-    public DrugModel update(DrugModel drug) throws SQLException {
-        if (drug != null) {
-            drug.update();
+    public boolean update(DrugModel drug) throws SQLException {
+        if (drug == null) {
+            return false;
         }
-        return drug;
+        return drug.update();
     }
-    
+
     public void remove(int id) throws SQLException {
         DrugModel.remove(id);
     }

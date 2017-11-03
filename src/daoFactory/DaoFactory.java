@@ -4,6 +4,7 @@ import java.sql.Connection;
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
+import dao.interfaces.OrderDao;
 
 /**
  *
@@ -15,6 +16,7 @@ public abstract class DaoFactory {
   public abstract DrugDao getDrugDao();
   public abstract DrugCategoryDao getDrugCategoryDao();
   public abstract DrugTypeDao getDrugTypeDao();
+  public abstract OrderDao getOrderDao();
   
   public static DaoFactory getDatabase() {
       return new Mysql();

@@ -110,14 +110,18 @@ public class DrugModel {
     public void setWeight(String weight) {
         this.weight = weight;
     }
-
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     /*  Methods to work with the database **/
     /**
      * Save Current Drug to DB
      */
-    public void save() throws SQLException {
-        DrugDAO().insert(this);
+    public boolean save() throws SQLException {
+        return DrugDAO().insert(this);
     }
     
     /**
@@ -130,7 +134,7 @@ public class DrugModel {
     /**
      * Update Existing Drug
      */
-    public DrugModel update() throws SQLException {
+    public boolean update() throws SQLException {
         return DrugDAO().update(this);
     }
     

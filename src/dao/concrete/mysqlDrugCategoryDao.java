@@ -18,7 +18,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
-import static util.messageAlert.getMessageAlert;
 
 /**
  *
@@ -42,7 +41,7 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
      * @throws SQLException 
      */
     @Override
-    public DrugCategoryModel insert(DrugCategoryModel drugCategory) throws SQLException {
+    public boolean insert(DrugCategoryModel drugCategory) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
@@ -55,15 +54,15 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
 
-        return drugCategory;
+        return false;
     }
     
     /**
@@ -88,7 +87,6 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
                 pstmt.close();
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
@@ -106,7 +104,7 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
      * @throws SQLException 
      */
     @Override
-    public DrugCategoryModel update(DrugCategoryModel drugCategory) throws SQLException {
+    public boolean update(DrugCategoryModel drugCategory) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
@@ -120,15 +118,15 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
 
-        return drugCategory;
+        return false;
     }
     
     /**
@@ -139,7 +137,7 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
      * @throws SQLException 
      */
     @Override
-    public void remove(int id) throws SQLException {
+    public boolean remove(int id) throws SQLException {
         try {
             Connection con = DaoFactory.getDatabase().openConnection();
             try {
@@ -151,13 +149,15 @@ public class mysqlDrugCategoryDao implements DrugCategoryDao {
 
                 //ResultSet rset = pstmt.getGeneratedKeys();
                 con.close();
+                return true;
             } catch (Exception ee) {
-                getMessageAlert(ee.getMessage(), "error");
                 LOG.error(ee);
             }
         } catch (Exception e) {
             LOG.error(e);
         }
+        
+        return false;
     }
    
     /**
