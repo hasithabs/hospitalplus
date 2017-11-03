@@ -17,4 +17,5 @@ public interface LeaveDao {
     
     public Employee getBsicDetails(String Id);
     public ArrayList<Leave> getAllLeaveData(String Id);
+    public void addLeave(Leave leave);
 }

@@ -29,4 +29,9 @@ and open the template in the editor.
     <query key="Leave_allData_ByEmpId">
         <entry>SELECT * FROM `Leave` WHERE EmpId IN (?)</entry>
     </query>
+    
+    <query key="Leave_Insert">
+        <entry>INSERT INTO `Leave` (`EmpId`, `Date`, `Description`, `Reporting_Manager`, `Status`) VALUES (?, ?, ?, ?, ?)</entry>
+    </query>
+    
 </root>

@@ -15,7 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -28,12 +30,14 @@ public class Util {
     public static final String PASSWORD_DEFAULT_VALUE = "";
 
     public static final String LEAVE_EMIAL_SUBJECT = "Applying For Leave";
-    
+
     public static final String PROPERTY_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\App.properties";
 
     public static final String QUERY_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\XMLFiles\\Query\\";
 
     public static final String MSG_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\XMLFiles\\Messages\\";
+
+    public static final String LEAVE_DEFAULT_STATUS = "Pending";
 
     public static ImageIcon getIcon(Class<?> kclass, String icone) {
         return new ImageIcon(kclass.getResource(ICONS_PATH + icone + ".png"));
@@ -58,11 +62,16 @@ public class Util {
             } else if (c instanceof JDateChooser) {
                 JDateChooser date = (JDateChooser) c;
                 date.setDate(null);
-            } 
-            else if (c instanceof JComboBox) {
+            } else if (c instanceof JComboBox) {
                 JComboBox date = (JComboBox) c;
                 date.setSelectedIndex(0);
-            } 
+            } else if (c instanceof JScrollPane) {
+                JScrollPane sp = (JScrollPane) c;
+                if (sp.getViewport().getComponent(0) instanceof JTextArea) {
+                    JTextArea ta = (JTextArea) sp.getViewport().getComponent(0);
+                    ta.setText("");
+                }
+            }
         }
     }
 
@@ -79,16 +88,16 @@ public class Util {
 
         tblRowSorter.setRowFilter(RowFilter.regexFilter(SerchingWord));
     }
-    
+
     /*
     *Can send Mail by using mail address and password mension in the App.property file
     *senderMail-> email that we need to send the email
     *Subject->Subject of the mail
     *body->body of the mail
-    */
-    public static void mailSender(String senderMail,String Subject,String body) throws IOException{
+     */
+    public static void mailSender(String senderMail, String Subject, String body) throws IOException {
         Config conf = new Config();
-        
+
         final String username = conf.getPropertyValue("EmailAddress");
         final String password = conf.getPropertyValue("EmailPassword");
 

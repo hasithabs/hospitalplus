@@ -71,7 +71,6 @@ public class MySqlLeaveDao implements LeaveDao {
             
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, Id);
-            System.out.println(pstmt);
             rset = pstmt.executeQuery();
 
             while (rset.next()) {
@@ -91,6 +90,33 @@ public class MySqlLeaveDao implements LeaveDao {
         }
 
         return leaveList;
+    }
+
+    /*
+    *Add leave to the LEave table from given Leave object
+    *leave -> leave object 
+    */
+    @Override
+    public void addLeave(Leave leave) {
+         //reading query from xml file
+        query = DBUtil.getXMLData("EmployeeQuery", "query", "Leave_Insert");
+
+        try {
+
+            pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            pstmt.setString(1, leave.getEmpId());
+            pstmt.setDate(2,leave.getDate());
+            pstmt.setString(3, leave.getDiscription());
+            pstmt.setString(4, leave.getReportingManager());
+            pstmt.setString(5, leave.getStatus());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.error(e, e);
+        }
+
     }
 
 }

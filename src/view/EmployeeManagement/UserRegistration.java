@@ -28,7 +28,7 @@ public class UserRegistration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        RegistrationPannel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -51,61 +51,61 @@ public class UserRegistration extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1255, 548));
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setLayout(null);
+        RegistrationPannel.setBackground(new java.awt.Color(0, 0, 0));
+        RegistrationPannel.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Last Name");
-        jPanel1.add(jLabel2);
+        RegistrationPannel.add(jLabel2);
         jLabel2.setBounds(640, 150, 150, 50);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Confirm password");
-        jPanel1.add(jLabel3);
+        RegistrationPannel.add(jLabel3);
         jLabel3.setBounds(640, 350, 210, 50);
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("First Name");
-        jPanel1.add(jLabel4);
+        RegistrationPannel.add(jLabel4);
         jLabel4.setBounds(80, 150, 150, 50);
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("E-mail Address");
-        jPanel1.add(jLabel5);
+        RegistrationPannel.add(jLabel5);
         jLabel5.setBounds(80, 250, 180, 50);
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Password");
-        jPanel1.add(jLabel6);
+        RegistrationPannel.add(jLabel6);
         jLabel6.setBounds(80, 350, 180, 50);
 
         txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtFirstName.setOpaque(false);
-        jPanel1.add(txtFirstName);
+        RegistrationPannel.add(txtFirstName);
         txtFirstName.setBounds(290, 160, 270, 30);
 
         txtEmail.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtEmail.setOpaque(false);
-        jPanel1.add(txtEmail);
+        RegistrationPannel.add(txtEmail);
         txtEmail.setBounds(290, 260, 270, 30);
         txtEmail.getAccessibleContext().setAccessibleName("");
 
         txtLastName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtLastName.setOpaque(false);
-        jPanel1.add(txtLastName);
+        RegistrationPannel.add(txtLastName);
         txtLastName.setBounds(890, 160, 270, 30);
 
         txtConfPassword.setOpaque(false);
-        jPanel1.add(txtConfPassword);
+        RegistrationPannel.add(txtConfPassword);
         txtConfPassword.setBounds(890, 360, 270, 30);
 
         txtPassword.setOpaque(false);
-        jPanel1.add(txtPassword);
+        RegistrationPannel.add(txtPassword);
         txtPassword.setBounds(290, 360, 270, 30);
 
         btnCancelBotton.setBackground(new java.awt.Color(102, 102, 102));
@@ -116,7 +116,7 @@ public class UserRegistration extends javax.swing.JFrame {
                 btnCancelBottonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelBotton);
+        RegistrationPannel.add(btnCancelBotton);
         btnCancelBotton.setBounds(840, 450, 120, 30);
 
         btnRegister.setBackground(new java.awt.Color(102, 102, 102));
@@ -127,17 +127,17 @@ public class UserRegistration extends javax.swing.JFrame {
                 btnRegisterActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegister);
+        RegistrationPannel.add(btnRegister);
         btnRegister.setBounds(1040, 450, 120, 30);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("User Registration Form");
-        jPanel1.add(jLabel1);
+        RegistrationPannel.add(jLabel1);
         jLabel1.setBounds(460, 10, 370, 70);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1260, 550);
+        getContentPane().add(RegistrationPannel);
+        RegistrationPannel.setBounds(0, 0, 1260, 550);
 
         pack();
         setLocationRelativeTo(null);
@@ -157,7 +157,7 @@ public class UserRegistration extends javax.swing.JFrame {
 
         try {
             empContro.save(empObj);
-            Util.Clear(jPanel1);
+            Util.Clear(RegistrationPannel);
         } catch (SQLException ex) {
             LOG.error(ex);
         } catch (IOException ex) {
@@ -167,7 +167,7 @@ public class UserRegistration extends javax.swing.JFrame {
 
     private void btnCancelBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelBottonActionPerformed
 
-        Util.Clear(jPanel1);
+        Util.Clear(RegistrationPannel);
 
     }//GEN-LAST:event_btnCancelBottonActionPerformed
 
@@ -199,6 +199,7 @@ public class UserRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel RegistrationPannel;
     private javax.swing.JToggleButton btnCancelBotton;
     private javax.swing.JToggleButton btnRegister;
     private javax.swing.JLabel jLabel1;
@@ -207,7 +208,6 @@ public class UserRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtConfPassword;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
