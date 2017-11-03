@@ -43,9 +43,18 @@ and open the template in the editor.
     </query>
     <query key="updateDrug">
         <entry>UPDATE drugs SET name = ?, category = ?, type = ?, price = ?,
-            remarks = ?, drug_level = ?, reorder_level = ? weight = ? WHERE id = ?</entry>
+            remarks = ?, drug_level = ?, reorder_level = ?, weight = ? WHERE id = ?</entry>
     </query>
     <query key="removeDrug">
         <entry>DELETE FROM drugs WHERE id = ?</entry>
+    </query>
+    <query key="addOrder">
+        <entry>INSERT INTO orders(supplier, drug, qty, pending) VALUES(?, ?, ?, ?)</entry>
+    </query>
+    <query key="getAllOrders">
+        <entry>SELECT * FROM orders WHERE pending = ?</entry>
+    </query>
+    <query key="updateOrder">
+        <entry>UPDATE orders SET pending = ? WHERE id = ?</entry>
     </query>
 </root>

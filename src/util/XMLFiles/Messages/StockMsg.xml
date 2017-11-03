@@ -19,4 +19,13 @@ and open the template in the editor.
     <message key="somethingWrong">
         <entry>Oops! Something went wrong. Please try again.</entry>
     </message>
+    <message key="numberzero">
+        <entry>%s can't be zero</entry>
+    </message>
+    <message key="emptyorders">
+        <entry>No orders found.</entry>
+    </message>
+    <message key="emaildone">
+        <entry>Emails has been sent successfully.</entry>
+    </message>
 </root>
