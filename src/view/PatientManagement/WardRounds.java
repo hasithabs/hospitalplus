@@ -15,6 +15,7 @@ import javax.swing.SpinnerDateModel;
 import model.patientModels.wardRound;
 import util.DBUtil;
 import static util.DBUtil.LOG;
+import util.Util;
 import util.Validation;
 import util.messageAlert;
 
@@ -155,7 +156,7 @@ public class WardRounds extends javax.swing.JFrame {
                 wardRound wr = new wardRound(
                         wrDocName.getSelectedItem().toString(),
                         wrWardName.getSelectedItem().toString(),
-                        Validation.convertUtilDateToSqlDate(wrDate.getDate()),
+                        Util.convertUtilDateToSqlDate(wrDate.getDate()),
                         wrStartTime.getValue().toString()
                 );
                 if (WardRoundController.getInstance().addWardRoundDetails(wr)) {

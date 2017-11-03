@@ -30,7 +30,7 @@ public class PatientController {
         try {
             String val = cnf.getPropertyValue("DiatTypes");
             String[] DiattypeList = val.split(",");
-            for(int i=0;i<DiattypeList.length;i++){
+            for (int i = 0; i < DiattypeList.length; i++) {
                 jc.addItem(DiattypeList[i]);
             }
         } catch (IOException ex) {
@@ -64,7 +64,7 @@ public class PatientController {
     public List getPatientFoodDetails(String searchText) throws SQLException {
         return PatientFood.getPatientDiatDetails(searchText);
     }
-    
+
     public boolean updatePatientDiat(PatientFood pf) throws SQLException {
         return PatientFood.updatePatientDiat(pf);
     }

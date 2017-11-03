@@ -16,6 +16,7 @@ import model.patientModels.Operation;
 import org.apache.log4j.Logger;
 import util.DBUtil;
 import static util.DBUtil.LOG;
+import util.Util;
 import util.Validation;
 import util.messageAlert;
 
@@ -148,7 +149,7 @@ public class OperationAssignment extends javax.swing.JFrame {
                     opPatientIDs.getSelectedItem().toString(),
                     opOperationType.getSelectedItem().toString(),
                     opDoctor.getSelectedItem().toString(),
-                    Validation.convertUtilDateToSqlDate(opOperationDate.getDate())
+                    Util.convertUtilDateToSqlDate(opOperationDate.getDate())
             );
             
             boolean isAssigned = ServiceController.getInstance().OperationRegistration(op); 

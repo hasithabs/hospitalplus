@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import util.Util;
 import util.imageIconUtil;
 
 /**
@@ -62,7 +63,7 @@ public class MainJFrame extends JFrame {
      */
     private JButton createMenuItemButton(String imgName, int btnWidth, int btnHeight) {
         JButton menu_btn = new JButton();
-        Image M_reseized_img1 = util.imageIconUtil.getIcon(getClass(), imgName).getImage()
+        Image M_reseized_img1 = util.Util.getIcon(getClass(), imgName).getImage()
                 .getScaledInstance((int) (screenW_ratio * btnWidth), (int) (screenH_ratio * btnHeight), java.awt.Image.SCALE_SMOOTH);
         ImageIcon Menu_reseize_ImgIcon1 = new ImageIcon(M_reseized_img1);
         menu_btn.setIcon(Menu_reseize_ImgIcon1);
@@ -314,7 +315,7 @@ public class MainJFrame extends JFrame {
         logo.setBorder(new EmptyBorder((int) (screenH_ratio * 0), (int) (screenW_ratio * 50), (int) (screenH_ratio * 0), (int) (screenW_ratio * 50)));
         logo.setOpaque(false);
         TOP.add(logo, BorderLayout.WEST);
-        Image L_img1 = imageIconUtil.getIcon(getClass(), "common/logo").getImage();
+        Image L_img1 = Util.getIcon(getClass(), "common/logo").getImage();
         Image L_reseized_img1 = L_img1.getScaledInstance((int) (screenW_ratio * 140), (int) (screenH_ratio * 140), java.awt.Image.SCALE_SMOOTH);
         ImageIcon Logo_reseize_ImgIcon1 = new ImageIcon(L_reseized_img1);
         JLabel stylish_logo = new JLabel();
@@ -377,7 +378,7 @@ public class MainJFrame extends JFrame {
         CENTER.add(CENTER_Page, BorderLayout.CENTER);
 
         // Center content panel background
-        Image I_reseized_img3 = util.imageIconUtil.getIcon(getClass(), "common/home_background").getImage()
+        Image I_reseized_img3 = util.Util.getIcon(getClass(), "common/home_background").getImage()
                 .getScaledInstance((int) (screenW_ratio * 1765), (int) (screenH_ratio * 770), java.awt.Image.SCALE_SMOOTH);
         ImageIcon Ienu_reseize_ImgIcon3 = new ImageIcon(I_reseized_img3);
         JLabel CENTER_PAGE_IMG = new JLabel();

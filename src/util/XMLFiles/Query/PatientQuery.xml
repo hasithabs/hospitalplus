@@ -41,6 +41,14 @@ and open the template in the editor.
         <query key="CheckUp_Assignment">
             <entry>INSERT INTO checkups(PatientID, CheckUpType,AdditionalInfo, CheckUpDate) VALUES(?,?,?,?)</entry>
         </query>
+         <!--Chanel Doctor-->
+        <query key="Channel_Doctor">
+           <entry>INSERT INTO Channelling(DoctorsName, ChanelDate, ChannelSession, PatientID) VALUES(?,?,?,?)</entry>
+       </query>
+       <query key="Get_Patient_Email_Address">
+           <entry>SELECT Email FROM patient WHERE PatientID = ?</entry>
+       </query>
+       
         
     <!-- WardRounds -->
     <query key="GET_All_Registered_Doctors">

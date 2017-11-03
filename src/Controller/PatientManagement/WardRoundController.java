@@ -5,8 +5,6 @@
  */
 package Controller.PatientManagement;
 
-import static Controller.PatientManagement.PatientController.cnf;
-import static Controller.PatientManagement.ServiceController.LOG;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

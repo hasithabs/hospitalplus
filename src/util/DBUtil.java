@@ -35,15 +35,15 @@ public class DBUtil {
         https://stackoverflow.com/questions/428073/what-is-the-best-simplest-way-to-read-in-an-xml-file-in-java-application
         */
         
-        PropertyConfigurator.configure(imageIconUtil.PROPERTY_FILE_PATH);
+        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
         LOG = Logger.getLogger(DBUtil.class);
         try {
             if (XMLFileType != null || dataType != null || key != null) {
                 String XMLFilePath ="";
                 if(dataType.equals("message")){
-                    XMLFilePath = (imageIconUtil.MSG_FILE_PATH.concat(XMLFileType)).concat(".xml");
+                    XMLFilePath = (Util.MSG_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else if(dataType.equals("query")){
-                    XMLFilePath = (imageIconUtil.QUERY_FILE_PATH.concat(XMLFileType)).concat(".xml");
+                    XMLFilePath = (Util.QUERY_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else{
                     LOG.error("Invalide XML dataType parameter");
                 }

@@ -9,7 +9,17 @@ package view.PatientManagement;
  *
  * @author Y4SHVINE
  */
+import Controller.PatientManagement.ServiceController;
+import Controller.PatientManagement.WardRoundController;
+import java.sql.SQLException;
 import java.util.Date;
+import javax.swing.JComboBox;
+import model.patientModels.ChanelDoctorModel;
+import util.DBUtil;
+import static util.DBUtil.LOG;
+import util.Util;
+import util.Validation;
+import util.messageAlert;
 public class ChanelDoctor extends javax.swing.JFrame {
 
     /**
@@ -17,8 +27,29 @@ public class ChanelDoctor extends javax.swing.JFrame {
      */
     public ChanelDoctor() {
         initComponents();
+        LOG = org.apache.log4j.Logger.getLogger(ChanelDoctor.class);
+        getAllPatientIDs(dcPatientID);
+        geDoctorsName(dcDocName);
     }
 
+    private void getAllPatientIDs(JComboBox jc){
+        try{
+            ServiceController.getInstance().getPatientIDList(jc); 
+        }catch(Exception e){
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(e);
+        }
+    }
+    
+    private static void geDoctorsName(JComboBox jc) {
+        try {
+            for (Object DocName : WardRoundController.getInstance().getDoctorListDetails()) {
+                jc.addItem(DocName);
+            }
+        } catch (SQLException ex) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,195 +59,132 @@ public class ChanelDoctor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         patientManagementLbl = new javax.swing.JLabel();
-        signupFNameLbl = new javax.swing.JLabel();
-        dcDoctorName = new javax.swing.JTextField();
-        signupFNameLbl1 = new javax.swing.JLabel();
-        dcSpeciality = new javax.swing.JComboBox<>();
-        signupFNameLbl2 = new javax.swing.JLabel();
-        dcHospital = new javax.swing.JComboBox<>();
-        dcChanelDate = new com.toedter.calendar.JDateChooser();
-        signupDOBLbl = new javax.swing.JLabel();
-        patientManagementLbl1 = new javax.swing.JLabel();
-        signupSubmitBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        signupFNameLbl3 = new javax.swing.JLabel();
-        signupFNameLbl4 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        signupPID = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        signupDOBLbl1 = new javax.swing.JLabel();
-        dcChanelDate1 = new com.toedter.calendar.JDateChooser();
-        signupPID1 = new javax.swing.JLabel();
-        signupPID2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        signupFNameLbl1 = new javax.swing.JLabel();
+        dcDocName = new javax.swing.JComboBox<>();
+        dcChannelSession = new javax.swing.JComboBox<>();
+        signupFNameLbl2 = new javax.swing.JLabel();
+        cuDate = new javax.swing.JLabel();
+        dcChanelDate = new com.toedter.calendar.JDateChooser();
+        cuDate1 = new javax.swing.JLabel();
+        cdChanelDoctor = new javax.swing.JButton();
+        dcPatientID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1765, 770));
-        setMinimumSize(new java.awt.Dimension(1765, 770));
+        setMaximumSize(new java.awt.Dimension(900, 770));
+        setMinimumSize(new java.awt.Dimension(900, 770));
+        setPreferredSize(new java.awt.Dimension(900, 770));
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(null);
+
         patientManagementLbl.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        patientManagementLbl.setForeground(new java.awt.Color(255, 255, 255));
         patientManagementLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         patientManagementLbl.setText("Doctor Channeling Service");
-        getContentPane().add(patientManagementLbl);
-        patientManagementLbl.setBounds(10, 20, 1740, 60);
-
-        signupFNameLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupFNameLbl.setText("Doctor Name");
-        signupFNameLbl.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupFNameLbl);
-        signupFNameLbl.setBounds(100, 285, 200, 35);
-
-        dcDoctorName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        dcDoctorName.setMaximumSize(new java.awt.Dimension(200, 35));
-        dcDoctorName.setMinimumSize(new java.awt.Dimension(200, 35));
-        dcDoctorName.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(dcDoctorName);
-        dcDoctorName.setBounds(300, 285, 300, 35);
-
-        signupFNameLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupFNameLbl1.setText("Speciality");
-        signupFNameLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl1.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupFNameLbl1);
-        signupFNameLbl1.setBounds(100, 360, 200, 35);
-
-        dcSpeciality.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
-        getContentPane().add(dcSpeciality);
-        dcSpeciality.setBounds(300, 360, 300, 35);
-
-        signupFNameLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupFNameLbl2.setText("Hospital");
-        signupFNameLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl2.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupFNameLbl2);
-        signupFNameLbl2.setBounds(100, 430, 200, 35);
-
-        dcHospital.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
-        getContentPane().add(dcHospital);
-        dcHospital.setBounds(300, 430, 300, 35);
-        getContentPane().add(dcChanelDate);
-        dcChanelDate.setBounds(300, 505, 300, 35);
-
-        signupDOBLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupDOBLbl.setText("Date");
-        signupDOBLbl.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupDOBLbl.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupDOBLbl.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupDOBLbl);
-        signupDOBLbl.setBounds(100, 505, 200, 35);
-
-        patientManagementLbl1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        patientManagementLbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        patientManagementLbl1.setText("Search Doctor");
-        getContentPane().add(patientManagementLbl1);
-        patientManagementLbl1.setBounds(100, 160, 500, 60);
-
-        signupSubmitBtn.setText("Search");
-        signupSubmitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signupSubmitBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(signupSubmitBtn);
-        signupSubmitBtn.setBounds(300, 580, 200, 35);
-
-        jScrollPane1.setEnabled(false);
-        jScrollPane1.setViewportView(jTextPane1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(640, 190, 9, 540);
-
-        signupFNameLbl3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupFNameLbl3.setText("Doctor Name");
-        signupFNameLbl3.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl3.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl3.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupFNameLbl3);
-        signupFNameLbl3.setBounds(690, 280, 200, 35);
-
-        signupFNameLbl4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupFNameLbl4.setText("Speciality");
-        signupFNameLbl4.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl4.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupFNameLbl4.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupFNameLbl4);
-        signupFNameLbl4.setBounds(690, 420, 200, 35);
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel4.setText("Chanel ID");
-        jLabel4.setMaximumSize(new java.awt.Dimension(200, 35));
-        jLabel4.setMinimumSize(new java.awt.Dimension(200, 35));
-        jLabel4.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(1190, 280, 200, 35);
-
-        signupPID.setText("DN");
-        signupPID.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupPID.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupPID.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupPID);
-        signupPID.setBounds(850, 280, 300, 35);
+        jPanel1.add(patientManagementLbl);
+        patientManagementLbl.setBounds(0, 10, 900, 60);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel5.setText("Chanel ID");
         jLabel5.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel5.setMinimumSize(new java.awt.Dimension(200, 35));
         jLabel5.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(jLabel5);
+        jPanel1.add(jLabel5);
         jLabel5.setBounds(2280, 450, 200, 35);
 
-        signupDOBLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        signupDOBLbl1.setText("Date");
-        signupDOBLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupDOBLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupDOBLbl1.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupDOBLbl1);
-        signupDOBLbl1.setBounds(1190, 420, 200, 35);
+        signupFNameLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupFNameLbl1.setForeground(new java.awt.Color(255, 255, 255));
+        signupFNameLbl1.setText("Doctor's Name");
+        signupFNameLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
+        signupFNameLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
+        signupFNameLbl1.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel1.add(signupFNameLbl1);
+        signupFNameLbl1.setBounds(200, 175, 200, 35);
 
-        dcChanelDate1.setMaxSelectableDate(new Date());
-        getContentPane().add(dcChanelDate1);
-        dcChanelDate1.setBounds(1390, 420, 300, 35);
+        jPanel1.add(dcDocName);
+        dcDocName.setBounds(400, 175, 300, 35);
 
-        signupPID1.setText("CID");
-        signupPID1.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupPID1.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupPID1.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupPID1);
-        signupPID1.setBounds(1390, 280, 300, 35);
+        dcChannelSession.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening" }));
+        jPanel1.add(dcChannelSession);
+        dcChannelSession.setBounds(400, 400, 300, 35);
 
-        signupPID2.setText("S");
-        signupPID2.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupPID2.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupPID2.setPreferredSize(new java.awt.Dimension(200, 35));
-        getContentPane().add(signupPID2);
-        signupPID2.setBounds(850, 420, 300, 35);
+        signupFNameLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupFNameLbl2.setForeground(new java.awt.Color(255, 255, 255));
+        signupFNameLbl2.setText("Patient ID");
+        signupFNameLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
+        signupFNameLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
+        signupFNameLbl2.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel1.add(signupFNameLbl2);
+        signupFNameLbl2.setBounds(200, 250, 200, 35);
 
-        jButton1.setText("Chanel Doctor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cuDate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        cuDate.setForeground(new java.awt.Color(255, 255, 255));
+        cuDate.setText("Chanel Date");
+        cuDate.setMaximumSize(new java.awt.Dimension(200, 35));
+        cuDate.setMinimumSize(new java.awt.Dimension(200, 35));
+        cuDate.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel1.add(cuDate);
+        cuDate.setBounds(200, 325, 200, 35);
+
+        dcChanelDate.setMinSelectableDate(new Date());
+        jPanel1.add(dcChanelDate);
+        dcChanelDate.setBounds(400, 325, 300, 35);
+
+        cuDate1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        cuDate1.setForeground(new java.awt.Color(255, 255, 255));
+        cuDate1.setText("Chanel Session");
+        cuDate1.setMaximumSize(new java.awt.Dimension(200, 35));
+        cuDate1.setMinimumSize(new java.awt.Dimension(200, 35));
+        cuDate1.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel1.add(cuDate1);
+        cuDate1.setBounds(200, 400, 200, 35);
+
+        cdChanelDoctor.setForeground(new java.awt.Color(0, 0, 0));
+        cdChanelDoctor.setText("Chanel");
+        cdChanelDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cdChanelDoctorActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1490, 580, 200, 35);
+        jPanel1.add(cdChanelDoctor);
+        cdChanelDoctor.setBounds(400, 475, 200, 35);
+
+        jPanel1.add(dcPatientID);
+        dcPatientID.setBounds(400, 250, 300, 35);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 900, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signupSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupSubmitBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_signupSubmitBtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cdChanelDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdChanelDoctorActionPerformed
+        try{
+            if(dcChanelDate.getDate() != null){
+                ChanelDoctorModel cd = new ChanelDoctorModel(
+                        dcDocName.getSelectedItem().toString(),
+                        dcPatientID.getSelectedItem().toString(),
+                        Util.convertUtilDateToSqlDate(dcChanelDate.getDate()),
+                        dcChannelSession.getSelectedItem().toString()
+                );
+                if (ServiceController.getInstance().ChannelDoctorService(cd)==true) {
+                    messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Msg_Succesfully_Added"), "success");
+                } else {
+                    messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+                }
+            }
+            else{
+                messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Can_not_Have_Empty_Fields"), "error");
+            }
+        }catch(Exception ex){
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_cdChanelDoctorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,28 +222,17 @@ public class ChanelDoctor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cdChanelDoctor;
+    private javax.swing.JLabel cuDate;
+    private javax.swing.JLabel cuDate1;
     private com.toedter.calendar.JDateChooser dcChanelDate;
-    private com.toedter.calendar.JDateChooser dcChanelDate1;
-    private javax.swing.JTextField dcDoctorName;
-    private javax.swing.JComboBox<String> dcHospital;
-    private javax.swing.JComboBox<String> dcSpeciality;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> dcChannelSession;
+    private javax.swing.JComboBox<String> dcDocName;
+    private javax.swing.JComboBox<String> dcPatientID;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel patientManagementLbl;
-    private javax.swing.JLabel patientManagementLbl1;
-    private javax.swing.JLabel signupDOBLbl;
-    private javax.swing.JLabel signupDOBLbl1;
-    private javax.swing.JLabel signupFNameLbl;
     private javax.swing.JLabel signupFNameLbl1;
     private javax.swing.JLabel signupFNameLbl2;
-    private javax.swing.JLabel signupFNameLbl3;
-    private javax.swing.JLabel signupFNameLbl4;
-    private javax.swing.JLabel signupPID;
-    private javax.swing.JLabel signupPID1;
-    private javax.swing.JLabel signupPID2;
-    private javax.swing.JButton signupSubmitBtn;
     // End of variables declaration//GEN-END:variables
 }

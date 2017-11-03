@@ -7,6 +7,7 @@ package dao.interfaces.patientInterfaces;
 
 import java.sql.SQLException;
 import java.util.List;
+import model.patientModels.ChanelDoctorModel;
 import model.patientModels.Checkup;
 import model.patientModels.Operation;
 
@@ -20,4 +21,6 @@ public interface ServicesDao {
     public boolean OperationRegistration(Operation op) throws SQLException;
 
     public boolean CheckUpAssigning(Checkup cu) throws SQLException;
+
+    public boolean ChannelDoctorService(ChanelDoctorModel cd) throws SQLException;
 }

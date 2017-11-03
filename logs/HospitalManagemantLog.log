@@ -4,3 +4,9 @@ ERROR   2017-11-03 07:30:10,085 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc
 ERROR   2017-11-03 07:31:04,700 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:30:55 IST 2017' for column 'WardRoundDate' at row 1
 ERROR   2017-11-03 07:34:36,472 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Thu Jan 01 13:34:23 IST 1970' for column 'WardRoundDate' at row 1
 ERROR   2017-11-03 07:37:18,844 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:37:14 IST 2017' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 22:26:03,463 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters
+ERROR   2017-11-03 22:26:16,764 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: SQL String can not be NULL
+ERROR   2017-11-03 22:26:16,868 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters
+ERROR   2017-11-03 22:27:38,152 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DoctorName' in 'field list'
+ERROR   2017-11-03 23:31:32,437 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Column 'ChanelID' not found.
+ERROR   2017-11-03 23:34:04,224 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Column 'ChanelID' not found.

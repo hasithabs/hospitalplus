@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import model.patientModels.Checkup;
 import util.DBUtil;
 import static util.DBUtil.LOG;
+import util.Util;
 import util.Validation;
 import util.messageAlert;
 
@@ -149,7 +150,7 @@ public class CheckUpAssignment extends javax.swing.JFrame {
             Checkup cu = new Checkup(
                 cuPatientIDs.getSelectedItem().toString(),
                 cuCheckUpType.getSelectedItem().toString(),
-                Validation.convertUtilDateToSqlDate(cuCheckUpDate.getDate()),
+                Util.convertUtilDateToSqlDate(cuCheckUpDate.getDate()),
                 cuAdditionalInfo.getText()
             );
             boolean isAssigned = ServiceController.getInstance().CheckUpAssigning(cu);

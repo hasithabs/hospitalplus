@@ -15,8 +15,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 import javax.swing.JComboBox;
+import model.patientModels.ChanelDoctorModel;
 import model.patientModels.Checkup;
 import model.patientModels.Operation;
+import util.Util;
 import util.imageIconUtil;
 
 /**
@@ -67,7 +69,7 @@ public class ServiceController {
     }
 
     public static void setKeyValue(String key, String value) throws FileNotFoundException, IOException {
-        File file = new File(imageIconUtil.PROPERTY_FILE_PATH);
+        File file = new File(Util.PROPERTY_FILE_PATH);
 
         FileInputStream in = new FileInputStream(file);
         Properties properties = new Properties();
@@ -79,5 +81,9 @@ public class ServiceController {
         properties.store(out, null);
         in.close();
         out.close();
+    }
+    
+    public static boolean ChannelDoctorService(ChanelDoctorModel cd) throws SQLException {
+        return ChanelDoctorModel.ChannelDoctorService(cd);
     }
 }

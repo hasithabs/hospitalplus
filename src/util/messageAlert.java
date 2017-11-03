@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import static util.imageIconUtil.getIcon;
 
 /**
  *
@@ -48,7 +47,7 @@ public class messageAlert {
             backgroundFile = "common/messagebox_success";
             typeColor = new Color(0, 39, 106);
         }
-        Image resizedBackgroundImg = getIcon(messageAlert.class, "common/messagebox_error").getImage()
+        Image resizedBackgroundImg = Util.getIcon(messageAlert.class, backgroundFile).getImage()
                 .getScaledInstance((int) (screenW_ratio * 800),
                         (int) (screenH_ratio * 215), java.awt.Image.SCALE_SMOOTH);
         ImageIcon resizedBackgroundImgIcon = new ImageIcon(resizedBackgroundImg);
