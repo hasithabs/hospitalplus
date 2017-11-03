@@ -7,5 +7,23 @@ and open the template in the editor.
 
 
 <root>
+    <message key="Err_No_Result_Found">
+        <entry>No Results Found</entry>
+    </message>
+    <message key="Err_Something_Went_Wrong">
+        <entry>Something went Wrong</entry>
+    </message>
+     <message key="Msg_Succesfully_Updated">
+        <entry>Succesfully Updated</entry>
+    </message>
+    <message key="Msg_Succesfully_Registered">
+        <entry>Succesfully Registered</entry>
+    </message>
+    <message key="Msg_Succesfully_Added">
+        <entry>Succesfully Added</entry>
+    </message>
+    <message key="Err_Can_not_Have_Empty_Fields">
+        <entry>Can not have Empty Fields</entry>
+    </message>
     
 </root>

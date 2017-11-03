@@ -7,8 +7,20 @@ package view.PatientManagement;
 
 import Controller.PatientManagement.PatientController;
 import java.sql.SQLException;
-import model.Patient;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import javax.swing.table.DefaultTableModel;
+import model.patientModels.Patient;
+import model.patientModels.PatientFood;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import util.DBUtil;
+import static util.DBUtil.LOG;
 import util.Validation;
+import util.imageIconUtil;
+import util.messageAlert;
 
 /**
  *
@@ -19,16 +31,64 @@ public class PatientManaging extends javax.swing.JFrame {
     /**
      * Creates new form PatientSignUp
      */
+    private List<Patient> patientSearchResultList;
+    private List<PatientFood> patientFoodSearchResultList;
+    //private Date d1 = new Date();
+
     public PatientManaging() {
         initComponents();
+        Validation.resizeColumnWidth(detailPatientTable);
+        Validation.resizeColumnWidth(pfDetailTable);
         fNameErrorIcon.setVisible(false);
         lNameErrorIcon.setVisible(false);
         emailErrorIcon.setVisible(false);
         phoneNumberErrorIcon.setVisible(false);
         nicErrorIcon.setVisible(false);
+        PropertyConfigurator.configure(imageIconUtil.PROPERTY_FILE_PATH);
+        LOG = Logger.getLogger(PatientManaging.class);
+        signupPID.setText(String.valueOf(getLatestPatientID() + 1));
+
+        //Patient Details
+        patientDetailsEditables(false);
+
+        //PatientDiat Details
+        PatientController.getInstance().getDiatList(foodDiatType);
+        patientDiatDetailsEditables(false);
+    }
+    //public static Logger LOG;
+    boolean signupRegisterBtnVali = false;
+
+    private int getLatestPatientID() {
+        try {
+            return Patient.getLatestPatientID();
+        } catch (Exception ex) {
+            LOG.error(ex);
+            return 0;
+        }
+    }
+
+    private void patientDetailsEditables(boolean val) {
+        detailPFirstName.setEditable(val);
+        detailPLastName.setEditable(val);
+        detailPDateofBirth.setEnabled(val);
+        detailSexCombo.setEnabled(val);
+        detailPEmail1.setEditable(val);
+        detailPPhoneNumber.setEditable(val);
+        detailPNIC.setEditable(val);
+        detailPAddress.setEditable(val);
+        detailPCity.setEditable(val);
+        detailPCode.setEditable(val);
+        detailPAdditionalInfo.setEditable(val);
+    }
+
+    private void patientDiatDetailsEditables(boolean val) {
+        foodPIDs.setEnabled(val);
+        foodDiatType.setEnabled(val);
+        foodDStartDate.setEnabled(val);
+        foodDEndDate.setEnabled(val);
+        foodUpdateBtn.setEnabled(val);
 
     }
-    boolean signupRegisterBtnVali = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,9 +100,7 @@ public class PatientManaging extends javax.swing.JFrame {
     private void initComponents() {
 
         patientManagementLbl = new javax.swing.JLabel();
-        patientManagementTabPane = new javax.swing.JTabbedPane();
-        assignMedicalCheckupPanel = new javax.swing.JPanel();
-        assignOpperationPanel = new javax.swing.JPanel();
+        CheckUps = new javax.swing.JTabbedPane();
         patientSignUpPanel = new javax.swing.JPanel();
         signupPID = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -76,6 +134,7 @@ public class PatientManaging extends javax.swing.JFrame {
         emailErrorIcon = new javax.swing.JLabel();
         nicErrorIcon = new javax.swing.JLabel();
         phoneNumberErrorIcon = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         patientDetailsPanel = new javax.swing.JPanel();
         signupNICLbl1 = new javax.swing.JLabel();
         detailPNIC = new javax.swing.JTextField();
@@ -97,7 +156,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupDOBLbl1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         detailPLastName = new javax.swing.JTextField();
-        signupPFirstName1 = new javax.swing.JTextField();
+        pDetailsSearchText = new javax.swing.JTextField();
         signupFNameLbl1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         detailPID = new javax.swing.JLabel();
@@ -106,29 +165,28 @@ public class PatientManaging extends javax.swing.JFrame {
         detailReportBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         detailPFirstName = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        pDetailsSearchBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         detailPatientTable = new javax.swing.JTable();
         signupEmailLbl4 = new javax.swing.JLabel();
         detailEditBtn = new javax.swing.JButton();
         patientFoodPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        pfsearchField = new javax.swing.JTextField();
+        pfSearchBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        foodDiatType = new javax.swing.JComboBox<>();
+        foodPIDs = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        foodPatientID = new javax.swing.JLabel();
         foodDStartDate = new com.toedter.calendar.JDateChooser();
         signupDOBLbl2 = new javax.swing.JLabel();
         signupDOBLbl3 = new javax.swing.JLabel();
         foodDEndDate = new com.toedter.calendar.JDateChooser();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pfDetailTable = new javax.swing.JTable();
         foodEditBtn = new javax.swing.JButton();
-        foodAddBtn = new javax.swing.JButton();
-        foodChangeBtn = new javax.swing.JButton();
+        foodUpdateBtn = new javax.swing.JButton();
         patientSignUpLbl2 = new javax.swing.JLabel();
+        foodDiatType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1765, 770));
@@ -143,14 +201,10 @@ public class PatientManaging extends javax.swing.JFrame {
         getContentPane().add(patientManagementLbl);
         patientManagementLbl.setBounds(10, 20, 1740, 60);
 
-        assignMedicalCheckupPanel.setLayout(null);
-        patientManagementTabPane.addTab("Assign for Medical Checkups", assignMedicalCheckupPanel);
-
-        assignOpperationPanel.setLayout(null);
-        patientManagementTabPane.addTab("Assign for Operations", assignOpperationPanel);
-
+        patientSignUpPanel.setBackground(new java.awt.Color(0, 0, 0));
         patientSignUpPanel.setLayout(null);
 
+        signupPID.setForeground(new java.awt.Color(255, 255, 255));
         signupPID.setText("1");
         signupPID.setMaximumSize(new java.awt.Dimension(200, 35));
         signupPID.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -159,6 +213,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPID.setBounds(300, 75, 300, 35);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Patient ID");
         jLabel4.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel4.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -167,6 +222,7 @@ public class PatientManaging extends javax.swing.JFrame {
         jLabel4.setBounds(100, 75, 200, 35);
 
         signupFNameLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupFNameLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupFNameLbl.setText("First Name");
         signupFNameLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupFNameLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -187,12 +243,14 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPFirstName.setBounds(300, 150, 300, 35);
 
         patientSignUpLbl.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        patientSignUpLbl.setForeground(new java.awt.Color(255, 255, 255));
         patientSignUpLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         patientSignUpLbl.setText("Patient Registration");
         patientSignUpPanel.add(patientSignUpLbl);
         patientSignUpLbl.setBounds(100, 0, 1530, 50);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Last Name");
         jLabel3.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel3.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -213,6 +271,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPLastName.setBounds(300, 225, 300, 35);
 
         signupEmailLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupEmailLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupEmailLbl.setText("Email");
         signupEmailLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupEmailLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -228,16 +287,20 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPEmail.setBounds(300, 450, 300, 35);
 
         signupDOBLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupDOBLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupDOBLbl.setText("Date of Birth");
         signupDOBLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl.setMinimumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl.setPreferredSize(new java.awt.Dimension(200, 35));
         patientSignUpPanel.add(signupDOBLbl);
         signupDOBLbl.setBounds(100, 300, 200, 35);
+
+        signupPDateofBirth.setMaxSelectableDate(new Date());
         patientSignUpPanel.add(signupPDateofBirth);
         signupPDateofBirth.setBounds(300, 300, 300, 35);
 
         signupEmailLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupEmailLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupEmailLbl1.setText("Phone Number");
         signupEmailLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupEmailLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -258,6 +321,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPPhoneNumber.setBounds(300, 525, 300, 35);
 
         signupSexlLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupSexlLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupSexlLbl.setText("Sex");
         signupSexlLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupSexlLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -270,6 +334,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPSexCombo.setBounds(300, 375, 300, 35);
 
         signupNICLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupNICLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupNICLbl.setText("NIC");
         signupNICLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupNICLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -297,6 +362,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPAddress.setBounds(1330, 150, 300, 35);
 
         signupAddressLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupAddressLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupAddressLbl.setText("Address");
         signupAddressLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupAddressLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -312,6 +378,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPCity.setBounds(1330, 225, 300, 35);
 
         signupNICLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupNICLbl2.setForeground(new java.awt.Color(255, 255, 255));
         signupNICLbl2.setText("City");
         signupNICLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
         signupNICLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -327,6 +394,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupPCode.setBounds(1330, 300, 300, 35);
 
         signupCodeLbl.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupCodeLbl.setForeground(new java.awt.Color(255, 255, 255));
         signupCodeLbl.setText("Zip / Postal Code");
         signupCodeLbl.setMaximumSize(new java.awt.Dimension(200, 35));
         signupCodeLbl.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -335,6 +403,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupCodeLbl.setBounds(1130, 300, 200, 35);
 
         signupCodeLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupCodeLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupCodeLbl1.setText("Additional Infomation");
         signupCodeLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupCodeLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -377,12 +446,16 @@ public class PatientManaging extends javax.swing.JFrame {
         phoneNumberErrorIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/common/Wrong.png"))); // NOI18N
         patientSignUpPanel.add(phoneNumberErrorIcon);
         phoneNumberErrorIcon.setBounds(610, 525, 15, 35);
+        patientSignUpPanel.add(jPanel1);
+        jPanel1.setBounds(470, 30, 10, 10);
 
-        patientManagementTabPane.addTab("Patient SignUp", patientSignUpPanel);
+        CheckUps.addTab("Patient Registration", patientSignUpPanel);
 
+        patientDetailsPanel.setBackground(new java.awt.Color(0, 0, 0));
         patientDetailsPanel.setLayout(null);
 
         signupNICLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupNICLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupNICLbl1.setText("NIC");
         signupNICLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupNICLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -398,6 +471,7 @@ public class PatientManaging extends javax.swing.JFrame {
         detailPNIC.setBounds(1090, 150, 300, 35);
 
         signupAddressLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupAddressLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupAddressLbl1.setText("Address");
         signupAddressLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupAddressLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -420,6 +494,7 @@ public class PatientManaging extends javax.swing.JFrame {
         detailPCity.setBounds(1090, 250, 300, 35);
 
         signupNICLbl3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupNICLbl3.setForeground(new java.awt.Color(255, 255, 255));
         signupNICLbl3.setText("City");
         signupNICLbl3.setMaximumSize(new java.awt.Dimension(200, 35));
         signupNICLbl3.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -428,6 +503,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupNICLbl3.setBounds(890, 250, 200, 35);
 
         signupCodeLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupCodeLbl2.setForeground(new java.awt.Color(255, 255, 255));
         signupCodeLbl2.setText("Zip / Postal Code");
         signupCodeLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
         signupCodeLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -450,6 +526,7 @@ public class PatientManaging extends javax.swing.JFrame {
         jScrollPane2.setBounds(1090, 350, 300, 70);
 
         signupCodeLbl3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupCodeLbl3.setForeground(new java.awt.Color(255, 255, 255));
         signupCodeLbl3.setText("Additional Infomation");
         signupCodeLbl3.setMaximumSize(new java.awt.Dimension(200, 35));
         signupCodeLbl3.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -465,6 +542,7 @@ public class PatientManaging extends javax.swing.JFrame {
         detailPPhoneNumber.setBounds(1090, 100, 300, 35);
 
         signupEmailLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupEmailLbl2.setForeground(new java.awt.Color(255, 255, 255));
         signupEmailLbl2.setText("Phone Number");
         signupEmailLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
         signupEmailLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -473,6 +551,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupEmailLbl2.setBounds(890, 100, 200, 35);
 
         signupEmailLbl3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupEmailLbl3.setForeground(new java.awt.Color(255, 255, 255));
         signupEmailLbl3.setText("Email");
         signupEmailLbl3.setMaximumSize(new java.awt.Dimension(200, 35));
         signupEmailLbl3.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -490,10 +569,13 @@ public class PatientManaging extends javax.swing.JFrame {
         detailSexCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
         patientDetailsPanel.add(detailSexCombo);
         detailSexCombo.setBounds(300, 300, 300, 35);
+
+        detailPDateofBirth.setMaxSelectableDate(new Date());
         patientDetailsPanel.add(detailPDateofBirth);
         detailPDateofBirth.setBounds(300, 250, 300, 35);
 
         signupDOBLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupDOBLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupDOBLbl1.setText("Date of Birth");
         signupDOBLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -502,6 +584,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupDOBLbl1.setBounds(100, 250, 200, 35);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Last Name");
         jLabel5.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel5.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -516,14 +599,15 @@ public class PatientManaging extends javax.swing.JFrame {
         patientDetailsPanel.add(detailPLastName);
         detailPLastName.setBounds(300, 200, 300, 35);
 
-        signupPFirstName1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        signupPFirstName1.setMaximumSize(new java.awt.Dimension(200, 35));
-        signupPFirstName1.setMinimumSize(new java.awt.Dimension(200, 35));
-        signupPFirstName1.setPreferredSize(new java.awt.Dimension(200, 35));
-        patientDetailsPanel.add(signupPFirstName1);
-        signupPFirstName1.setBounds(300, 50, 200, 35);
+        pDetailsSearchText.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        pDetailsSearchText.setMaximumSize(new java.awt.Dimension(200, 35));
+        pDetailsSearchText.setMinimumSize(new java.awt.Dimension(200, 35));
+        pDetailsSearchText.setPreferredSize(new java.awt.Dimension(200, 35));
+        patientDetailsPanel.add(pDetailsSearchText);
+        pDetailsSearchText.setBounds(300, 50, 200, 35);
 
         signupFNameLbl1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupFNameLbl1.setForeground(new java.awt.Color(255, 255, 255));
         signupFNameLbl1.setText("First Name");
         signupFNameLbl1.setMaximumSize(new java.awt.Dimension(200, 35));
         signupFNameLbl1.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -532,6 +616,7 @@ public class PatientManaging extends javax.swing.JFrame {
         signupFNameLbl1.setBounds(100, 150, 200, 35);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Patient ID");
         jLabel6.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel6.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -539,7 +624,8 @@ public class PatientManaging extends javax.swing.JFrame {
         patientDetailsPanel.add(jLabel6);
         jLabel6.setBounds(100, 100, 200, 35);
 
-        detailPID.setText("ID");
+        detailPID.setForeground(new java.awt.Color(255, 255, 255));
+        detailPID.setText("Patient ID");
         detailPID.setMaximumSize(new java.awt.Dimension(200, 35));
         detailPID.setMinimumSize(new java.awt.Dimension(200, 35));
         detailPID.setPreferredSize(new java.awt.Dimension(200, 35));
@@ -547,12 +633,18 @@ public class PatientManaging extends javax.swing.JFrame {
         detailPID.setBounds(300, 100, 300, 35);
 
         patientSignUpLbl1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        patientSignUpLbl1.setForeground(new java.awt.Color(255, 255, 255));
         patientSignUpLbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         patientSignUpLbl1.setText("Patient Details");
         patientDetailsPanel.add(patientSignUpLbl1);
         patientSignUpLbl1.setBounds(100, 0, 1550, 50);
 
         detailsSubmitBtn.setText("Submit");
+        detailsSubmitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsSubmitBtnActionPerformed(evt);
+            }
+        });
         patientDetailsPanel.add(detailsSubmitBtn);
         detailsSubmitBtn.setBounds(1450, 200, 200, 35);
 
@@ -561,6 +653,7 @@ public class PatientManaging extends javax.swing.JFrame {
         detailReportBtn.setBounds(1450, 300, 200, 35);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Name or Patient ID");
         jLabel7.setMaximumSize(new java.awt.Dimension(200, 35));
         jLabel7.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -575,10 +668,16 @@ public class PatientManaging extends javax.swing.JFrame {
         patientDetailsPanel.add(detailPFirstName);
         detailPFirstName.setBounds(300, 150, 300, 35);
 
-        jButton3.setText("Search");
-        patientDetailsPanel.add(jButton3);
-        jButton3.setBounds(500, 50, 100, 35);
+        pDetailsSearchBtn.setText("Search");
+        pDetailsSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pDetailsSearchBtnActionPerformed(evt);
+            }
+        });
+        patientDetailsPanel.add(pDetailsSearchBtn);
+        pDetailsSearchBtn.setBounds(500, 50, 100, 35);
 
+        detailPatientTable.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         detailPatientTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -605,12 +704,20 @@ public class PatientManaging extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        detailPatientTable.setAlignmentX(2.5F);
+        detailPatientTable.setAlignmentY(2.5F);
+        detailPatientTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detailPatientTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(detailPatientTable);
 
         patientDetailsPanel.add(jScrollPane3);
         jScrollPane3.setBounds(90, 430, 1300, 180);
 
         signupEmailLbl4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupEmailLbl4.setForeground(new java.awt.Color(255, 255, 255));
         signupEmailLbl4.setText("Sex");
         signupEmailLbl4.setMaximumSize(new java.awt.Dimension(200, 35));
         signupEmailLbl4.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -619,46 +726,57 @@ public class PatientManaging extends javax.swing.JFrame {
         signupEmailLbl4.setBounds(100, 300, 200, 35);
 
         detailEditBtn.setText("Edit");
+        detailEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailEditBtnActionPerformed(evt);
+            }
+        });
         patientDetailsPanel.add(detailEditBtn);
         detailEditBtn.setBounds(1450, 100, 200, 35);
 
-        patientManagementTabPane.addTab("Patient Details and Reports", patientDetailsPanel);
+        CheckUps.addTab("Patient Details and Reports", patientDetailsPanel);
 
+        patientFoodPanel.setBackground(new java.awt.Color(0, 0, 0));
         patientFoodPanel.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Patient ID or Name");
         patientFoodPanel.add(jLabel1);
         jLabel1.setBounds(100, 75, 200, 35);
-        patientFoodPanel.add(jTextField1);
-        jTextField1.setBounds(300, 75, 200, 35);
+        patientFoodPanel.add(pfsearchField);
+        pfsearchField.setBounds(300, 75, 200, 35);
 
-        jButton1.setText("Search");
-        patientFoodPanel.add(jButton1);
-        jButton1.setBounds(500, 75, 100, 35);
+        pfSearchBtn.setText("Search");
+        pfSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pfSearchBtnActionPerformed(evt);
+            }
+        });
+        patientFoodPanel.add(pfSearchBtn);
+        pfSearchBtn.setBounds(500, 75, 100, 35);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Diat Type");
         patientFoodPanel.add(jLabel2);
         jLabel2.setBounds(100, 225, 200, 35);
 
-        foodDiatType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        patientFoodPanel.add(foodDiatType);
-        foodDiatType.setBounds(300, 225, 300, 35);
+        patientFoodPanel.add(foodPIDs);
+        foodPIDs.setBounds(300, 150, 300, 35);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Patient ID ");
         patientFoodPanel.add(jLabel8);
         jLabel8.setBounds(100, 150, 200, 35);
 
-        foodPatientID.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        foodPatientID.setText("Patient ID ");
-        patientFoodPanel.add(foodPatientID);
-        foodPatientID.setBounds(300, 150, 200, 35);
+        foodDStartDate.setMinSelectableDate(new Date());
         patientFoodPanel.add(foodDStartDate);
         foodDStartDate.setBounds(940, 150, 300, 35);
 
         signupDOBLbl2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupDOBLbl2.setForeground(new java.awt.Color(255, 255, 255));
         signupDOBLbl2.setText("Start Date");
         signupDOBLbl2.setMaximumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl2.setMinimumSize(new java.awt.Dimension(200, 35));
@@ -667,16 +785,19 @@ public class PatientManaging extends javax.swing.JFrame {
         signupDOBLbl2.setBounds(740, 150, 200, 35);
 
         signupDOBLbl3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        signupDOBLbl3.setForeground(new java.awt.Color(255, 255, 255));
         signupDOBLbl3.setText("End Date");
         signupDOBLbl3.setMaximumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl3.setMinimumSize(new java.awt.Dimension(200, 35));
         signupDOBLbl3.setPreferredSize(new java.awt.Dimension(200, 35));
         patientFoodPanel.add(signupDOBLbl3);
         signupDOBLbl3.setBounds(740, 225, 200, 35);
+
+        foodDEndDate.setMaxSelectableDate(foodDStartDate.getDate());
         patientFoodPanel.add(foodDEndDate);
         foodDEndDate.setBounds(940, 225, 300, 35);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        pfDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -702,22 +823,33 @@ public class PatientManaging extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        pfDetailTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pfDetailTableMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(pfDetailTable);
 
         patientFoodPanel.add(jScrollPane4);
         jScrollPane4.setBounds(100, 300, 1520, 270);
 
         foodEditBtn.setText("Edit");
+        foodEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodEditBtnActionPerformed(evt);
+            }
+        });
         patientFoodPanel.add(foodEditBtn);
-        foodEditBtn.setBounds(1410, 150, 100, 35);
+        foodEditBtn.setBounds(1410, 150, 200, 35);
 
-        foodAddBtn.setText("Add");
-        patientFoodPanel.add(foodAddBtn);
-        foodAddBtn.setBounds(1410, 225, 200, 35);
-
-        foodChangeBtn.setText("Change");
-        patientFoodPanel.add(foodChangeBtn);
-        foodChangeBtn.setBounds(1510, 150, 100, 35);
+        foodUpdateBtn.setText("Update");
+        foodUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodUpdateBtnActionPerformed(evt);
+            }
+        });
+        patientFoodPanel.add(foodUpdateBtn);
+        foodUpdateBtn.setBounds(1410, 225, 200, 35);
 
         patientSignUpLbl2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         patientSignUpLbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -725,66 +857,216 @@ public class PatientManaging extends javax.swing.JFrame {
         patientFoodPanel.add(patientSignUpLbl2);
         patientSignUpLbl2.setBounds(100, 0, 1510, 50);
 
-        patientManagementTabPane.addTab("Patient - Food Management", patientFoodPanel);
+        patientFoodPanel.add(foodDiatType);
+        foodDiatType.setBounds(300, 225, 300, 35);
 
-        getContentPane().add(patientManagementTabPane);
-        patientManagementTabPane.setBounds(10, 90, 1740, 670);
+        CheckUps.addTab("Patient - Food Management", patientFoodPanel);
+
+        getContentPane().add(CheckUps);
+        CheckUps.setBounds(10, 90, 1740, 670);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void foodUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodUpdateBtnActionPerformed
+        try {
+            PatientFood pf = new PatientFood(
+                foodPIDs.getSelectedItem().toString(),
+                foodDiatType.getSelectedItem().toString(),
+                Validation.convertUtilDateToSqlDate(foodDStartDate.getDate()),
+                Validation.convertUtilDateToSqlDate(foodDEndDate.getDate())
+            );
+            boolean updatepf = PatientController.getInstance().updatePatientDiat(pf);
+            if (updatepf) {
+                messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Msg_Succesfully_Updated"), "success");
+                patientDiatDetailsEditables(false);
+                pfSearchBtn.doClick();
+            }
+        } catch (SQLException e) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(e);
+        }
+    }//GEN-LAST:event_foodUpdateBtnActionPerformed
+
+    private void foodEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodEditBtnActionPerformed
+        patientDiatDetailsEditables(true);
+    }//GEN-LAST:event_foodEditBtnActionPerformed
+
+    private void pfDetailTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfDetailTableMouseClicked
+        DefaultTableModel model = (DefaultTableModel) pfDetailTable.getModel();
+        int patientID = (int) model.getValueAt(pfDetailTable.getSelectedRow(), 0);
+
+        for (PatientFood pf : patientFoodSearchResultList) {
+            if (patientID == pf.getPatientID()) {
+                foodPIDs.setSelectedItem(String.valueOf(pf.getPatientID()));
+                if (pf.getStartDate() != null) {
+                    foodDiatType.setSelectedItem(pf.getDiatType());
+                    foodDStartDate.setDate(pf.getStartDate());
+                    foodDEndDate.setDate(pf.getEndDate());
+                } else {
+                    foodDStartDate.setDate(null);
+                    foodDEndDate.setDate(null);
+                }
+                break;
+            }
+            patientDiatDetailsEditables(false);
+        }
+    }//GEN-LAST:event_pfDetailTableMouseClicked
+
+    private void pfSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSearchBtnActionPerformed
+        try {
+            patientFoodSearchResultList = null;
+            patientFoodSearchResultList = new ArrayList(PatientController.getInstance().getPatientFoodDetails(pfsearchField.getText()));
+            if (patientFoodSearchResultList != null) {
+                if (patientFoodSearchResultList.isEmpty()) {
+                    messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_No_Result_Found"), "error");
+                } else {
+                    DefaultTableModel model = (DefaultTableModel) pfDetailTable.getModel();
+                    //Removing all the rows in the jTable
+                    int rowCount = model.getRowCount();
+                    for (int i = rowCount - 1; i >= 0; i--) {
+                        model.removeRow(i);
+                    }
+                    //Removing Combo box items (PID)
+                    int itemCount = foodPIDs.getItemCount();
+                    for (int i = 0; i < itemCount; i++) {
+                        foodPIDs.removeItemAt(0);
+                    }
+
+                    for (PatientFood pf : patientFoodSearchResultList) {
+                        foodPIDs.addItem(String.valueOf(pf.getPatientID()));
+                        model.addRow(new Object[]{pf.getPatientID(), pf.getFirstName(), pf.getLastName(), pf.getDiatType(), pf.getStartDate(), pf.getEndDate()});
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_pfSearchBtnActionPerformed
+
+    private void detailEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailEditBtnActionPerformed
+        patientDetailsEditables(true);
+    }//GEN-LAST:event_detailEditBtnActionPerformed
+
+    private void detailPatientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailPatientTableMouseClicked
+
+        DefaultTableModel model = (DefaultTableModel) detailPatientTable.getModel();
+        int patientID = (int) model.getValueAt(detailPatientTable.getSelectedRow(), 0);
+
+        for (Patient patient : patientSearchResultList) {
+            if (patientID == patient.getPatientID()) {
+                detailPID.setText(String.valueOf(patient.getPatientID()));
+                detailPFirstName.setText(patient.getFirstName());
+                detailPLastName.setText(patient.getLastName());
+                detailPDateofBirth.setDate(patient.getDateofBirth());
+                detailSexCombo.setSelectedItem(patient.getSex());
+                detailPEmail1.setText(patient.getEmail());
+                detailPPhoneNumber.setText(patient.getPhoneNumber());
+                detailPNIC.setText(patient.getNic());
+                detailPAddress.setText(patient.getAddress());
+                detailPCity.setText(patient.getCity());
+                detailPCode.setText(patient.getPzCode());
+                detailPAdditionalInfo.setText(patient.getAdditionalInfo());
+                break;
+            }
+        }
+        patientDetailsEditables(false);
+    }//GEN-LAST:event_detailPatientTableMouseClicked
+
+    private void pDetailsSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pDetailsSearchBtnActionPerformed
+        try {
+            patientSearchResultList = null;
+            patientSearchResultList = new ArrayList(PatientController.getInstance().getPatientDetails(pDetailsSearchText.getText()));
+            if (patientSearchResultList != null) {
+                if (patientSearchResultList.isEmpty()) {
+                    messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_No_Result_Found"), "error");
+                } else {
+                    DefaultTableModel model = (DefaultTableModel) detailPatientTable.getModel();
+                    //Removing all the rows in the jTable
+                    int rowCount = model.getRowCount();
+                    for (int i = rowCount - 1; i >= 0; i--) {
+                        model.removeRow(i);
+                    }
+                    for (Patient patient : patientSearchResultList) {
+                        model.addRow(new Object[]{patient.getPatientID(), patient.getFirstName(), patient.getLastName(), patient.getSex()});
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(ex);
+        }
+    }//GEN-LAST:event_pDetailsSearchBtnActionPerformed
+
+    private void detailsSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsSubmitBtnActionPerformed
+        try {
+            Patient patient = new Patient(
+                detailPID.getText(),
+                detailPFirstName.getText(),
+                detailPLastName.getText(),
+                detailSexCombo.getSelectedItem().toString(),
+                detailPEmail1.getText(),
+                detailPPhoneNumber.getText(),
+                detailPNIC.getText(),
+                detailPAddress.getText(),
+                detailPCity.getText(),
+                detailPCode.getText(),
+                detailPAdditionalInfo.getText(),
+                Validation.convertUtilDateToSqlDate(detailPDateofBirth.getDate())
+            );
+            boolean update = PatientController.getInstance().updatePatient(patient);
+            if (update) {
+                messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Msg_Succesfully_Updated"), "success");
+                patientDetailsEditables(false);
+            }
+        } catch (SQLException e) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error(e);
+        }
+    }//GEN-LAST:event_detailsSubmitBtnActionPerformed
 
     private void signupSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupSubmitBtnActionPerformed
         if (signupRegisterBtnVali != false) {
             try {
                 Patient patient = new Patient(
-                        signupPID.getText(),
-                        signupPFirstName.getText(),
-                        signupPLastName.getText(),
-                        signupPSexCombo.getSelectedItem().toString(),
-                        signupPEmail.getText(),
-                        signupPPhoneNumber.getText(),
-                        signupPNIC.getText(),
-                        signupPAddress.getText(),
-                        signupPCity.getText(),
-                        signupPCode.getText(),
-                        signupPAdditionalInfo.getText(),
-                        Validation.convertUtilDateToSqlDate(signupPDateofBirth.getDate())
+                    signupPID.getText(),
+                    signupPFirstName.getText(),
+                    signupPLastName.getText(),
+                    signupPSexCombo.getSelectedItem().toString(),
+                    signupPEmail.getText(),
+                    signupPPhoneNumber.getText(),
+                    signupPNIC.getText(),
+                    signupPAddress.getText(),
+                    signupPCity.getText(),
+                    signupPCode.getText(),
+                    signupPAdditionalInfo.getText(),
+                    Validation.convertUtilDateToSqlDate(signupPDateofBirth.getDate())
                 );
                 PatientController.getInstance().patientSignUp(patient);
+                messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Msg_Succesfully_Registered"), "success");
+                signupPID.setText(String.valueOf(getLatestPatientID() + 1));
             } catch (SQLException e) {
-                System.out.println("view.PatientManagement.PatientManaging.signupSubmitBtnActionPerformed() error" + e);
+                LOG.error(e);
             }
         } else {
-            System.out.println("Invalide fieldes");
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
+            LOG.error("Validation failed");
         }
-
     }//GEN-LAST:event_signupSubmitBtnActionPerformed
 
-    private void signupPFirstNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPFirstNameCaretUpdate
-        if (!"".equals(signupPFirstName.getText())) {
-            boolean fNameVali = Validation.ContainOnlyLetters(signupPFirstName.getText());
-            if (fNameVali == false) {
-                fNameErrorIcon.setVisible(true);
+    private void signupPNICCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPNICCaretUpdate
+        if (!"".equals(signupPNIC.getText())) {
+            boolean phoneNumberVali = Validation.isAcceptableNIC(signupPNIC.getText());
+            if (phoneNumberVali == false) {
+                nicErrorIcon.setVisible(true);
                 signupRegisterBtnVali = false;
             } else {
-                fNameErrorIcon.setVisible(false);
+                nicErrorIcon.setVisible(false);
                 signupRegisterBtnVali = true;
             }
         }
-    }//GEN-LAST:event_signupPFirstNameCaretUpdate
-
-    private void signupPLastNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPLastNameCaretUpdate
-        if (!"".equals(signupPLastName.getText())) {
-            boolean lNameVali = Validation.ContainOnlyLetters(signupPLastName.getText());
-            if (lNameVali == false) {
-                lNameErrorIcon.setVisible(true);
-                signupRegisterBtnVali = false;
-            } else {
-                lNameErrorIcon.setVisible(false);
-                signupRegisterBtnVali = true;
-            }
-        }
-    }//GEN-LAST:event_signupPLastNameCaretUpdate
+    }//GEN-LAST:event_signupPNICCaretUpdate
 
     private void signupPPhoneNumberCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPPhoneNumberCaretUpdate
         if (!"".equals(signupPPhoneNumber.getText())) {
@@ -799,18 +1081,31 @@ public class PatientManaging extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_signupPPhoneNumberCaretUpdate
 
-    private void signupPNICCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPNICCaretUpdate
-        if (!"".equals(signupPNIC.getText())) {
-            boolean phoneNumberVali = Validation.isAcceptableNIC(signupPNIC.getText());
-            if (phoneNumberVali == false) {
-                nicErrorIcon.setVisible(true);
+    private void signupPLastNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPLastNameCaretUpdate
+        if (!"".equals(signupPLastName.getText())) {
+            boolean lNameVali = Validation.ContainOnlyLetters(signupPLastName.getText());
+            if (lNameVali == false) {
+                lNameErrorIcon.setVisible(true);
                 signupRegisterBtnVali = false;
             } else {
-                nicErrorIcon.setVisible(false);
+                lNameErrorIcon.setVisible(false);
                 signupRegisterBtnVali = true;
             }
         }
-    }//GEN-LAST:event_signupPNICCaretUpdate
+    }//GEN-LAST:event_signupPLastNameCaretUpdate
+
+    private void signupPFirstNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPFirstNameCaretUpdate
+        if (!"".equals(signupPFirstName.getText())) {
+            boolean fNameVali = Validation.ContainOnlyLetters(signupPFirstName.getText());
+            if (fNameVali == false) {
+                fNameErrorIcon.setVisible(true);
+                signupRegisterBtnVali = false;
+            } else {
+                fNameErrorIcon.setVisible(false);
+                signupRegisterBtnVali = true;
+            }
+        }
+    }//GEN-LAST:event_signupPFirstNameCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -849,8 +1144,7 @@ public class PatientManaging extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel assignMedicalCheckupPanel;
-    private javax.swing.JPanel assignOpperationPanel;
+    private javax.swing.JTabbedPane CheckUps;
     private javax.swing.JButton detailEditBtn;
     private javax.swing.JTextArea detailPAdditionalInfo;
     private javax.swing.JTextField detailPAddress;
@@ -869,15 +1163,12 @@ public class PatientManaging extends javax.swing.JFrame {
     private javax.swing.JButton detailsSubmitBtn;
     private javax.swing.JLabel emailErrorIcon;
     private javax.swing.JLabel fNameErrorIcon;
-    private javax.swing.JButton foodAddBtn;
-    private javax.swing.JButton foodChangeBtn;
     private com.toedter.calendar.JDateChooser foodDEndDate;
     private com.toedter.calendar.JDateChooser foodDStartDate;
     private javax.swing.JComboBox<String> foodDiatType;
     private javax.swing.JButton foodEditBtn;
-    private javax.swing.JLabel foodPatientID;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> foodPIDs;
+    private javax.swing.JButton foodUpdateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -886,22 +1177,25 @@ public class PatientManaging extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lNameErrorIcon;
     private javax.swing.JLabel nicErrorIcon;
+    private javax.swing.JButton pDetailsSearchBtn;
+    private javax.swing.JTextField pDetailsSearchText;
     private javax.swing.JPanel patientDetailsPanel;
     private javax.swing.JPanel patientFoodPanel;
     private javax.swing.JLabel patientManagementLbl;
-    private javax.swing.JTabbedPane patientManagementTabPane;
     private javax.swing.JLabel patientSignUpLbl;
     private javax.swing.JLabel patientSignUpLbl1;
     private javax.swing.JLabel patientSignUpLbl2;
     private javax.swing.JPanel patientSignUpPanel;
+    private javax.swing.JTable pfDetailTable;
+    private javax.swing.JButton pfSearchBtn;
+    private javax.swing.JTextField pfsearchField;
     private javax.swing.JLabel phoneNumberErrorIcon;
     private javax.swing.JLabel signupAddressLbl;
     private javax.swing.JLabel signupAddressLbl1;
@@ -931,7 +1225,6 @@ public class PatientManaging extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser signupPDateofBirth;
     private javax.swing.JTextField signupPEmail;
     private javax.swing.JTextField signupPFirstName;
-    private javax.swing.JTextField signupPFirstName1;
     private javax.swing.JLabel signupPID;
     private javax.swing.JTextField signupPLastName;
     private javax.swing.JTextField signupPNIC;

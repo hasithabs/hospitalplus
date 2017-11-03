@@ -22,7 +22,7 @@ public class Config {
     public Logger getLogger(Class className){
         Logger LOG;
         
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
+        PropertyConfigurator.configure(imageIconUtil.PROPERTY_FILE_PATH);
         LOG = Logger.getLogger(className);
         return LOG;
     }
@@ -40,7 +40,7 @@ public class Config {
         Properties prop = new Properties();
 
         try {
-            String propFileName = Util.PROPERTY_FILE_PATH;
+            String propFileName = imageIconUtil.PROPERTY_FILE_PATH;
             inputStream = new FileInputStream(propFileName);
 
             if (inputStream != null) {

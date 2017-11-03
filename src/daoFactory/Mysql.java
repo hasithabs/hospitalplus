@@ -1,10 +1,15 @@
 package daoFactory;
 
-import dao.concrete.MysqlPatientDao;
-import dao.interfaces.PatientDao;
+import dao.concrete.patientConcrete.MysqlServicesDao;
+import dao.concrete.patientConcrete.MysqlPatientDao;
+import dao.interfaces.patientInterfaces.PatientDao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import dao.interfaces.patientInterfaces.ServicesDao;
+import dao.interfaces.patientInterfaces.WardRoundDao;
+import dao.concrete.patientConcrete.MysqlWardRoundDao;
+
 
 /**
  *
@@ -36,4 +41,16 @@ public class Mysql extends DaoFactory {
     public PatientDao getPatientDao() {
         return new MysqlPatientDao();
     }
+
+    @Override
+    public ServicesDao getServiceDao() {
+        return new MysqlServicesDao();
+    }
+
+    @Override
+    public WardRoundDao getWardRoundDao() {
+        return new MysqlWardRoundDao();
+    }
+
+    
 }

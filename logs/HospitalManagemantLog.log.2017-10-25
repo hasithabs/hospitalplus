@@ -1,0 +1,8 @@
+ERROR   2017-10-25 23:22:17,117 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:23:27,377 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:24:03,581 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:34:17,982 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:34:41,701 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:38:35,100 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:40:10,191 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs
+ERROR   2017-10-25 23:42:31,876 [AWT-EventQueue-0] util.DBUtil  - java.sql.SQLException: Can not issue executeUpdate() for SELECTs

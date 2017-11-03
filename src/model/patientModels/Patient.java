@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.patientModels;
 
 import java.sql.Date;
 import java.sql.SQLException;
 
-import dao.interfaces.PatientDao;
+import dao.interfaces.patientInterfaces.PatientDao;
 import daoFactory.DaoFactory;
+import java.awt.List;
 
 /**
  *
@@ -148,7 +149,21 @@ public class Patient {
     public void patientSignUp() throws SQLException {
         patientDAO().insert(this);
     }
+    
+    /**
+     * Method to get Latest PatientID
+     */
+    public static int getLatestPatientID() throws SQLException{
+        return patientDAO().getLatestPatientID();
+    }
 
+    public static java.util.List getPatientDetails(String SearchText) throws SQLException{
+        return patientDAO().getPatientDetails(SearchText);
+    }
+     
+    public static boolean updatePatient(Patient patient) throws SQLException{
+        return patientDAO().updatePatient(patient);
+    }
     private static PatientDao patientDAO() {
         DaoFactory dao = DaoFactory.getDatabase();
         return dao.getPatientDao();

@@ -1,10 +1,6 @@
-ERROR   2017-10-17 00:01:31,628 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:03:06,307 [main] Controller.EmployeeManagement.Employee  - property file 'src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:06:30,383 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\Util\App.properties' not found in the classpath
-ERROR   2017-10-17 00:07:35,974 [main] Controller.EmployeeManagement.Employee  - property file 'C:\Users\kasun\Desktop\Sliit\hospitalplus\src\util\App.properties' not found in the classpath
-ERROR   2017-10-17 23:33:48,035 [main] util.DBUtil  - Invalide XML dataType
-ERROR   2017-10-17 23:37:08,291 [main] util.DBUtil  - Invalide XML dataType
-ERROR   2017-10-17 23:37:08,357 [main] util.DBUtil  - Invalide XML Selection
-ERROR   2017-10-17 23:38:34,898 [main] util.DBUtil  - Invalide XML Selection
-ERROR   2017-10-17 23:40:03,593 [main] util.DBUtil  - Invalide XML Selection
-ERROR   2017-10-17 23:42:12,126 [main] util.DBUtil  - Invalide XML Selection
+ERROR   2017-11-03 07:30:09,920 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:29:45 IST 2017' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 07:30:10,015 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:29:45 IST 2017' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 07:30:10,085 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:29:45 IST 2017' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 07:31:04,700 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:30:55 IST 2017' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 07:34:36,472 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Thu Jan 01 13:34:23 IST 1970' for column 'WardRoundDate' at row 1
+ERROR   2017-11-03 07:37:18,844 [AWT-EventQueue-0] util.DBUtil  - com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'Fri Nov 03 07:37:14 IST 2017' for column 'WardRoundDate' at row 1

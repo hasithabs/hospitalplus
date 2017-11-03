@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import static util.Util.getIcon;
+import static util.imageIconUtil.getIcon;
 
 /**
  *
