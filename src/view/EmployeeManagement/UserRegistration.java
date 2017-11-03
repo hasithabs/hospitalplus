@@ -5,7 +5,7 @@ All the user Registration action done in this class.
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;

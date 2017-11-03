@@ -5,8 +5,8 @@
  */
 package Controller.EmployeeManagement;
 
-import Model.EmployeeManagement.Employee;
-import Model.EmployeeManagement.Leave;
+import model.Employee;
+import model.Leave;
 import java.util.ArrayList;
 import java.util.Map;
 import org.junit.After;

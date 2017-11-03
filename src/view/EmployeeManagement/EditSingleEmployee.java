@@ -1,7 +1,7 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import java.io.IOException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;

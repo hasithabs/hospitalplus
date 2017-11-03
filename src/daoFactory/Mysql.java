@@ -38,14 +38,17 @@ public class Mysql extends DaoFactory {
     private String user;
     private String password;
 
-    public Mysql() throws IOException {
+    public Mysql() {
         
-        url = cnf.getPropertyValue("url");
-        database = cnf.getPropertyValue("database");
-        driver = cnf.getPropertyValue("driver");
-        user = cnf.getPropertyValue("user");
-        password = cnf.getPropertyValue("password");
-        
+        try {
+            url = cnf.getPropertyValue("url");
+            database = cnf.getPropertyValue("database");
+            driver = cnf.getPropertyValue("driver");
+            user = cnf.getPropertyValue("user");
+            password = cnf.getPropertyValue("password");
+        } catch (IOException ex) {
+            LOG.error(ex);
+        }
     }
 
     @Override

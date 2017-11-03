@@ -3,7 +3,7 @@
 */
 package Controller.EmployeeManagement;
 
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import dao.interfaces.EmployeeDao;
 import daoFactory.DaoFactory;
 import java.io.IOException;

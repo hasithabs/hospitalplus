@@ -1,7 +1,7 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

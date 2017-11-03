@@ -1,5 +1,5 @@
 
-package Model.EmployeeManagement;
+package model;
 
 import java.sql.Date;
 

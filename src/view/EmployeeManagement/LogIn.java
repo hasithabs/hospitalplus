@@ -1,7 +1,7 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.Util;

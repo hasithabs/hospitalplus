@@ -1,7 +1,7 @@
 package dao.concrete;
 
-import Model.EmployeeManagement.Employee;
-import Model.EmployeeManagement.Leave;
+import model.Employee;
+import model.Leave;
 import dao.interfaces.LeaveDao;
 import daoFactory.DaoFactory;
 import java.io.IOException;

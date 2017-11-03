@@ -5,7 +5,7 @@
  */
 package dao.interfaces;
 
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

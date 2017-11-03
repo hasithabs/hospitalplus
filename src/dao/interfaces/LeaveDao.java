@@ -5,8 +5,8 @@
  */
 package dao.interfaces;
 
-import Model.EmployeeManagement.Employee;
-import Model.EmployeeManagement.Leave;
+import model.Employee;
+import model.Leave;
 import java.util.ArrayList;
 
 /**

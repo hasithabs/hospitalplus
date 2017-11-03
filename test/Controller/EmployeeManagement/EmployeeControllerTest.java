@@ -5,7 +5,7 @@
  */
 package Controller.EmployeeManagement;
 
-import Model.EmployeeManagement.Employee;
+import model.Employee;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

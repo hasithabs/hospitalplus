@@ -1,8 +1,8 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.LeaveController;
-import Model.EmployeeManagement.Employee;
-import Model.EmployeeManagement.Leave;
+import model.Employee;
+import model.Leave;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;

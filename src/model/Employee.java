@@ -2,7 +2,7 @@
  * This class handles all the operations regarding to the employees 
  * in addition to that this holds all the attributes regarding to the Employees
  */
-package Model.EmployeeManagement;
+package model;
 
 import java.sql.Date;
 

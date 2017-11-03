@@ -2,7 +2,6 @@ package daoFactory;
 
 import dao.interfaces.EmployeeDao;
 import dao.interfaces.LeaveDao;
-import java.io.IOException;
 import java.sql.Connection;
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
@@ -23,7 +22,7 @@ public abstract class DaoFactory {
   public abstract EmployeeDao getEmployeeDao();
   public abstract LeaveDao getLeaveDao();
   
-  public static DaoFactory getDatabase() throws IOException {
+  public static DaoFactory getDatabase() {
       return new Mysql();
   }
 }
