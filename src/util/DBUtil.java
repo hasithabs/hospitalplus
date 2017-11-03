@@ -13,20 +13,22 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 
 /**
  *
  * @author Y4SHVINE
  */
 public class DBUtil {
+    
     public static Logger LOG;
 
     // get xml data 
     public static String getXMLData(String XMLFileType, String dataType, String key) {
+        Config cnf = new Config();
         /*
         <-----Parameters Examples------>
-        XMLFileType   : "EmployeeError" / "EmployeeMsg"
+        XMLFileType   : "EmployeeMsg" / "EmployeeQuery"
         dataType      : "message" / "query"
         key           : "id"
         
@@ -34,8 +36,8 @@ public class DBUtil {
         https://stackoverflow.com/questions/428073/what-is-the-best-simplest-way-to-read-in-an-xml-file-in-java-application
         */
         
-        PropertyConfigurator.configure(Util.PROPERTY_FILE_PATH);
-        LOG = Logger.getLogger(DBUtil.class);
+       
+        LOG =cnf.getLogger(DBUtil.class);
         try {
             if (XMLFileType != null || dataType != null || key != null) {
                 String XMLFilePath ="";
@@ -44,7 +46,7 @@ public class DBUtil {
                 }else if(dataType.equals("query")){
                     XMLFilePath = (Util.QUERY_FILE_PATH.concat(XMLFileType)).concat(".xml");
                 }else{
-                    LOG.error("Invalide XML dataType parameter");
+                    LOG.error("Invalide XML dataType parameter for getXMLData method");
                 }
                 
                 File fXmlFile = new File(XMLFilePath);
@@ -65,11 +67,11 @@ public class DBUtil {
                     }
                 }
             }else{
-                LOG.error("Null Parameters");
+                LOG.error("Null Parameters for getXMLData method");
                 return null;
             }
         } catch (Exception ex) {
-            LOG.error("Invalide Parameters");
+            LOG.error("Invalide Parameters for getXMLData method");
             ex.printStackTrace();
         }
         return null;

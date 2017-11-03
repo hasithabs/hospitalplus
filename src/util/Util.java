@@ -1,6 +1,7 @@
 package util;
 
 import java.awt.Component;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -36,16 +37,26 @@ public class Util {
 
     private static final String IMAGE_PATH = "/view/images/";
 
+    public static final String PASSWORD_DEFAULT_VALUE = "";
+
+    public static final String LEAVE_EMIAL_SUBJECT = "Applying For Leave";
+
     public static final String PROPERTY_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\App.properties";
 
     public static final String QUERY_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\XMLFiles\\Query\\";
 
     public static final String MSG_FILE_PATH = System.getProperty("user.dir") + "\\src\\util\\XMLFiles\\Messages\\";
 
+    public static final String LEAVE_DEFAULT_STATUS = "Pending";
+
     public static ImageIcon getIcon(Class<?> kclass, String icone) {
         return new ImageIcon(kclass.getResource(IMAGE_PATH + icone + ".png"));
     }
 
+    /*
+    *clean all the text in any input field in the Jpanel
+    *pannel-> Jpanel that contain the input fields.
+     */
     public static void Clear(JPanel pannel) {
         if (pannel == null) {
             return;
@@ -58,6 +69,9 @@ public class Util {
             } else if (c instanceof JPasswordField) {
                 JPasswordField p = (JPasswordField) c;
                 p.setText("");
+            } else if (c instanceof JDateChooser) {
+                JDateChooser date = (JDateChooser) c;
+                date.setDate(null);
             } else if (c instanceof JComboBox) {
                 JComboBox cb = (JComboBox) c;
                 if (cb.getItemCount() > 0) {

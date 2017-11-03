@@ -1,5 +1,8 @@
 package daoFactory;
 
+import dao.interfaces.EmployeeDao;
+import dao.interfaces.LeaveDao;
+import java.io.IOException;
 import java.sql.Connection;
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
@@ -17,8 +20,10 @@ public abstract class DaoFactory {
   public abstract DrugCategoryDao getDrugCategoryDao();
   public abstract DrugTypeDao getDrugTypeDao();
   public abstract OrderDao getOrderDao();
+  public abstract EmployeeDao getEmployeeDao();
+  public abstract LeaveDao getLeaveDao();
   
-  public static DaoFactory getDatabase() {
+  public static DaoFactory getDatabase() throws IOException {
       return new Mysql();
   }
 }

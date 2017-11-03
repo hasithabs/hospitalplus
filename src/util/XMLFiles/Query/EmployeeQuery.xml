@@ -6,10 +6,39 @@ and open the template in the editor.
 -->
 
 <root>
-    <query key="test1">
-        <entry>SELECT emp_id, first_name, last_name, salary FROM trn_employee</entry>
+    <query key="Employee_Regiter_Insert">
+        <entry>INSERT INTO Employee (FirstName,LastName,Email,Password) VALUES (?, ?, ?, ?)</entry>
     </query>
-    <query key="test2">
-        <entry>SELECT yash, jaya last_name, salary FROM trn_employee</entry>
+    <query key="Employee_Edit_SelectAll">
+        <entry>SELECT * FROM Employee</entry>
     </query>
+    <query key="Employee_Edit_SelectAllById">
+        <entry>SELECT * FROM Employee WHERE Id IN (?) </entry>
+    </query>
+    <query key="Employee_Single_Update">
+        <entry>UPDATE Employee SET FirstName = ? ,LastName = ? ,Email = ? ,Password = ? ,DOB = ? ,NIC = ? ,Address =? WHERE Id = ? </entry>
+    </query>
+    <query key="Employee_Edit_Update">
+        <entry>UPDATE Employee SET FirstName = ? ,LastName = ? ,Email = ? ,Password = ? ,DOB = ? ,NIC = ? ,Gender = ? ,Possition = ? ,Address =? WHERE Id = ? </entry>
+    </query>
+    <query key="Employee_Delete">
+        <entry>DELETE FROM Employee WHERE Id = ?</entry>
+    </query>
+    
+    <query key="Employee_Basic_Details">
+        <entry>SELECT Id,FirstName,LastName,Email FROM Employee WHERE Id IN (?) </entry>
+    </query>
+    
+    <query key="Leave_allData_ByEmpId">
+        <entry>SELECT * FROM `Leave` WHERE EmpId IN (?)</entry>
+    </query>
+    
+    <query key="Leave_Insert">
+        <entry>INSERT INTO `Leave` (`EmpId`, `Date`, `Description`, `Reporting_Manager`, `Status`) VALUES (?, ?, ?, ?, ?)</entry>
+    </query>
+    
+    <query key="Login_GetData">
+        <entry>SELECT Id,FirstName,Possition FROM Employee WHERE Email =? AND Password= ?</entry>
+    </query>
+    
 </root>
