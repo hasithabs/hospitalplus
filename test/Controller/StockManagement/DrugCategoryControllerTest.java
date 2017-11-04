@@ -39,18 +39,6 @@ public class DrugCategoryControllerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getInstance method, of class DrugCategoryController.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        DrugCategoryController expResult = null;
-        DrugCategoryController result = DrugCategoryController.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of save method, of class DrugCategoryController.
@@ -58,27 +46,11 @@ public class DrugCategoryControllerTest {
     @Test
     public void testSave() throws Exception {
         System.out.println("save");
-        DrugCategoryModel drugCategory = null;
-        DrugCategoryController instance = null;
-        boolean expResult = false;
+        DrugCategoryModel drugCategory = new DrugCategoryModel("test1", "test2");
+        DrugCategoryController instance = DrugCategoryController.getInstance();
+        boolean expResult = true;
         boolean result = instance.save(drugCategory);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of allDrugCategories method, of class DrugCategoryController.
-     */
-    @Test
-    public void testAllDrugCategories() throws Exception {
-        System.out.println("allDrugCategories");
-        DrugCategoryController instance = null;
-        List<DrugCategoryModel> expResult = null;
-        List<DrugCategoryModel> result = instance.allDrugCategories();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,28 +59,11 @@ public class DrugCategoryControllerTest {
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
-        DrugCategoryModel drugCategory = null;
-        DrugCategoryController instance = null;
-        boolean expResult = false;
+        DrugCategoryModel drugCategory = new DrugCategoryModel("test3", "test4");
+        DrugCategoryController instance = DrugCategoryController.getInstance();
+        boolean expResult = true;
         boolean result = instance.update(drugCategory);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of remove method, of class DrugCategoryController.
-     */
-    @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        int id = 0;
-        DrugCategoryController instance = null;
-        boolean expResult = false;
-        boolean result = instance.remove(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
