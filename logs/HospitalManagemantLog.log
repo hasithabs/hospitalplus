@@ -53,3 +53,7 @@ ERROR   2017-11-04 06:46:47,535 [main] dao.concrete.mysqlDrugTypeDao  - com.mysq
 ERROR   2017-11-04 06:46:47,566 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
 ERROR   2017-11-04 06:46:47,626 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
 ERROR   2017-11-04 06:46:47,646 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 09:58:59,070 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 10:05:14,117 [main] util.DBUtil  - com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp.gmail.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect

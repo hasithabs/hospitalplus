@@ -5,6 +5,7 @@
  */
 package Controller.PatientManagement;
 
+import java.util.Date;
 import javax.swing.JComboBox;
 import model.patientModels.ChanelDoctorModel;
 import model.patientModels.Checkup;
@@ -41,43 +42,6 @@ public class ServiceControllerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getInstance method, of class ServiceController.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        ServiceController expResult = null;
-        ServiceController result = ServiceController.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getOperationTypeList method, of class ServiceController.
-     */
-    @Test
-    public void testGetOperationTypeList() {
-        System.out.println("getOperationTypeList");
-        JComboBox jc = null;
-        String PropVal = "";
-        ServiceController.getOperationTypeList(jc, PropVal);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPatientIDList method, of class ServiceController.
-     */
-    @Test
-    public void testGetPatientIDList() throws Exception {
-        System.out.println("getPatientIDList");
-        JComboBox jc = null;
-        ServiceController.getPatientIDList(jc);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of OperationRegistration method, of class ServiceController.
@@ -85,12 +49,11 @@ public class ServiceControllerTest {
     @Test
     public void testOperationRegistration() throws Exception {
         System.out.println("OperationRegistration");
-        Operation op = null;
-        boolean expResult = false;
+        Operation op = new Operation("1", "test", "test", new java.sql.Date(2000,12,3));
+        boolean expResult = true;
         boolean result = ServiceController.OperationRegistration(op);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -99,26 +62,13 @@ public class ServiceControllerTest {
     @Test
     public void testCheckUpAssigning() throws Exception {
         System.out.println("CheckUpAssigning");
-        Checkup cu = null;
-        boolean expResult = false;
+        Checkup cu;
+        cu = new Checkup("1","test checkup",new java.sql.Date(2017,10,12),"info");
+        boolean expResult = true;
         boolean result = ServiceController.CheckUpAssigning(cu);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setKeyValue method, of class ServiceController.
-     */
-    @Test
-    public void testSetKeyValue() throws Exception {
-        System.out.println("setKeyValue");
-        String key = "";
-        String value = "";
-        ServiceController.setKeyValue(key, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of ChannelDoctorService method, of class ServiceController.
@@ -126,12 +76,10 @@ public class ServiceControllerTest {
     @Test
     public void testChannelDoctorService() throws Exception {
         System.out.println("ChannelDoctorService");
-        ChanelDoctorModel cd = null;
-        boolean expResult = false;
+        ChanelDoctorModel cd = new ChanelDoctorModel("test doc", "1", new java.sql.Date(2017,10,12), "morning");
+        boolean expResult = true;
         boolean result = ServiceController.ChannelDoctorService(cd);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
