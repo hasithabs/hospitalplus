@@ -13,13 +13,12 @@ import java.util.List;
 import model.DrugCategoryModel;
 import model.DrugModel;
 import model.DrugTypeModel;
+import model.LogInDetails;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
 import util.Validation;
 import static util.messageAlert.getMessageAlert;
-import view.EmployeeManagement.LogIn;
-import static view.EmployeeManagement.LogIn.UserType;
 import view.layout.MainJFrame;
 
 /**
@@ -432,7 +431,8 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugCategorySelectorItemStateChanged
         validateCategory();
-        if (asiDrugCategorySelector.getSelectedIndex() > 0) {
+        if (asiDrugCategorySelector.getSelectedIndex() > 0 && LogInDetails.getisIsLogin()
+                && LogInDetails.getUserType().equalsIgnoreCase("admin")) {
             asiUpdateRemoveCatBtn.setEnabled(true);
         } else {
             asiUpdateRemoveCatBtn.setEnabled(false);

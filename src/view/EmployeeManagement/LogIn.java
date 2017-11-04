@@ -7,6 +7,7 @@ import model.LogInDetails;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.Util;
+import view.layout.MainJFrame;
 
 public class LogIn extends javax.swing.JFrame {
     
@@ -106,7 +107,8 @@ public class LogIn extends javax.swing.JFrame {
                 LogInDetails.setUserType(empObj.getPossition());
                 LogInDetails.setUserId(empObj.getId());
                 LOG.info(LogInDetails.getUserId()+" | "+LogInDetails.getUserType()+" | "+LogInDetails.getisIsLogin());
-                Main main = new Main();
+                MainJFrame.getInstance().createAndShowGUI();
+                this.dispose();
                
             }
             

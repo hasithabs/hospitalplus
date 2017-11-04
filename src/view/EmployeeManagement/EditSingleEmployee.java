@@ -28,11 +28,6 @@ public class EditSingleEmployee extends javax.swing.JFrame {
             LOG.error(ex, ex);
         }
     }
-
-    private EditSingleEmployee() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
     /*
     *Load data to text fields 
@@ -299,7 +294,8 @@ public class EditSingleEmployee extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditSingleEmployee().setVisible(true); 
+                String id = "0";
+                new EditSingleEmployee(id).setVisible(true); 
             }
         });
     }

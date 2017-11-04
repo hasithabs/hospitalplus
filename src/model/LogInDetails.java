@@ -4,8 +4,8 @@ package model;
 
 public class LogInDetails {
     public static boolean isLogin = false;
-    public static String UserType = null;
-    public static String UserId = null;
+    public static String UserType = "";
+    public static String UserId = "";
 
     public static boolean getisIsLogin() {
         return isLogin;

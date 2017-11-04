@@ -63,3 +63,100 @@ ERROR   2017-11-04 10:05:29,547 [AWT-EventQueue-0] util.DBUtil  - com.sun.mail.u
 ERROR   2017-11-04 10:10:15,715 [AWT-EventQueue-0] util.DBUtil  - com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp.gmail.com, 587; timeout -1;
   nested exception is:
 	java.net.ConnectException: Connection timed out: connect
+INFO    2017-11-04 11:14:40,122 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:15:37,441 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:18:33,193 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:19:33,767 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:20:23,076 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:20:59,280 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:21:21,878 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:23:57,474 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 24 | Admin | true
+INFO    2017-11-04 11:27:01,040 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 24 | Admin | true
+INFO    2017-11-04 11:27:19,613 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - null | null | true
+ERROR   2017-11-04 11:27:20,363 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - Login Fail
+java.lang.NullPointerException
+	at view.layout.MainJFrame.createAndShowGUI(MainJFrame.java:482)
+	at view.EmployeeManagement.LogIn.btnLoginActionPerformed(LogIn.java:110)
+	at view.EmployeeManagement.LogIn.access$000(LogIn.java:12)
+	at view.EmployeeManagement.LogIn$1.actionPerformed(LogIn.java:78)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6535)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6300)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4891)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4713)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2750)
+	at java.awt.Component.dispatchEvent(Component.java:4713)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+INFO    2017-11-04 11:27:59,142 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - null | null | true
+ERROR   2017-11-04 11:27:59,908 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - Login Fail
+java.lang.NullPointerException
+	at view.layout.MainJFrame.createAndShowGUI(MainJFrame.java:482)
+	at view.EmployeeManagement.LogIn.btnLoginActionPerformed(LogIn.java:110)
+	at view.EmployeeManagement.LogIn.access$000(LogIn.java:12)
+	at view.EmployeeManagement.LogIn$1.actionPerformed(LogIn.java:78)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6535)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6300)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4891)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4713)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2750)
+	at java.awt.Component.dispatchEvent(Component.java:4713)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+INFO    2017-11-04 11:28:36,579 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 5 | CEO | true
+INFO    2017-11-04 11:29:05,400 [AWT-EventQueue-0] view.EmployeeManagement.LogIn  - 24 | Admin | true

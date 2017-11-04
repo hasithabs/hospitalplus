@@ -18,10 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import model.LogInDetails;
 import util.Util;
 import view.EmployeeManagement.EditEmployee;
 import view.EmployeeManagement.EditSingleEmployee;
 import view.EmployeeManagement.LeaveManagement;
+import view.EmployeeManagement.LogIn;
 import view.EmployeeManagement.UserRegistration;
 import view.PatientManagement.ChanelDoctor;
 import view.PatientManagement.PatientManaging;
@@ -134,7 +136,7 @@ public class MainJFrame extends JFrame {
         private final JLabel centerImg;
 
         /**
-         * 
+         *
          * @param menuSubBtnArr sub menu button array
          * @param menuBackdrop panel backdrop
          * @param centerPanel frame center JPanel
@@ -205,7 +207,7 @@ public class MainJFrame extends JFrame {
         private final JFrame centerFrame;
 
         /**
-         * 
+         *
          * @param menuSubBtnArr sub menu button array
          * @param menuBackdrop panel backdrop
          * @param centerPanel frame center JPanel
@@ -274,7 +276,7 @@ public class MainJFrame extends JFrame {
         private final JPanel menuBackdrop;
 
         /**
-         * 
+         *
          * @param menuSubBtnArr sub menu button array
          * @param menuBackdrop panel backdrop
          */
@@ -309,6 +311,7 @@ public class MainJFrame extends JFrame {
         }
     }
     public JFrame GuiMainFrame;
+
     /**
      * Create main GUI with menu
      */
@@ -419,7 +422,7 @@ public class MainJFrame extends JFrame {
         guiTopLayer.add(menu1Backdrop);
 
         menuMainIconBtn1.addMouseListener(new menuMainBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        
+
         // Load JFrames to center panel
         PatientManaging patientManagingObj = new PatientManaging();
         menu1SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu1BtnArray, menu1Backdrop, CENTER_Page, patientManagingObj));
@@ -440,7 +443,7 @@ public class MainJFrame extends JFrame {
         guiTopLayer.add(menu2Backdrop);
 
         menuMainIconBtn2.addMouseListener(new menuMainBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        
+
         // Load JFrames to center panel
         DrugList druglistObj = DrugList.getInstance();
         menu2SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, druglistObj));
@@ -465,26 +468,31 @@ public class MainJFrame extends JFrame {
         //menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
         menu3Backdrop.addMouseListener(new menuBackDropAction(SubMenu3BtnArray, menu3Backdrop));
 
-      /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
-        JPanel menu4Backdrop = createSubMenuBackdrop(1710, 155, 160, 110);
+        /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
+        JPanel menu4Backdrop;
+        if (LogInDetails.getUserType().equalsIgnoreCase("admin")) {
+            menu4Backdrop = createSubMenuBackdrop(1710, 155, 210, 110);
+        } else {
+            menu4Backdrop = createSubMenuBackdrop(1710, 155, 160, 110);
+        }
         JButton menu4SubMenuBtn1 = createSubMenuItem("Register", 1720, 155, 140, 50);
         JButton menu4SubMenuBtn2 = createSubMenuItem("Edit Profile", 1720, 205, 140, 50);
         JButton menu4SubMenuBtn3 = createSubMenuItem("Leaves", 1720, 255, 140, 50);
-        JButton menu4SubMenuBtn4 = createSubMenuItem("Edit All", 1720, 255, 140, 50);
-        
-        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2, menu4SubMenuBtn3,menu4SubMenuBtn4};
+        JButton menu4SubMenuBtn4 = createSubMenuItem("Edit All", 1720, 305, 140, 50);
+        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2, menu4SubMenuBtn3, menu4SubMenuBtn4};
 
         guiTopLayer.add(menu4SubMenuBtn1);
         guiTopLayer.add(menu4SubMenuBtn2);
         guiTopLayer.add(menu4SubMenuBtn3);
-        guiTopLayer.add(menu4SubMenuBtn4);
+        if (LogInDetails.getUserType().equalsIgnoreCase("admin")) {
+            guiTopLayer.add(menu4SubMenuBtn4);
+        }
         guiTopLayer.add(menu4Backdrop);
 
         menuMainIconBtn4.addMouseListener(new menuMainBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        
-        String UserID = "5";
-        
+
         // Load JFrames to center panel
+        String UserID = LogInDetails.getUserId();
         UserRegistration userRegistrationObj = new UserRegistration();
         menu4SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
         EditSingleEmployee editsingleEmployee = new EditSingleEmployee(UserID);
@@ -504,7 +512,6 @@ public class MainJFrame extends JFrame {
 //                System.exit(1);
 //            }
 //        });
-
         GuiMainFrame.setTitle("Hospital Plus");
         GuiMainFrame.setVisible(true);
         GuiMainFrame.add(layeredPane);
