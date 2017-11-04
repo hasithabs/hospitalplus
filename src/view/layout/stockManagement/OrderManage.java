@@ -423,11 +423,11 @@ public class OrderManage extends javax.swing.JFrame {
             }
 
             if (orderaddStatus) {
-                getMessageAlert(String.format(getXMLData("StockMsg", "message", "addedMsg"), "Orders"), "success");
+                //getMessageAlert(String.format(getXMLData("StockMsg", "message", "addedMsg"), "Orders"), "success");
                 getPendingOrderInit();
                 setupDrugTable();
             } else {
-                getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
+                //getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
             }
 
             boolean emailStatus = false;

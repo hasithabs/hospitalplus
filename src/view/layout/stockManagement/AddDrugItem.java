@@ -61,10 +61,6 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiDrugTypeVali.setVisible(false);
         asiDrugPriceVali.setVisible(false);
         asiDrugWeightVali.setVisible(false);
-        
-        if (LogIn.UserType.equalsIgnoreCase("admin")) {
-            
-        }
     }
 
     public final void getCategoriesInit() {
@@ -436,7 +432,7 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugCategorySelectorItemStateChanged
         validateCategory();
-        if (asiDrugCategorySelector.getSelectedIndex() > 0 && LogIn.UserType.equalsIgnoreCase("admin")) {
+        if (asiDrugCategorySelector.getSelectedIndex() > 0) {
             asiUpdateRemoveCatBtn.setEnabled(true);
         } else {
             asiUpdateRemoveCatBtn.setEnabled(false);
@@ -445,7 +441,7 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiDrugTypeSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugTypeSelectorItemStateChanged
         validateType();
-        if (asiDrugTypeSelector.getSelectedIndex() > 0 && LogIn.UserType.equalsIgnoreCase("admin")) {
+        if (asiDrugTypeSelector.getSelectedIndex() > 0) {
             asiUpdateRemoveTypeBtn.setEnabled(true);
         } else {
             asiUpdateRemoveTypeBtn.setEnabled(false);

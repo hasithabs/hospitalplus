@@ -427,7 +427,7 @@ public class MainJFrame extends JFrame {
         menu1Backdrop.addMouseListener(new menuBackDropAction(SubMenu1BtnArray, menu1Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 2 ~~~~~~~~~~ */
-        JPanel menu2Backdrop = createSubMenuBackdrop(1330, 155, 160, 110);
+        JPanel menu2Backdrop = createSubMenuBackdrop(1330, 155, 160, 160);
         JButton menu2SubMenuBtn1 = createSubMenuItem("Drug List", 1340, 155, 140, 50);
         JButton menu2SubMenuBtn2 = createSubMenuItem("Add Drug", 1340, 205, 140, 50);
         JButton menu2SubMenuBtn3 = createSubMenuItem("Order Manage", 1340, 255, 140, 50);

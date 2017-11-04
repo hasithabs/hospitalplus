@@ -108,7 +108,6 @@ public class LogIn extends javax.swing.JFrame {
                 UserType= empObj.getPossition();
                 UserId = empObj.getId();
                 LOG.info(isLogin+" | "+UserId+" | "+UserType);
-                new Main();
             }
             
             
