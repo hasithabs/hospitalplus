@@ -5,122 +5,52 @@ ERROR   2017-11-04 04:29:09,059 [main] util.DBUtil  - com.mysql.jdbc.exceptions.
 ERROR   2017-11-04 04:29:09,465 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
 ERROR   2017-11-04 04:40:58,110 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
 ERROR   2017-11-04 04:40:58,490 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:17:07,170 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:17:08,021 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:17:08,244 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:17:08,351 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:17:08,506 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:17:08,587 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:17:08,714 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:17:08,824 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:17:43,861 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:17:44,806 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:17:45,167 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:17:45,385 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:17:45,613 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:17:45,809 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:17:46,018 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:17:46,144 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:20:12,238 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:20:12,784 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:20:12,937 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:20:12,986 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:20:13,104 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:20:13,194 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:20:13,266 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:20:13,319 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:24:20,191 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:24:20,723 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:24:20,873 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:24:20,916 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:24:21,038 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:24:21,115 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:24:21,195 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:24:21,301 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-INFO    2017-11-04 07:25:13,073 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
-ERROR   2017-11-04 07:30:03,073 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:30:03,901 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:30:04,264 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:30:04,331 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:30:04,530 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:30:04,615 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:30:04,798 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:30:04,866 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:30:24,272 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '2017-11-04' for key 'PRIMARY'
-com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '2017-11-04' for key 'PRIMARY'
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
-	at com.mysql.jdbc.Util.getInstance(Util.java:381)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1016)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:957)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3376)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3308)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1837)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:1961)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2543)
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1737)
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2022)
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1940)
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1925)
-	at dao.concrete.MySqlLeaveDao.addLeave(MySqlLeaveDao.java:114)
-	at Controller.EmployeeManagement.LeaveController.insert(LeaveController.java:93)
-	at view.EmployeeManagement.LeaveManagement.btnLeaveRequestActionPerformed(LeaveManagement.java:275)
-	at view.EmployeeManagement.LeaveManagement.access$100(LeaveManagement.java:15)
-	at view.EmployeeManagement.LeaveManagement$3.actionPerformed(LeaveManagement.java:202)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6535)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6300)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4891)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4713)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2750)
-	at java.awt.Component.dispatchEvent(Component.java:4713)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-ERROR   2017-11-04 07:39:02,749 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:39:03,198 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:39:03,339 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:39:03,463 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:39:03,542 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:39:03,625 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:39:03,712 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:39:03,750 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-INFO    2017-11-04 07:39:15,496 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
-ERROR   2017-11-04 07:41:04,510 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:41:05,348 [main] util.DBUtil  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.patient' doesn't exist
-ERROR   2017-11-04 07:41:05,555 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:41:05,649 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-ERROR   2017-11-04 07:41:05,897 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
-ERROR   2017-11-04 07:41:06,014 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
-ERROR   2017-11-04 07:41:06,240 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
-ERROR   2017-11-04 07:41:06,309 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
-INFO    2017-11-04 07:41:20,276 [AWT-EventQueue-0] dao.concrete.MysqlEmployeeDao  - Successfully saved
+ERROR   2017-11-04 06:17:17,473 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:17:17,513 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:17:17,564 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:17:17,595 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:17:17,649 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:17:17,674 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:27:23,091 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:27:23,120 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:27:23,159 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:27:23,187 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:27:23,242 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:27:23,266 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:28:39,175 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:28:39,219 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:28:39,284 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:28:39,310 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:28:39,364 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:28:39,393 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:30:25,755 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:30:25,799 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:30:25,860 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:30:25,891 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:30:25,949 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:30:25,979 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:32:11,102 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:32:11,148 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:32:11,211 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:32:11,237 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:32:11,296 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:32:11,324 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:32:40,662 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:32:40,696 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:32:40,750 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:32:40,791 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:32:40,859 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:32:40,888 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:46:05,727 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:46:05,759 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:46:05,801 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:46:05,830 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:46:05,881 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:46:05,905 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:46:47,451 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:46:47,487 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+ERROR   2017-11-04 06:46:47,535 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_categories' doesn't exist
+ERROR   2017-11-04 06:46:47,566 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drug_types' doesn't exist
+ERROR   2017-11-04 06:46:47,626 [main] dao.concrete.mysqlDrugTypeDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.drugs' doesn't exist
+ERROR   2017-11-04 06:46:47,646 [main] dao.concrete.mysqlOrderDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'hospitalplus.orders' doesn't exist
+
