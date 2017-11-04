@@ -137,7 +137,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -150,7 +149,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
@@ -166,7 +164,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -175,9 +172,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtConfPassword">
-          <Properties>
-            <Property name="opaque" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="890" y="360" width="270" height="30"/>
@@ -185,9 +179,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
-          <Properties>
-            <Property name="opaque" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="290" y="360" width="270" height="30"/>
@@ -197,7 +188,7 @@
         <Component class="javax.swing.JToggleButton" name="btnCancelBotton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="14" style="1"/>
@@ -216,7 +207,7 @@
         <Component class="javax.swing.JToggleButton" name="btnRegister">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="14" style="1"/>

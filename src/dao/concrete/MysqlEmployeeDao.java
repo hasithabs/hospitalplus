@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.DBUtil;
+import static util.DBUtil.getXMLData;
+import static util.messageAlert.getMessageAlert;
 
 /**
  *
@@ -60,10 +62,12 @@ public class MysqlEmployeeDao implements EmployeeDao {
             pstmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
+            //getMessageAlert(getXMLData("EmployeeMsg", "message", "Sucessfully_Save"), "success");
             LOG.info(DBUtil.getXMLData("EmployeeMsg", "message", "Sucessfully_Save"));
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"));
             LOG.error(DBUtil.getXMLData("EmployeeMsg", "message", "Employee_Registration_EmptyFields"), e);
+             //getMessageAlert(getXMLData("StockMsg", "message", "somethingWrong"), "error");
 
         }
 

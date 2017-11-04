@@ -20,21 +20,34 @@ public class LeaveManagement extends javax.swing.JFrame {
     DefaultTableModel model;
     LeaveController leaveContro = new LeaveController();
 
-    String HardCordId = "5";
+    String UserID;
 
-    public LeaveManagement() throws IOException {
+    public LeaveManagement(String ID) {
         initComponents();
 
-        //load data to combobox
-        for (String str : leaveContro.getReportingManagers()) {
-            cmbLeaveReportingManager.addItem(str);
+        UserID = ID;
+
+        try {
+            //load data to table
+            loadBasicData(UserID);
+            showAllLeaveData(UserID);
+
+            //initialize log file
+            LOG = cnf.getLogger(UserRegistration.class);
+
+            //load data to combobox
+            for (String str : leaveContro.getReportingManagers()) {
+                cmbLeaveReportingManager.addItem(str);
+            }
+
+        } catch (IOException ex) {
+            LOG.error(ex, ex);
         }
 
-        loadBasicData(HardCordId);
-        showAllLeaveData(HardCordId);
+    }
 
-        //initialize log file
-        LOG = cnf.getLogger(UserRegistration.class);
+    private LeaveManagement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /*
@@ -245,11 +258,11 @@ public class LeaveManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLeaveClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveClearActionPerformed
-          Util.Clear(LeavePannel);
+        Util.Clear(LeavePannel);
     }//GEN-LAST:event_btnLeaveClearActionPerformed
 
     private void btnLeaveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveRequestActionPerformed
-        
+
         //get details to send database
         Leave leave = new Leave();
         leave.setEmpId(txtLeaveId.getText());
@@ -261,29 +274,27 @@ public class LeaveManagement extends javax.swing.JFrame {
         try {
             leaveContro.insert(leave);
         } catch (IOException ex) {
-            LOG.error("Can not Insert Leave",ex);
+            LOG.error("Can not Insert Leave", ex);
         }
-        
-         showAllLeaveData(HardCordId);
-         Util.Clear(LeavePannel);
-        
         //send email
-//        try {
-//           leaveContro.sendMail(leaveContro.getEmailMap().get(cmbLeaveReportingManager.getSelectedItem().toString()),txtLeaveReason.getText());
-//        } catch (IOException ex) {
-//            LOG.error(ex, ex);
-//        }
+        try {
+            leaveContro.sendMail(leaveContro.getEmailMap().get(cmbLeaveReportingManager.getSelectedItem().toString()), txtLeaveReason.getText());
+            //add data to table
+            showAllLeaveData(UserID);
+            //clear text fields
+            Util.Clear(LeavePannel);
+        } catch (IOException ex) {
+            LOG.error(ex, ex);
+        }
+
+
     }//GEN-LAST:event_btnLeaveRequestActionPerformed
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new LeaveManagement().setVisible(true);
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(LeaveManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new LeaveManagement().setVisible(true);
             }
         });
     }

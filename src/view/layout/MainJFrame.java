@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import util.Util;
 import view.EmployeeManagement.EditEmployee;
+import view.EmployeeManagement.EditSingleEmployee;
 import view.EmployeeManagement.LeaveManagement;
 import view.EmployeeManagement.UserRegistration;
 import view.PatientManagement.ChanelDoctor;
@@ -453,26 +454,34 @@ public class MainJFrame extends JFrame {
         //menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
         menu3Backdrop.addMouseListener(new menuBackDropAction(SubMenu3BtnArray, menu3Backdrop));
 
-        /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
+      /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */
         JPanel menu4Backdrop = createSubMenuBackdrop(1710, 155, 160, 110);
         JButton menu4SubMenuBtn1 = createSubMenuItem("Register", 1720, 155, 140, 50);
-        JButton menu4SubMenuBtn2 = createSubMenuItem("User Manage", 1720, 205, 140, 50);
-        JButton menu4SubMenuBtn3 = createSubMenuItem("Leave Handling", 1720, 255, 140, 50);
-        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2, menu4SubMenuBtn3};
+        JButton menu4SubMenuBtn2 = createSubMenuItem("Edit Profile", 1720, 205, 140, 50);
+        JButton menu4SubMenuBtn3 = createSubMenuItem("Leaves", 1720, 255, 140, 50);
+        JButton menu4SubMenuBtn4 = createSubMenuItem("Edit All", 1720, 255, 140, 50);
+        
+        JButton[] SubMenu4BtnArray = new JButton[]{menu4SubMenuBtn1, menu4SubMenuBtn2, menu4SubMenuBtn3,menu4SubMenuBtn4};
 
         guiTopLayer.add(menu4SubMenuBtn1);
         guiTopLayer.add(menu4SubMenuBtn2);
+        guiTopLayer.add(menu4SubMenuBtn3);
+        guiTopLayer.add(menu4SubMenuBtn4);
         guiTopLayer.add(menu4Backdrop);
 
         menuMainIconBtn4.addMouseListener(new menuMainBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, CENTER_PAGE_IMG));
         
+        String UserID = "5";
+        
         // Load JFrames to center panel
         UserRegistration userRegistrationObj = new UserRegistration();
         menu4SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
-        //EditEmployee editEmployee = new EditEmployee();
-        menu4SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
-        //LeaveManagement leaveManagement = new LeaveManagement();
-        menu4SubMenuBtn3.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, userRegistrationObj));
+        EditSingleEmployee editsingleEmployee = new EditSingleEmployee(UserID);
+        menu4SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, editsingleEmployee));
+        LeaveManagement leaveManagement = new LeaveManagement(UserID);
+        menu4SubMenuBtn3.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, leaveManagement));
+        EditEmployee admiEdit = new EditEmployee();
+        menu4SubMenuBtn4.addMouseListener(new menuSubBtnAction(SubMenu4BtnArray, menu4Backdrop, CENTER_Page, admiEdit));
         menu4Backdrop.addMouseListener(new menuBackDropAction(SubMenu4BtnArray, menu4Backdrop));
 
 //        logout_btn.setBounds((int) (screenH_ratio * 1750), (int) (screenH_ratio * 980), (int) (screenH_ratio * 100), (int) (screenH_ratio * 30));
