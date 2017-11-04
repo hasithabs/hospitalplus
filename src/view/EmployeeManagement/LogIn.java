@@ -1,18 +1,16 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
+import main.Main;
 import model.Employee;
+import model.LogInDetails;
 import org.apache.log4j.Logger;
 import util.Config;
 import util.Util;
 
 public class LogIn extends javax.swing.JFrame {
     
-    /*****LogIn Variables*****/
-    public static boolean isLogin = false;
-    public static String UserType = null;
-    public static String UserId = null;
-    /************************/
+   
     
     Config cnf = new Config();
     public Logger LOG;
@@ -103,11 +101,13 @@ public class LogIn extends javax.swing.JFrame {
             
             if(empContro.isLog(txtLogInUserName.getText(), new String(pswLoginPassword.getPassword()))){
                 empObj=empContro.logIn(txtLogInUserName.getText(), new String(pswLoginPassword.getPassword()));
-                isLogin=true;
-                UserType= empObj.getPossition();
-                UserId = empObj.getId();
-                LOG.info(isLogin+" | "+UserId+" | "+UserType);
-              
+                
+                LogInDetails.setIsLogin(true);
+                LogInDetails.setUserType(empObj.getPossition());
+                LogInDetails.setUserId(empObj.getId());
+                LOG.info(LogInDetails.getUserId()+" | "+LogInDetails.getUserType()+" | "+LogInDetails.getisIsLogin());
+                Main main = new Main();
+               
             }
             
             
