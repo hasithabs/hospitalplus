@@ -5,8 +5,6 @@
  */
 package Controller.PatientManagement;
 
-import java.util.Date;
-import javax.swing.JComboBox;
 import model.patientModels.ChanelDoctorModel;
 import model.patientModels.Checkup;
 import model.patientModels.Operation;
