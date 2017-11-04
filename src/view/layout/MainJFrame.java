@@ -350,12 +350,12 @@ public class MainJFrame extends JFrame {
         menu.add(menuItemPanel2);
 
         JPanel menuItemPanel3 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
-        JButton menuMainIconBtn3 = createMenuItemButton("common/menu_1", menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn3 = createMenuItemButton("common/menu_3", menuBtnWidth, menuBtnHeight);
         menuItemPanel3.add(menuMainIconBtn3);
         menu.add(menuItemPanel3);
 
         JPanel menuItemPanel4 = createMenuItemPanel(menuBtnWidth, menuBtnHeight);
-        JButton menuMainIconBtn4 = createMenuItemButton("common/menu_2", menuBtnWidth, menuBtnHeight);
+        JButton menuMainIconBtn4 = createMenuItemButton("common/menu_4", menuBtnWidth, menuBtnHeight);
         menuItemPanel4.add(menuMainIconBtn4);
         menu.add(menuItemPanel4);
 
