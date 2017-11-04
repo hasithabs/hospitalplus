@@ -23,22 +23,25 @@ public class EditEmployee extends javax.swing.JFrame {
     int selectedIndex;
     EmployeeController empCnt = new EmployeeController();
 
-    public EditEmployee() throws IOException, ParseException {       
+    public EditEmployee() {       
         initComponents();
-        showUser(empCnt.getAllRegistedEmployeeData());
+        try {
+            //load table data
+            showUser(empCnt.getAllRegistedEmployeeData());
 
-        //initialize log file
-        LOG = cnf.getLogger(UserRegistration.class);
+            //load drop down data
+            for (String str : empCnt.getPosiition()) {
+                cmbEditPossition.addItem(str);
+            }
+            //initialize log file
+            LOG = cnf.getLogger(UserRegistration.class);
 
-        //give initial forcus to ID field
-        txtEditID.requestFocus();
-
-        //load data to combobox
-        for (String str : empCnt.getPosiition()) {
-            cmbEditPossition.addItem(str);
+            //give initial forcus to ID field
+            txtEditID.requestFocus();
+            
+        } catch (IOException ex) {
+            LOG.error(ex, ex);
         }
-
-       
    
     }
 
@@ -460,13 +463,7 @@ public class EditEmployee extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new EditEmployee().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(EditEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
-                    Logger.getLogger(EditEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new EditEmployee().setVisible(true);
             }
         });
     }

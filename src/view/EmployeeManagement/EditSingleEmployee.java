@@ -3,7 +3,6 @@ package view.EmployeeManagement;
 import Controller.EmployeeManagement.EmployeeController;
 import model.Employee;
 import java.io.IOException;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import util.Config;
 
@@ -14,12 +13,24 @@ public class EditSingleEmployee extends javax.swing.JFrame {
     public Logger LOG;
 
     EmployeeController empCnt = new EmployeeController();
-    String hardcodeID = "5";
-    String Pass = "";
-    public EditSingleEmployee() throws IOException{
+    String UserID;
+    String Pass;
+
+    public EditSingleEmployee(String ID) {
         initComponents();
-                
-        loadData(hardcodeID);
+        
+        UserID = ID;
+        
+        try {
+            //lord data to from ID
+            loadData(UserID);
+        } catch (IOException ex) {
+            LOG.error(ex, ex);
+        }
+    }
+
+    private EditSingleEmployee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
@@ -239,7 +250,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
 
     private void btnUserEditClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserEditClearActionPerformed
         try {
-            loadData(hardcodeID);
+            loadData(UserID);
         } catch (IOException ex) {
            LOG.error(ex, ex);
         }
@@ -274,7 +285,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
 
         try {
             empCnt.updateSingleUser(emp);
-            loadData(hardcodeID);
+            loadData(UserID);
 
         } catch (IOException e) {
             LOG.error("Cannot Update this Employee", e);
@@ -288,11 +299,7 @@ public class EditSingleEmployee extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new EditSingleEmployee().setVisible(true);
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(EditSingleEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                new EditSingleEmployee().setVisible(true); 
             }
         });
     }

@@ -85,30 +85,23 @@ public class UserRegistration extends javax.swing.JFrame {
         jLabel6.setBounds(80, 350, 180, 50);
 
         txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        txtFirstName.setOpaque(false);
         RegistrationPannel.add(txtFirstName);
         txtFirstName.setBounds(290, 160, 270, 30);
 
         txtEmail.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        txtEmail.setOpaque(false);
         RegistrationPannel.add(txtEmail);
         txtEmail.setBounds(290, 260, 270, 30);
         txtEmail.getAccessibleContext().setAccessibleName("");
 
         txtLastName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        txtLastName.setOpaque(false);
         RegistrationPannel.add(txtLastName);
         txtLastName.setBounds(890, 160, 270, 30);
-
-        txtConfPassword.setOpaque(false);
         RegistrationPannel.add(txtConfPassword);
         txtConfPassword.setBounds(890, 360, 270, 30);
-
-        txtPassword.setOpaque(false);
         RegistrationPannel.add(txtPassword);
         txtPassword.setBounds(290, 360, 270, 30);
 
-        btnCancelBotton.setBackground(new java.awt.Color(102, 102, 102));
+        btnCancelBotton.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelBotton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnCancelBotton.setText("Cancel");
         btnCancelBotton.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +112,7 @@ public class UserRegistration extends javax.swing.JFrame {
         RegistrationPannel.add(btnCancelBotton);
         btnCancelBotton.setBounds(840, 450, 120, 30);
 
-        btnRegister.setBackground(new java.awt.Color(102, 102, 102));
+        btnRegister.setBackground(new java.awt.Color(204, 204, 204));
         btnRegister.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
