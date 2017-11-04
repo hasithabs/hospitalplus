@@ -13,6 +13,7 @@ import util.Config;
 import static util.DBUtil.getXMLData;
 import static util.Util.getScreenSizrRatio;
 import static util.messageAlert.getMessageAlert;
+import view.layout.MainJFrame;
 
 /**
  *
@@ -86,7 +87,7 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        UpdateRemoveDrugCategoryPanel.setBackground(new java.awt.Color(0, 0, 0));
+        UpdateRemoveDrugCategoryPanel.setBackground(new java.awt.Color(102, 102, 102));
         UpdateRemoveDrugCategoryPanel.setMaximumSize(new java.awt.Dimension(800, 400));
         UpdateRemoveDrugCategoryPanel.setMinimumSize(new java.awt.Dimension(800, 400));
         UpdateRemoveDrugCategoryPanel.setPreferredSize(new java.awt.Dimension(800, 400));
@@ -121,7 +122,7 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
             }
         });
         UpdateRemoveDrugCategoryPanel.add(urdcCloseBtn);
-        urdcCloseBtn.setBounds(740, 10, 40, 40);
+        urdcCloseBtn.setBounds(740, 10, 50, 40);
         UpdateRemoveDrugCategoryPanel.add(urdcDrugCatNameInput);
         urdcDrugCatNameInput.setBounds(310, 140, 300, 30);
 
@@ -194,8 +195,8 @@ public class UpdateRemoveDrugCategory extends javax.swing.JFrame {
     }//GEN-LAST:event_urdcRemoveBtnActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        AddDrugItem.getInstance().setEnabled(true);
-        AddDrugItem.getInstance().toFront();
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(true);
+        MainJFrame.getInstance().GuiMainFrame.toFront();
     }//GEN-LAST:event_formWindowClosed
 
     /**

@@ -34,8 +34,7 @@ import view.layout.stockManagement.OrderManage;
  */
 public class MainJFrame extends JFrame {
 
-    public MainJFrame() {
-    }
+    private static MainJFrame self;
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int ScreenW = (int) screenSize.getWidth();
@@ -45,6 +44,18 @@ public class MainJFrame extends JFrame {
 
     int menuBtnWidth = 140;
     int menuBtnHeight = 140;
+
+    public MainJFrame() {
+        self = this;
+    }
+
+    public static MainJFrame getInstance() {
+        if (self == null) {
+            self = new MainJFrame();
+        }
+
+        return self;
+    }
 
     /**
      * Create Main Menu Item JPanel
@@ -296,12 +307,12 @@ public class MainJFrame extends JFrame {
         public void mouseEntered(MouseEvent e) {
         }
     }
-
+    public JFrame GuiMainFrame;
     /**
      * Create main GUI with menu
      */
     public void createAndShowGUI() {
-        JFrame GuiMainFrame = new JFrame();
+        GuiMainFrame = new JFrame();
         GuiMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLayeredPane layeredPane = new JLayeredPane();
@@ -430,11 +441,11 @@ public class MainJFrame extends JFrame {
         menuMainIconBtn2.addMouseListener(new menuMainBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, CENTER_PAGE_IMG));
         
         // Load JFrames to center panel
-        DrugList druglistObj = new DrugList();
+        DrugList druglistObj = DrugList.getInstance();
         menu2SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, druglistObj));
-        AddDrugItem addDrugItemObj = new AddDrugItem();
+        AddDrugItem addDrugItemObj = AddDrugItem.getInstance();
         menu2SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, addDrugItemObj));
-        OrderManage orderManageObj = new OrderManage();
+        OrderManage orderManageObj = OrderManage.getInstance();
         menu2SubMenuBtn3.addMouseListener(new menuSubBtnAction(SubMenu2BtnArray, menu2Backdrop, CENTER_Page, orderManageObj));
 
         menu2Backdrop.addMouseListener(new menuBackDropAction(SubMenu2BtnArray, menu2Backdrop));

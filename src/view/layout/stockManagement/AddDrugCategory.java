@@ -13,6 +13,7 @@ import util.Config;
 import static util.DBUtil.getXMLData;
 import static util.Util.getScreenSizrRatio;
 import static util.messageAlert.getMessageAlert;
+import view.layout.MainJFrame;
 
 /**
  *
@@ -83,7 +84,7 @@ public class AddDrugCategory extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        AddDrugCategoryPanel.setBackground(new java.awt.Color(0, 0, 0));
+        AddDrugCategoryPanel.setBackground(new java.awt.Color(102, 102, 102));
         AddDrugCategoryPanel.setMaximumSize(new java.awt.Dimension(800, 400));
         AddDrugCategoryPanel.setMinimumSize(new java.awt.Dimension(800, 400));
         AddDrugCategoryPanel.setPreferredSize(new java.awt.Dimension(800, 400));
@@ -118,7 +119,7 @@ public class AddDrugCategory extends javax.swing.JFrame {
             }
         });
         AddDrugCategoryPanel.add(adcCloseBtn);
-        adcCloseBtn.setBounds(740, 10, 40, 40);
+        adcCloseBtn.setBounds(740, 10, 50, 40);
         AddDrugCategoryPanel.add(adcDrugCatNameInput);
         adcDrugCatNameInput.setBounds(310, 140, 300, 30);
 
@@ -160,8 +161,8 @@ public class AddDrugCategory extends javax.swing.JFrame {
     }//GEN-LAST:event_adcCloseBtnActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        AddDrugItem.getInstance().setEnabled(true);
-        AddDrugItem.getInstance().toFront();
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(true);
+        MainJFrame.getInstance().GuiMainFrame.toFront();
     }//GEN-LAST:event_formWindowClosed
 
     /**

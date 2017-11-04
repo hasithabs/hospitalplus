@@ -1,6 +1,7 @@
 package view.EmployeeManagement;
 
 import Controller.EmployeeManagement.EmployeeController;
+import main.Main;
 import model.Employee;
 import org.apache.log4j.Logger;
 import util.Config;
@@ -107,7 +108,7 @@ public class LogIn extends javax.swing.JFrame {
                 UserType= empObj.getPossition();
                 UserId = empObj.getId();
                 LOG.info(isLogin+" | "+UserId+" | "+UserType);
-              
+                new Main();
             }
             
             

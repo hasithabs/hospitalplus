@@ -26,6 +26,7 @@ import util.Config;
 import static util.DBUtil.getXMLData;
 import util.Util;
 import static util.messageAlert.getMessageAlert;
+import view.layout.MainJFrame;
 
 /**
  *
@@ -160,9 +161,6 @@ public class DrugList extends javax.swing.JFrame {
         dlDrugTable = new javax.swing.JTable();
         dlSearchLabel = new javax.swing.JLabel();
         dlSearchInput = new javax.swing.JTextField();
-        dlSearchTypeCheckbox = new javax.swing.JCheckBox();
-        dlSearchNameCheckbox = new javax.swing.JCheckBox();
-        dlSearchCategoryCheckbox = new javax.swing.JCheckBox();
         dlUpdateSelectedBtn = new javax.swing.JButton();
         dlDeleteSelectedBtn = new javax.swing.JButton();
 
@@ -246,27 +244,6 @@ public class DrugList extends javax.swing.JFrame {
         DrugListPanel.add(dlSearchInput);
         dlSearchInput.setBounds(160, 120, 300, 30);
 
-        dlSearchTypeCheckbox.setBackground(new java.awt.Color(0, 0, 0));
-        dlSearchTypeCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        dlSearchTypeCheckbox.setForeground(new java.awt.Color(255, 255, 255));
-        dlSearchTypeCheckbox.setText("Type");
-        DrugListPanel.add(dlSearchTypeCheckbox);
-        dlSearchTypeCheckbox.setBounds(700, 120, 90, 30);
-
-        dlSearchNameCheckbox.setBackground(new java.awt.Color(0, 0, 0));
-        dlSearchNameCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        dlSearchNameCheckbox.setForeground(new java.awt.Color(255, 255, 255));
-        dlSearchNameCheckbox.setText("Name");
-        DrugListPanel.add(dlSearchNameCheckbox);
-        dlSearchNameCheckbox.setBounds(500, 120, 80, 30);
-
-        dlSearchCategoryCheckbox.setBackground(new java.awt.Color(0, 0, 0));
-        dlSearchCategoryCheckbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        dlSearchCategoryCheckbox.setForeground(new java.awt.Color(255, 255, 255));
-        dlSearchCategoryCheckbox.setText("Category");
-        DrugListPanel.add(dlSearchCategoryCheckbox);
-        dlSearchCategoryCheckbox.setBounds(590, 120, 90, 30);
-
         dlUpdateSelectedBtn.setText("Update");
         dlUpdateSelectedBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +302,7 @@ public class DrugList extends javax.swing.JFrame {
         selectedDrug.setId(Integer.parseInt(dlDrugTable.getValueAt(dlDrugTable.getSelectedRow(), 0).toString()));
 
         new UpdateDrugItem(selectedDrug).setVisible(true);
-        this.setEnabled(false);
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(false);
     }//GEN-LAST:event_dlUpdateSelectedBtnActionPerformed
 
     private void dlSearchInputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_dlSearchInputCaretUpdate
@@ -374,11 +351,8 @@ public class DrugList extends javax.swing.JFrame {
     private javax.swing.JPanel DrugListPanel;
     private javax.swing.JButton dlDeleteSelectedBtn;
     private javax.swing.JTable dlDrugTable;
-    private javax.swing.JCheckBox dlSearchCategoryCheckbox;
     private javax.swing.JTextField dlSearchInput;
     private javax.swing.JLabel dlSearchLabel;
-    private javax.swing.JCheckBox dlSearchNameCheckbox;
-    private javax.swing.JCheckBox dlSearchTypeCheckbox;
     private javax.swing.JLabel dlTitleLabel;
     private javax.swing.JButton dlUpdateSelectedBtn;
     private javax.swing.JScrollPane jScrollPane1;

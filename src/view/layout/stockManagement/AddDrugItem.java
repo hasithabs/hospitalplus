@@ -18,6 +18,9 @@ import util.Config;
 import static util.DBUtil.getXMLData;
 import util.Validation;
 import static util.messageAlert.getMessageAlert;
+import view.EmployeeManagement.LogIn;
+import static view.EmployeeManagement.LogIn.UserType;
+import view.layout.MainJFrame;
 
 /**
  *
@@ -58,6 +61,10 @@ public class AddDrugItem extends javax.swing.JFrame {
         asiDrugTypeVali.setVisible(false);
         asiDrugPriceVali.setVisible(false);
         asiDrugWeightVali.setVisible(false);
+        
+        if (LogIn.UserType.equalsIgnoreCase("admin")) {
+            
+        }
     }
 
     public final void getCategoriesInit() {
@@ -416,18 +423,20 @@ public class AddDrugItem extends javax.swing.JFrame {
     }//GEN-LAST:event_asiDrugPriceInputCaretUpdate
 
     private void asiAddCatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiAddCatBtnActionPerformed
-        new AddDrugCategory().setVisible(true);
-        this.setEnabled(false);
+        AddDrugCategory.getInstance().setVisible(true);
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(false);
+        //this.setEnabled(false);
     }//GEN-LAST:event_asiAddCatBtnActionPerformed
 
     private void asiAddTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiAddTypeBtnActionPerformed
         new AddDrugType().setVisible(true);
-        this.setEnabled(false);
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(false);
+        //this.setEnabled(false);
     }//GEN-LAST:event_asiAddTypeBtnActionPerformed
 
     private void asiDrugCategorySelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugCategorySelectorItemStateChanged
         validateCategory();
-        if (asiDrugCategorySelector.getSelectedIndex() > 0) {
+        if (asiDrugCategorySelector.getSelectedIndex() > 0 && LogIn.UserType.equalsIgnoreCase("admin")) {
             asiUpdateRemoveCatBtn.setEnabled(true);
         } else {
             asiUpdateRemoveCatBtn.setEnabled(false);
@@ -436,7 +445,7 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiDrugTypeSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_asiDrugTypeSelectorItemStateChanged
         validateType();
-        if (asiDrugTypeSelector.getSelectedIndex() > 0) {
+        if (asiDrugTypeSelector.getSelectedIndex() > 0 && LogIn.UserType.equalsIgnoreCase("admin")) {
             asiUpdateRemoveTypeBtn.setEnabled(true);
         } else {
             asiUpdateRemoveTypeBtn.setEnabled(false);
@@ -449,12 +458,12 @@ public class AddDrugItem extends javax.swing.JFrame {
 
     private void asiUpdateRemoveCatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiUpdateRemoveCatBtnActionPerformed
         new UpdateRemoveDrugCategory((DrugCategoryModel) asiDrugCategorySelector.getSelectedItem()).setVisible(true);
-        this.setEnabled(false);
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(false);
     }//GEN-LAST:event_asiUpdateRemoveCatBtnActionPerformed
 
     private void asiUpdateRemoveTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asiUpdateRemoveTypeBtnActionPerformed
         new UpdateRemoveDrugType((DrugTypeModel) asiDrugTypeSelector.getSelectedItem()).setVisible(true);
-        this.setEnabled(false);
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(false);
     }//GEN-LAST:event_asiUpdateRemoveTypeBtnActionPerformed
 
     /**

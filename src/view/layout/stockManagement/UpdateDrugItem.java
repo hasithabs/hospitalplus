@@ -16,8 +16,10 @@ import model.DrugTypeModel;
 import org.apache.log4j.Logger;
 import util.Config;
 import static util.DBUtil.getXMLData;
+import static util.Util.getScreenSizrRatio;
 import util.Validation;
 import static util.messageAlert.getMessageAlert;
+import view.layout.MainJFrame;
 
 /**
  *
@@ -26,6 +28,9 @@ import static util.messageAlert.getMessageAlert;
 public class UpdateDrugItem extends javax.swing.JFrame {
 
     private static UpdateDrugItem self;
+    
+    static int ScreenW = (int) getScreenSizrRatio()[0];
+    static int ScreenH = (int) getScreenSizrRatio()[1];
 
     Config cnf = new Config();
     public Logger LOG;
@@ -37,6 +42,9 @@ public class UpdateDrugItem extends javax.swing.JFrame {
     public UpdateDrugItem(DrugModel drug) {
         initComponents();
         self = this;
+     
+        this.setLocation((ScreenW - this.getWidth()) / 2,
+                (ScreenH - this.getHeight()) / 2);
 
         //initialize log file
         LOG = cnf.getLogger(UpdateDrugItem.class);
@@ -204,10 +212,12 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         udiDrugTypeVali = new javax.swing.JLabel();
         udiDrugPriceVali = new javax.swing.JLabel();
         udiDrugWeightVali = new javax.swing.JLabel();
+        urdcCloseBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(1765, 770));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -215,7 +225,7 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        UpdateDrugItemPanel.setBackground(new java.awt.Color(0, 0, 0));
+        UpdateDrugItemPanel.setBackground(new java.awt.Color(102, 102, 102));
         UpdateDrugItemPanel.setMaximumSize(new java.awt.Dimension(1765, 770));
         UpdateDrugItemPanel.setMinimumSize(new java.awt.Dimension(1765, 770));
         UpdateDrugItemPanel.setLayout(null);
@@ -358,6 +368,15 @@ public class UpdateDrugItem extends javax.swing.JFrame {
         UpdateDrugItemPanel.add(udiDrugWeightVali);
         udiDrugWeightVali.setBounds(1640, 380, 30, 30);
 
+        urdcCloseBtn.setText("X");
+        urdcCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urdcCloseBtnActionPerformed(evt);
+            }
+        });
+        UpdateDrugItemPanel.add(urdcCloseBtn);
+        urdcCloseBtn.setBounds(1700, 20, 50, 40);
+
         getContentPane().add(UpdateDrugItemPanel);
         UpdateDrugItemPanel.setBounds(0, 0, 1765, 770);
 
@@ -415,9 +434,13 @@ public class UpdateDrugItem extends javax.swing.JFrame {
     }//GEN-LAST:event_udiDrugWeightInputCaretUpdate
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        DrugList.getInstance().setEnabled(true);
-        DrugList.getInstance().toFront();
+        MainJFrame.getInstance().GuiMainFrame.setEnabled(true);
+        MainJFrame.getInstance().GuiMainFrame.toFront();
     }//GEN-LAST:event_formWindowClosed
+
+    private void urdcCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urdcCloseBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_urdcCloseBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,5 +505,6 @@ public class UpdateDrugItem extends javax.swing.JFrame {
     private javax.swing.JButton udiResetBtn;
     private javax.swing.JLabel udiTitleLabel;
     private javax.swing.JButton udiUpdateBtn;
+    private javax.swing.JButton urdcCloseBtn;
     // End of variables declaration//GEN-END:variables
 }

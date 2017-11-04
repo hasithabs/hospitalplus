@@ -143,27 +143,6 @@ public class Util {
 
         tblRowSorter.setRowFilter(RowFilter.regexFilter(SerchingWord));
     }
-//
-//    /**
-//     *
-//     * @param tbl JTable
-//     * @param SerchingWord Searching letters
-//     * @param columns Search Columns
-//     */
-//    public static void filterMultipleColumnFromJTable(JTable tbl, String SerchingWord, int[] columns) {
-//        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
-//
-//        List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
-//        filters.add(RowFilter.regexFilter(SerchingWord, 1));
-//        filters.add(RowFilter.regexFilter(SerchingWord, 2));
-//        filters.add(RowFilter.regexFilter(SerchingWord, 3));
-//
-//        TableRowSorter<DefaultTableModel> tblRowSorter = new TableRowSorter<>(model);
-//        tbl.setRowSorter(tblRowSorter);
-//        
-//        tblRowSorter.setRowFilter(filters);
-//
-//    }
 
     /*
     *Can send Mail by using mail address and password mension in the App.property file
