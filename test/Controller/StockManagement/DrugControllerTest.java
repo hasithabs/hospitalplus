@@ -39,18 +39,7 @@ public class DrugControllerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getInstance method, of class DrugController.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        DrugController expResult = null;
-        DrugController result = DrugController.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of save method, of class DrugController.
@@ -63,8 +52,7 @@ public class DrugControllerTest {
         boolean expResult = false;
         boolean result = instance.save(drug);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -88,7 +76,7 @@ public class DrugControllerTest {
     public void testUpdate() throws Exception {
         System.out.println("update");
         DrugModel drug = null;
-        DrugController instance = null;
+        DrugController instance = DrugController.getInstance();
         boolean expResult = false;
         boolean result = instance.update(drug);
         assertEquals(expResult, result);
@@ -102,8 +90,8 @@ public class DrugControllerTest {
     @Test
     public void testRemove() throws Exception {
         System.out.println("remove");
-        int id = 0;
-        DrugController instance = null;
+        int id = 2;
+        DrugController instance = DrugController.getInstance();
         instance.remove(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
