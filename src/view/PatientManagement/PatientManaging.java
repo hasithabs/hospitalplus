@@ -6,11 +6,13 @@
 package view.PatientManagement;
 
 import Controller.PatientManagement.PatientController;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.patientModels.Patient;
 import model.patientModels.PatientFood;
@@ -56,6 +58,7 @@ public class PatientManaging extends javax.swing.JFrame {
     boolean signupRegisterBtnVali = false;
     private List<Patient> patientSearchResultList;
     private List<PatientFood> patientFoodSearchResultList;
+    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     //private Date d1 = new Date();
 
     private int getLatestPatientID() {
@@ -876,16 +879,31 @@ public class PatientManaging extends javax.swing.JFrame {
 
         newServiceBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         newServiceBtn.setText("Add New Service");
+        newServiceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newServiceBtnActionPerformed(evt);
+            }
+        });
         jPanel2.add(newServiceBtn);
         newServiceBtn.setBounds(690, 460, 400, 70);
 
         CheckUpBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         CheckUpBtn.setText("CheckUp Service");
+        CheckUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckUpBtnActionPerformed(evt);
+            }
+        });
         jPanel2.add(CheckUpBtn);
         CheckUpBtn.setBounds(690, 150, 400, 70);
 
         OperationBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         OperationBtn.setText("Operation Service");
+        OperationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OperationBtnActionPerformed(evt);
+            }
+        });
         jPanel2.add(OperationBtn);
         OperationBtn.setBounds(690, 300, 400, 70);
 
@@ -1157,7 +1175,7 @@ public class PatientManaging extends javax.swing.JFrame {
     }//GEN-LAST:event_signupPFirstNameCaretUpdate
 
     private void signupPEmailCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_signupPEmailCaretUpdate
-       if (!"".equals(signupPEmail.getText())) {
+        if (!"".equals(signupPEmail.getText())) {
             boolean emailVali = EmailValidator.getInstance().isValid(signupPEmail.getText());
             if (emailVali == false) {
                 emailErrorIcon.setVisible(true);
@@ -1168,6 +1186,27 @@ public class PatientManaging extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_signupPEmailCaretUpdate
+
+    private void CheckUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckUpBtnActionPerformed
+        CheckUpAssignment cua = new CheckUpAssignment();
+        cua.setVisible(true);
+        cua.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        cua.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }//GEN-LAST:event_CheckUpBtnActionPerformed
+
+    private void OperationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OperationBtnActionPerformed
+        OperationAssignment oa = new OperationAssignment();
+        oa.setVisible(true);
+        oa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        oa.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }//GEN-LAST:event_OperationBtnActionPerformed
+
+    private void newServiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newServiceBtnActionPerformed
+        NewService ns = new NewService();
+        ns.setVisible(true);
+        ns.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ns.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }//GEN-LAST:event_newServiceBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1183,16 +1222,28 @@ public class PatientManaging extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PatientManaging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PatientManaging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PatientManaging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PatientManaging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PatientManaging.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PatientManaging.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PatientManaging.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PatientManaging.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

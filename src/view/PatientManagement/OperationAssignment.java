@@ -10,6 +10,8 @@ package view.PatientManagement;
  * @author Y4SHVINE
  */
 import Controller.PatientManagement.ServiceController;
+import Controller.PatientManagement.WardRoundController;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JComboBox;
 import model.patientModels.Operation;
@@ -30,6 +32,7 @@ public class OperationAssignment extends javax.swing.JFrame {
         initComponents();
         ServiceController.getInstance().getOperationTypeList(opOperationType,"OperationTypes");
         getAllPatientIDs(opPatientIDs);
+        geDoctorsName(opDoctor);
         LOG = Logger.getLogger(OperationAssignment.class);
     }
     /**
@@ -43,6 +46,16 @@ public class OperationAssignment extends javax.swing.JFrame {
         }catch(Exception e){
             messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
             LOG.error(e);
+        }
+    }
+    
+     private static void geDoctorsName(JComboBox jc) {
+        try {
+            for (Object DocName : WardRoundController.getInstance().getDoctorListDetails()) {
+                jc.addItem(DocName);
+            }
+        } catch (SQLException ex) {
+            messageAlert.getMessageAlert(DBUtil.getXMLData("PatientMsg", "message", "Err_Something_Went_Wrong"), "error");
         }
     }
     @SuppressWarnings("unchecked")
@@ -124,7 +137,6 @@ public class OperationAssignment extends javax.swing.JFrame {
         jPanel1.add(signupFNameLbl3);
         signupFNameLbl3.setBounds(200, 325, 200, 35);
 
-        opDoctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "item" }));
         jPanel1.add(opDoctor);
         opDoctor.setBounds(400, 325, 300, 35);
 
