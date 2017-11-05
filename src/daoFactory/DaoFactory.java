@@ -1,5 +1,6 @@
 package daoFactory;
 
+import dao.interfaces.PrescriptionDao;
 import java.sql.Connection;
 
 /**
@@ -9,6 +10,7 @@ import java.sql.Connection;
 public abstract class DaoFactory {
 
   public abstract Connection openConnection();	
+  public abstract PrescriptionDao getPrescriptionDao();
   
   public static DaoFactory getDatabase() {
       return new Mysql();
