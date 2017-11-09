@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <query key="PrescriptionInsert">
+        <entry>INSERT INTO prescription(PatientName, PatientID, Age, Sex, CreateDate, DrugName, Dosage, Frequency, Period) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)</entry>
+    </query>
+    <query key="PrescriptionUpdate">
+        <entry>UPDATE prescription SET PatientID = ?, Age = ?, Sex = ?, PrescriptionID = ?, CreateDate = ?, DrugName = ?, Dosage = ?, Frequency = ?, Period = ? WHERE PatientName = ?</entry>
+    </query>  
+    <query key="PrescriptionDelete">
+        <entry>DELETE FROM prescription WHERE PrescriptionID = ?</entry>
+    </query>
+    <query key="patientDetails">
+        <entry>SELECT FirstName, LastName FROM patient</entry>
+    </query>
+    <query key="drugDetails">
+        <entry>SELECT DrugName FROM drugs</entry>
+    </query>  
+    <query key="prescriptiontDetails">
+        <entry>SELECT * FROM prescription</entry>
+    </query>
+    <query key="PrescriptionSelectAllById">
+        <entry>SELECT * FROM prescription WHERE PatientName IN (?) </entry>
+    </query>
+    <query key="patientGetPatientId">
+        <entry>SELECT PatientID FROM patient</entry>
+    </query>
+    <query key="prescViewPrescriptionDetails">
+        <entry>SELECT PrescriptionID, PatientName, Age, CreateDate FROM prescription</entry>
+    </query>
+    <query key="drugViewPrescDetails">
+        <entry>SELECT PrescriptionID, DrugName, Dosage, Frequency, Period FROM prescription</entry>
+    </query>
+    <query key="searchPrescriptionDetails">
+        <entry>SELECT PrescriptionID, PatientName, Age, CreateDate FROM prescription WHERE PatientName like ?</entry>
+    </query>
+    <query key="prescDrugSearchDetails">
+        <entry>SELECT PrescriptionID, DrugName, Dosage, Frequency, Period FROM prescription WHERE PrescriptionID like ?</entry>
+    </query>
+</root>
