@@ -33,8 +33,9 @@ public class LogIn extends javax.swing.JFrame {
         txtLogInUserName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnSignIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        btnsignUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1255, 547));
@@ -70,19 +71,29 @@ public class LogIn extends javax.swing.JFrame {
         pnlLogInBox.add(jLabel1);
         jLabel1.setBounds(360, 170, 110, 24);
 
-        btnLogin.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        btnLogin.setText("LogIn");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnSignIn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        btnSignIn.setText("SignIn");
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnSignInActionPerformed(evt);
             }
         });
-        pnlLogInBox.add(btnLogin);
-        btnLogin.setBounds(640, 270, 100, 30);
+        pnlLogInBox.add(btnSignIn);
+        btnSignIn.setBounds(510, 270, 100, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/EmployeeManagement/LogUser.png"))); // NOI18N
         pnlLogInBox.add(jLabel4);
         jLabel4.setBounds(80, 80, 180, 140);
+
+        btnsignUp.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        btnsignUp.setText("SignUp");
+        btnsignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsignUpActionPerformed(evt);
+            }
+        });
+        pnlLogInBox.add(btnsignUp);
+        btnsignUp.setBounds(640, 270, 100, 30);
 
         pnlLogPage.add(pnlLogInBox);
         pnlLogInBox.setBounds(220, 80, 810, 370);
@@ -95,7 +106,7 @@ public class LogIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
 
         try {
             
@@ -117,7 +128,14 @@ public class LogIn extends javax.swing.JFrame {
         
           Util.Clear(pnlLogInBox);
         
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnSignInActionPerformed
+
+    private void btnsignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignUpActionPerformed
+        
+        UserRegistration user = new UserRegistration();
+       user.setVisible(true);
+        
+    }//GEN-LAST:event_btnsignUpActionPerformed
 
     public static void main(String args[]) {
 
@@ -129,7 +147,8 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignIn;
+    private javax.swing.JButton btnsignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

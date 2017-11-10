@@ -140,8 +140,7 @@ public class UserRegistration extends javax.swing.JFrame {
 
         Employee empObj = new Employee();
         EmployeeController empContro = new EmployeeController();
-        
-        
+
         empObj.setFirstName(txtFirstName.getText());
         empObj.setLastName(txtLastName.getText());
         empObj.setEmail(txtEmail.getText());
@@ -151,11 +150,15 @@ public class UserRegistration extends javax.swing.JFrame {
         try {
             empContro.save(empObj);
             Util.Clear(RegistrationPannel);
+            LogIn login = new LogIn();
+            login.setVisible(true);
+            this.dispose();
         } catch (SQLException ex) {
             LOG.error(ex);
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex,ex);
         }
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnCancelBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelBottonActionPerformed
