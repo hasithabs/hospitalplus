@@ -8,6 +8,7 @@ import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
 import dao.interfaces.OrderDao;
 import dao.interfaces.patientInterfaces.PatientDao;
+import dao.interfaces.PrescriptionDao;
 import java.sql.Connection;
 import dao.interfaces.patientInterfaces.ServicesDao;
 import dao.interfaces.patientInterfaces.WardRoundDao;
@@ -28,7 +29,8 @@ public abstract class DaoFactory {
   public abstract PatientDao getPatientDao();
   public abstract ServicesDao getServiceDao();
   public abstract WardRoundDao getWardRoundDao();
-  
+  public abstract PrescriptionDao getPrescriptionDao();
+
   public static DaoFactory getDatabase() {
       return new Mysql();
   }

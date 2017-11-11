@@ -22,12 +22,14 @@ import dao.concrete.mysqlDrugTypeDao;
 import dao.concrete.mysqlOrderDao;
 import dao.concrete.patientConcrete.MysqlServicesDao;
 import dao.concrete.patientConcrete.MysqlPatientDao;
+import dao.concrete.MysqlPrescriptionDao;
 import dao.interfaces.patientInterfaces.PatientDao;
 
 import dao.interfaces.DrugDao;
 import dao.interfaces.DrugCategoryDao;
 import dao.interfaces.DrugTypeDao;
 import dao.interfaces.OrderDao;
+import dao.interfaces.PrescriptionDao;
 
 import dao.interfaces.patientInterfaces.ServicesDao;
 import dao.interfaces.patientInterfaces.WardRoundDao;
@@ -131,5 +133,10 @@ public class Mysql extends DaoFactory {
     @Override
     public WardRoundDao getWardRoundDao() {
         return new MysqlWardRoundDao();
+    }
+
+    @Override
+    public PrescriptionDao getPrescriptionDao() {
+        return new MysqlPrescriptionDao();
     }
 }

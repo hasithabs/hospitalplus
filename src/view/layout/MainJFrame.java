@@ -27,6 +27,8 @@ import view.EmployeeManagement.LogIn;
 import view.EmployeeManagement.UserRegistration;
 import view.PatientManagement.ChanelDoctor;
 import view.PatientManagement.PatientManaging;
+import view.PrescriptionManagement.PrescView;
+import view.PrescriptionManagement.PrescriptionDetails;
 import view.layout.stockManagement.AddDrugItem;
 import view.layout.stockManagement.DrugList;
 import view.layout.stockManagement.OrderManage;
@@ -465,7 +467,12 @@ public class MainJFrame extends JFrame {
         guiTopLayer.add(menu3Backdrop);
 
         menuMainIconBtn3.addMouseListener(new menuMainBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page, CENTER_PAGE_IMG));
-        //menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page));
+    
+        // Load JFrames to center panel
+        PrescriptionDetails prescriptiondetailsObj = new PrescriptionDetails();
+        menu3SubMenuBtn1.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page, prescriptiondetailsObj));
+        PrescView prescviewObj = new PrescView();
+        menu3SubMenuBtn2.addMouseListener(new menuSubBtnAction(SubMenu3BtnArray, menu3Backdrop, CENTER_Page, prescviewObj));
         menu3Backdrop.addMouseListener(new menuBackDropAction(SubMenu3BtnArray, menu3Backdrop));
 
         /* ~~~~~~~~~~ SUB MENU 4 ~~~~~~~~~~ */

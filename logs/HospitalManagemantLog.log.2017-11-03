@@ -1,0 +1,22 @@
+ERROR   2017-11-03 11:34:56,567 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 11:34:56,613 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 11:36:58,890 [AWT-EventQueue-0] view.PrescriptionManagement.PrescriptionDetails  - Validation failed
+ERROR   2017-11-03 13:00:39,434 [AWT-EventQueue-0] view.PrescriptionManagement.PrescriptionDetails  - Validation failed
+ERROR   2017-11-03 13:08:42,499 [AWT-EventQueue-0] view.PrescriptionManagement.PrescriptionDetails  - Validation failed
+ERROR   2017-11-03 14:35:32,300 [AWT-EventQueue-0] view.PrescriptionManagement.PrescriptionDetails  - Validation failed
+ERROR   2017-11-03 15:31:17,296 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:31:17,343 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 15:32:59,944 [AWT-EventQueue-0] dao.concrete.MysqlPrescriptionDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'
+ERROR   2017-11-03 15:32:59,960 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:32:59,991 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 15:33:37,854 [AWT-EventQueue-0] dao.concrete.MysqlPrescriptionDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'
+ERROR   2017-11-03 15:33:37,854 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:33:37,854 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 15:34:46,187 [AWT-EventQueue-0] dao.concrete.MysqlPrescriptionDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'
+ERROR   2017-11-03 15:34:46,187 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:34:46,219 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 15:36:52,667 [AWT-EventQueue-0] dao.concrete.MysqlPrescriptionDao  - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'
+ERROR   2017-11-03 15:36:52,667 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:36:52,699 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
+ERROR   2017-11-03 15:58:30,337 [AWT-EventQueue-0] util.DBUtil  - Invalide XML dataType parameter for getXMLData method
+ERROR   2017-11-03 15:58:30,387 [AWT-EventQueue-0] util.DBUtil  - Invalide Parameters for getXMLData method
