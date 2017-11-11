@@ -300,7 +300,7 @@ public class MysqlPrescriptionDao implements PrescriptionDao{
             
             List<String> drugNameList = new ArrayList<>();
             while (rset.next()) {
-                drugNameList.add(rset.getString("DrugName"));
+                drugNameList.add(rset.getString("name"));
             }
             pstmt.close();
             con.close();

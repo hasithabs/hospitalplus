@@ -20,7 +20,7 @@ and open the template in the editor.
         <entry>SELECT FirstName, LastName FROM patient</entry>
     </query>
     <query key="drugDetails">
-        <entry>SELECT DrugName FROM drugs</entry>
+        <entry>SELECT name FROM drugs</entry>
     </query>  
     <query key="prescriptiontDetails">
         <entry>SELECT * FROM prescription</entry>
