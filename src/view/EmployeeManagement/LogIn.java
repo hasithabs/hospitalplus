@@ -132,9 +132,9 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnsignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignUpActionPerformed
         
-        UserRegistration user = new UserRegistration();
+       UserRegistration user = new UserRegistration();
        user.setVisible(true);
-        
+       this.dispose();
     }//GEN-LAST:event_btnsignUpActionPerformed
 
     public static void main(String args[]) {

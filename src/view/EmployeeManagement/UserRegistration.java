@@ -150,9 +150,11 @@ public class UserRegistration extends javax.swing.JFrame {
         try {
             empContro.save(empObj);
             Util.Clear(RegistrationPannel);
+            
             LogIn login = new LogIn();
             login.setVisible(true);
             this.dispose();
+            
         } catch (SQLException ex) {
             LOG.error(ex);
         } catch (IOException ex) {
